@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Image, Text, View, TouchableOpacity } from 'react-native';
 import { Camera, Permissions } from 'expo';
 
 export default class CameraExample extends React.Component {
   state = {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
+    uri: null
   };
 
   async componentWillMount() {
@@ -13,7 +14,43 @@ export default class CameraExample extends React.Component {
     this.setState({ hasCameraPermission: status === 'granted' });
   }
 
+  snap = async () => {
+    if (this.camera) {
+      let photo = await this.camera.takePictureAsync()
+        .then(data => {
+          this.setState({
+            uri: data.uri
+          })
+          console.log(this.state, '<<<<<<<')
+        })
+    }
+  }
+
   render() {
+    return (
+      <View style={{ flex: 1 }}>
+        {this.state.uri ? this.renderImage() : this.renderCamera()}
+      </View>
+    );
+  }
+
+  renderImage() {
+    return (
+      <View>
+        <Image
+          source={{ uri: this.state.uri }}
+          style={{ width: 40, height: 40 }}
+        />
+        <Text
+          style={{ fontSize: 18, marginBottom: 0, color: 'blue' }}
+          onPress={() => this.setState({ uri: null })}
+        >Cancel
+        </Text>
+      </View>
+    );
+  }
+
+  renderCamera() {
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
@@ -22,7 +59,19 @@ export default class CameraExample extends React.Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <Camera style={{ flex: 1 }} type={this.state.type}>
+          <Camera
+            style={{ flex: 1 }}
+            ref={(ref) => { this.camera = ref }}
+          >
+            <View style={{ flex: 1 }}></View>
+            <TouchableOpacity
+              style={{ flex: 0, backgroundColor: 'red' }}
+              onPress={this.snap.bind(this)}
+            >
+              <Text>Touch Me</Text>
+            </TouchableOpacity>
+          </Camera>
+          {/* <Camera style={{ flex: 1 }} type={this.state.type} ref={(ref) => { this.camera = ref }}>
             <View
               style={{
                 flex: 1,
@@ -35,20 +84,23 @@ export default class CameraExample extends React.Component {
                   alignSelf: 'flex-end',
                   alignItems: 'center',
                 }}
-                onPress={() => {
-                  this.setState({
-                    type: this.state.type === Camera.Constants.Type.back
-                      ? Camera.Constants.Type.front
-                      : Camera.Constants.Type.back,
-                  });
-                }}>
+                // onPress={() => {
+                //   this.setState({
+                //     type: this.state.type === Camera.Constants.Type.back
+                //       ? Camera.Constants.Type.front
+                //       : Camera.Constants.Type.back,
+                //   });
+                // }}
+                onPress={this.snap.bind(this)}
+              >
                 <Text
                   style={{ fontSize: 18, marginBottom: 10, color: 'blue' }}>
-                  {' '}Flip - relic hunters!{' '}
+                  {' '}Flippy!{' '}
                 </Text>
               </TouchableOpacity>
             </View>
-          </Camera>
+          </Camera> */}
+
         </View>
       );
     }
