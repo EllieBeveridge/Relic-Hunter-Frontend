@@ -1,0 +1,25 @@
+[
+  {
+    "location": "MOSE",
+    "quest-id": 1,
+    "score": 5,
+    "answers": [
+      "true",
+      "true",
+      "skip",
+      "true",
+      "true",
+      "skip",
+      "true"
+    ],
+    "timings": [
+      100,
+      600,
+      300,
+      400,
+      312,
+      90,
+      145
+    ]
+  }
+]
