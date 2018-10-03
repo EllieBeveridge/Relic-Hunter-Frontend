@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, TouchableHighlight, Animated } from 'react-native'; //Step 1
+import { StyleSheet, Text, View, Button, Image, TouchableHighlight, Animated } from 'react-native'; //Step 1
 
 class Panel extends Component {
   constructor(props) {
@@ -73,6 +73,12 @@ class Panel extends Component {
 
           <View style={styles.body} onLayout={this._setMaxHeight.bind(this)}>
             <Text>{this.state.description}</Text>
+            <Button
+              title="Go to Quest"
+              onPress={() => {
+                this.props.navigation.navigate('Question')
+              }} />
+
           </View>
 
         </View>

@@ -18,7 +18,7 @@ class LandingPage extends Component {
       <View>
         <ScrollView>
           {this.state.quests.map((quest, index) => (
-            <Panel title={quest.title} key={index} description={quest.description}>
+            <Panel navigation={this.props.navigation} title={quest.title} key={index} description={quest.description}>
               <Text>{quest.description}</Text>
             </Panel>
           ))}
