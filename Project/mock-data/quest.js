@@ -3,7 +3,7 @@ const questList = [
     "id": 1,
     "location": "MOSE",
     "title": "Science of the Ages",
-    "description": "An intriguing hunt through the science of the industrial revolution and first computers",
+    "description": "An intriguing hunt through the science of the industrial revolution and first computersAn intriguing hunt through the science of the industrial revolution and first computersAn intriguing hunt through the science of the industrial revolution and first computersAn intriguing hunt through the science of the industrial revolution and first computersAn intriguing hunt through the science of the industrial revolution and first computersAn intriguing hunt through the science of the industrial revolution and first computersAn intriguing hunt through the science of the industrial revolution and first computersAn intriguing hunt through the science of the industrial revolution and first computersAn intriguing hunt through the science of the industrial revolution and first computersAn intriguing hunt through the science of the industrial revolution and first computersAn intriguing hunt through the science of the industrial revolution and first computersAn intriguing hunt through the science of the industrial revolution and first computersAn intriguing hunt through the science of the industrial revolution and first computersAn intriguing hunt through the science of the industrial revolution and first computers",
     "suitability": "For 8-10 year olds"
   },
   {
