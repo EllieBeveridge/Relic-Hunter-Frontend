@@ -75,9 +75,9 @@ class ScoreCard extends Component {
 
         <View style={styles.welcomeContainer}>
           <Button
-            title="Back to Homepage"
+            title="NEXT"
             onPress={() =>
-              this.props.navigation.navigate('Home')
+              this.props.navigation.navigate('LandingPage')
             }
           />
         </View>
