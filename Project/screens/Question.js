@@ -4,7 +4,7 @@ import QuestionButtons from '../components/QuestionButtons'
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
 import styles from '../stylesheets/QuestionStylesheet'
 import base64 from 'base64-js';
-import axios from 'axios';
+import * as api from '../api';
 
 import { questid } from '../mock-data/question.json'
 
@@ -19,7 +19,7 @@ class Question extends Component {
       questions: [],
       currQ: 0,
       score: 0,
-      answers: [],
+      answers: 0
 
     };
   }
@@ -36,7 +36,10 @@ class Question extends Component {
     if (pressed && !uri) return this.renderCamera();
 
     return (
+
+
       <View style={{ flex: 1 }}>
+        {console.log(this.state.answers, 'your score!!')}
         <Text style={styles.question}> QUESTION{questions[currQ].question_id}:
           {questions[currQ].questionTitle}
         </Text>
@@ -63,7 +66,6 @@ class Question extends Component {
       hasCameraPermission: status === 'granted',
       questions: questid.questions,
     });
-    console.log('comp did mount', this.state.questions)
   }
 
   renderImage = () => {
@@ -134,24 +136,33 @@ class Question extends Component {
   }
 
   sendImage() {
+    console.log('sending image...')
     this.setState({
       uploading: true
     })
 
-
     ImageManipulator.manipulate(this.state.uri, [{ resize: { width: 1000 } }], { base64: true, format: 'jpeg' })
       .then(({ base64 }) => {
-
         const finalB64 = { answer: { image: base64 } }
         const question_id = 1;
-        const API_URL = `http://ec2-35-177-132-73.eu-west-2.compute.amazonaws.com/api/answers/${question_id}`;
-
-        return axios.post(API_URL, finalB64)
-          .then(res => {
-            this.setState({
-              uploading: false,
-              uri: null,
-            })
+        api.checkPicture(question_id, finalB64)
+          .then(answer => {
+            console.log('checking picture...', answer)
+            const points = this.state.answers
+            const newPoints = points + 1
+            if (answer) {
+              this.setState({
+                uploading: false,
+                uri: null,
+                answers: newPoints
+              })
+            } else {
+              this.setState({
+                uploading: false,
+                uri: null
+              })
+            }
+            console.log(this.state.answers, 'score')
           })
           .catch(err => {
             console.log('error in axios Post', err)
