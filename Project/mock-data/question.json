@@ -1,30 +1,34 @@
-[
-  {
-    "quest-id": 1,
-    "question-id": 1,
-    "section": "Steam engines",
-    "question": "Find the largest steam driven wheel",
-    "hint": "Look for the Firgrove Mill steam engine"
-  },
-  {
-    "quest-id": 1,
-    "question-id": 2,
-    "section": "Computing",
-    "question": "Find the first Computer made in Manchester",
-    "hint": "Look for \"Baby\" made in 1948"
-  },
-  {
-    "quest-id": 2,
-    "question-id": 1,
-    "section": "Textiles",
-    "question": "The person who made the world\"s first synthetic dye",
-    "hint": "Find William Henry Perkin"
-  },
-  {
-    "quest-id": 2,
-    "question-id": 2,
-    "section": "Cotton",
-    "question": "Find a factory that produces cotton in Manchester",
-    "hint": "An engraving of a Cotton Factory on Union Street Manchester"
+{
+  "questid": {
+    "questions": [
+      {
+        "question_id": 1,
+        "questionTitle": "Steam Driven Wheel",
+        "questionText": "Find the largest steam driven wheel",
+        "hintText": "Look for the Firgrove Mill steam engine",
+        "answerText": "the wheel"
+      },
+      {
+        "question_id": 2,
+        "questionTitle": "Computing",
+        "questionText": "Find the first Computer made in Manchester",
+        "hintText": "Look for \"Baby\" made in 1948",
+        "answerText": "Computer Baby"
+      },
+      {
+        "question_id": 3,
+        "questionTitle": "Textiles",
+        "questionText": "The person who made the world\"s first synthetic dye",
+        "hintText": "Find William Henry Perkin",
+        "answerText": "William Henry Perkin"
+      },
+      {
+        "question_id": 4,
+        "questionTitle": "Cotton",
+        "questionText": "Find a factory that produces cotton in Manchester",
+        "hintText": "An engraving of a Cotton Factory on Union Street Manchester",
+        "answerText": "Cotton Factory Union Street"
+      }
+    ]
   }
-]
+}

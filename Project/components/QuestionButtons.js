@@ -14,7 +14,7 @@ class componentName extends Component {
         <Button
           title="Get a Hint"
           onPress={() => {
-            Alert.alert('Here is a lovely hint!')
+            Alert.alert(this.props.hintText)
           }
           }
         />

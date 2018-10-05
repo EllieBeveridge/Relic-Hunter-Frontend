@@ -6,6 +6,8 @@ import styles from '../stylesheets/QuestionStylesheet'
 import base64 from 'base64-js';
 import axios from 'axios';
 
+import { questid } from '../mock-data/question.json'
+
 class Question extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +15,12 @@ class Question extends Component {
       pressed: null,
       hasCameraPermission: null,
       type: Camera.Constants.Type.back,
-      uri: null
+      uri: null,
+      questions: [],
+      currQ: 0,
+      score: 0,
+      answers: [],
+
     };
   }
 
@@ -22,12 +29,20 @@ class Question extends Component {
   }
 
   render() {
-    const { pressed, uri } = this.state
+    const { pressed, uri, currQ, questions } = this.state;
+    if (!questions[0]) return null;
+
     if (pressed && uri) return this.renderImage();
     if (pressed && !uri) return this.renderCamera();
+
     return (
       <View style={{ flex: 1 }}>
-        <Text style={styles.question}> QUESTION: TELL ME HOW YOU FEEL ABOUT REACT NATIVE </Text>
+        <Text style={styles.question}> QUESTION{questions[currQ].question_id}:
+          {questions[currQ].questionTitle}
+        </Text>
+        <Text style={styles.question}>
+          {questions[currQ].questionText}
+        </Text>
         <Button
           title="Take a picture"
           onPress={() =>
@@ -36,14 +51,19 @@ class Question extends Component {
             })
           }
         />
-        <QuestionButtons navigation={this.props.navigation} />
+        <QuestionButtons navigation={this.props.navigation}
+          hintText={questions[currQ].hintText} />
       </View>
     );
   }
 
   async componentDidMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === 'granted' });
+    this.setState({
+      hasCameraPermission: status === 'granted',
+      questions: questid.questions,
+    });
+    console.log('comp did mount', this.state.questions)
   }
 
   renderImage = () => {
@@ -130,7 +150,7 @@ class Question extends Component {
           .then(res => {
             this.setState({
               uploading: false,
-              uri: null
+              uri: null,
             })
           })
           .catch(err => {
