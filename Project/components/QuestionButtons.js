@@ -27,7 +27,7 @@ class componentName extends Component {
         <Button
           title="Finish this quest"
           onPress={() =>
-            this.props.navigation.navigate('LandingPage')
+            this.props.navigation.navigate('ScoreCard')
           }
         />
       </View>
