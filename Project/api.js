@@ -25,11 +25,12 @@ export const fetchQuestion = (quest_id, question_id) => {
     .catch(err => { throw err })
 }
 
-export const checkPicture = (question_id, finalB64) => {
+export const checkPicture = (question_id, finalB64, currQ) => {
   return axios.post(`${API_URL}/${question_id}`, finalB64)
-    .then(res => {
-      console.log(res)
-      return res;
+    .then(({ res: { answer } }) => {
+      console.log(answer)
+      answers[currQ] = answer
+      return answers
     })
     .catch(err => { throw err })
 }
