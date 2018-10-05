@@ -3,6 +3,7 @@ import LandingPage from '../screens/LandingPage';
 import Question from '../screens/Question'
 import ScoreCard from '../screens/ScoreCard'
 
+
 const AppNavigator = createStackNavigator({
   LandingPage: { screen: LandingPage },
   Question: { screen: Question },
