@@ -25,12 +25,13 @@ export const fetchQuestion = (quest_id, question_id) => {
     .catch(err => { throw err })
 }
 
-export const checkPicture = (question_id, finalB64, currQ) => {
-  return axios.post(`${API_URL}/${question_id}`, finalB64)
-    .then(({ res: { answer } }) => {
-      console.log(answer)
-      answers[currQ] = answer
-      return answers
+export const checkPicture = (question_id, finalB64) => {
+  //return axios.post(`${API_URL}/${question_id}`, finalB64)
+  return axios.post('http://ec2-35-177-132-73.eu-west-2.compute.amazonaws.com/api/answers/testquestion', finalB64)
+    .then(({ data: { answer } }) => {
+      return answer.answer_id.isCorrect
+      //answers[currQ] = answer
+      //return answers
     })
     .catch(err => { throw err })
 }
