@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, Image, TouchableHighlight, Animated } from 'react-native'; //Step 1
+import * as api from '../api'
 
 class Panel extends Component {
   constructor(props) {
@@ -47,6 +48,14 @@ class Panel extends Component {
     });
   }
 
+  goToQuestions = (quest_id) => {
+    api.fetchQuestById(quest_id)
+      .then(questions => {
+        this.props.navigation.navigate('Question', {
+          questions
+        })
+      })
+  }
 
   render() {
     let icon = this.icons['down']
@@ -75,7 +84,7 @@ class Panel extends Component {
             <Button
               title="Go to Quest"
               onPress={() => {
-                this.props.navigation.navigate('Question')
+                this.goToQuestions(this.props.quest_id)
               }} />
 
           </View>

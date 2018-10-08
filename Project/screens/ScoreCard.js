@@ -14,33 +14,14 @@ class ScoreCard extends Component {
     };
   }
 
-  render() {
-    const player =
-    {
-      "location": "MOSE",
-      "quest-id": 1,
-      "score": 5,
-      "answers": [
-        "true",
-        "true",
-        "skip",
-        "true",
-        "true",
-        "skip",
-        "true"
-      ],
-      "timings": [
-        100,
-        600,
-        300,
-        400,
-        312,
-        90,
-        145
-      ]
-    };
 
-    const rounds = player.answers.length;
+
+  render() {
+
+    const { navigation } = this.props
+    const currQ = navigation.getParam('currQ')
+    const score = navigation.getParam('score')
+
     // let { spinAnim } = this.state;
     let { fadeAnim } = this.state;
 
@@ -63,10 +44,11 @@ class ScoreCard extends Component {
         <View style={styles.welcomeContainer}>
           <FadeInView style={{ backgroundColor: '#fff' }}>
             <Text style={styles.scoreMode}> Congratulations </Text>
-            <Text style={styles.scoreMode}> You scored {player.score} POINTS !! </Text>
+            <Text style={styles.scoreMode}> You scored {score} POINTS !! </Text>
           </FadeInView>
-          <Text style={styles.mainText}> Thank you for playing at {player.location} </Text>
-          <Text style={styles.mainText}> You played for {rounds} rounds</Text>
+          <Text style={styles.mainText}> Thank you for playing at {} </Text>
+          {console.log(currQ)}
+          <Text style={styles.mainText}> You played for {currQ} rounds</Text>
         </View>
 
         <View>

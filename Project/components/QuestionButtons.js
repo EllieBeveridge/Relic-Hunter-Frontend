@@ -14,7 +14,7 @@ class componentName extends Component {
         <Button
           title="Get a Hint"
           onPress={() => {
-            Alert.alert(this.props.hintText)
+            Alert.alert(this.props.hint_text)
           }
           }
         />
@@ -25,7 +25,10 @@ class componentName extends Component {
         <Button
           title="Finish this quest"
           onPress={() =>
-            this.props.navigation.navigate('ScoreCard')
+            this.props.navigation.navigate('ScoreCard', {
+              currQ: rounds,
+              score: this.props.score
+            })
           }
         />
       </View>
@@ -34,7 +37,11 @@ class componentName extends Component {
 
   skip = () => {
     if (this.props.currQ === this.props.questions.length - 1) {
-      this.props.navigation.navigate('ScoreCard')
+      rounds = this.props.currQ + 1;
+      this.props.navigation.navigate('ScoreCard', {
+        currQ: rounds,
+        score: this.props.score
+      })
     } else {
       this.props.updateCurrQ()
     }

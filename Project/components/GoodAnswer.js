@@ -13,7 +13,7 @@ class GoodAnswer extends Component {
     return (
       <View>
         <Text> GoodAnswer! Go to the next question... </Text>
-        <Text> You are now on {this.props.answers} points </Text>
+        <Text> You are now on {this.props.score} points </Text>
         <Button
           title="Next Q"
           onPress={() => this.done()
@@ -25,9 +25,12 @@ class GoodAnswer extends Component {
 
   done = () => {
     if (this.props.currQ === this.props.questions.length - 1) {
-      this.props.navigation.navigate('ScoreCard')
+      this.props.navigation.navigate('ScoreCard', {
+        currQ: rounds,
+        score: this.props.score
+      })
     } else {
-      this.props.updateAnswers(this.props.answers, null)
+      this.props.updateAnswers(this.props.score, null)
       this.props.updateCurrQ()
     }
   }

@@ -22,7 +22,6 @@ class Question extends Component {
       questions: [],
       currQ: 0,
       score: 0,
-      answers: 0,
       lastAnswer: null
     };
   }
@@ -32,7 +31,7 @@ class Question extends Component {
   }
 
   render() {
-    const { hasCameraPermission, takePic, uri, currQ, questions, answers, lastAnswer } = this.state;
+    const { hasCameraPermission, takePic, uri, currQ, questions, score, lastAnswer } = this.state;
     if (!questions[0]) return null;
 
     if (hasCameraPermission === false) {
@@ -46,14 +45,15 @@ class Question extends Component {
       return <CameraImage
         updateUri={this.updateUri}
         uri={uri}
-        answers={answers}
+        score={score}
         updateAnswers={this.updateAnswers}
         lastAnswer={lastAnswer}
+        question={questions[currQ]}
       />
 
     if (lastAnswer === 't')
       return <GoodAnswer
-        answers={answers}
+        score={score}
         updateAnswers={this.updateAnswers}
         currQ={currQ}
         questions={questions}
@@ -61,15 +61,15 @@ class Question extends Component {
         updateCurrQ={this.updateCurrQ} />
     if (lastAnswer === 'f')
       return <BadAnswer
-        answers={answers} updateAnswers={this.updateAnswers} />
+        score={score} updateAnswers={this.updateAnswers} />
 
     return (
       <View style={{ flex: 1 }}>
-        <Text style={styles.question}> QUESTION{questions[currQ].question_id}:
-          {questions[currQ].questionTitle}
+        <Text style={styles.question}> QUESTION{questions[currQ].id}:
+          {questions[currQ].title}
         </Text>
         <Text style={styles.question}>
-          {questions[currQ].questionText}
+          {questions[currQ].text}
         </Text>
         <Button
           title="Take a picture"
@@ -82,19 +82,22 @@ class Question extends Component {
         />
         <QuestionButtons
           navigation={this.props.navigation}
-          hintText={questions[currQ].hintText}
+          hint_text={questions[currQ].hint_text}
           currQ={currQ}
           questions={questions}
-          updateCurrQ={this.updateCurrQ} />
+          updateCurrQ={this.updateCurrQ}
+        />
       </View>
     );
   }
 
   async componentDidMount() {
+    const { navigation } = this.props;
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    const questions = navigation.getParam('questions')
     this.setState({
       hasCameraPermission: status === 'granted',
-      questions: questid.questions,
+      questions: questions.questions
     });
   }
 
@@ -108,7 +111,7 @@ class Question extends Component {
 
   updateAnswers = (newScore, ansFlag) => {
     this.setState({
-      answers: newScore,
+      score: newScore,
       lastAnswer: ansFlag,
       takePic: false,
       showImage: false
