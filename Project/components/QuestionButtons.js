@@ -20,9 +20,7 @@ class componentName extends Component {
         />
         <Button
           title="Skip this question"
-          onPress={() =>
-            Alert.alert('At some point there will be a skip function')
-          }
+          onPress={() => this.skip()}
         />
         <Button
           title="Finish this quest"
@@ -33,6 +31,15 @@ class componentName extends Component {
       </View>
     );
   }
+
+  skip = () => {
+    if (this.props.currQ === this.props.questions.length - 1) {
+      this.props.navigation.navigate('ScoreCard')
+    } else {
+      this.props.updateCurrQ()
+    }
+  }
+
 }
 
 export default componentName;

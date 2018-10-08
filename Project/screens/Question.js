@@ -39,9 +39,6 @@ class Question extends Component {
       return <Text>Camera permission needed to play</Text>
     }
 
-    // console.log('Question - showImage', showImage)
-    // console.log('Question - uri', uri)
-    // console.log('Question - takePic', takePic)
     if (takePic && !uri)
       return <CameraPicture updateUri={this.updateUri}
       />
@@ -58,6 +55,9 @@ class Question extends Component {
       return <GoodAnswer
         answers={answers}
         updateAnswers={this.updateAnswers}
+        currQ={currQ}
+        questions={questions}
+        navigation={this.props.navigation}
         updateCurrQ={this.updateCurrQ} />
     if (lastAnswer === 'f')
       return <BadAnswer
@@ -65,7 +65,6 @@ class Question extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        {console.log(answers, 'your score!!')}
         <Text style={styles.question}> QUESTION{questions[currQ].question_id}:
           {questions[currQ].questionTitle}
         </Text>
@@ -81,8 +80,12 @@ class Question extends Component {
             })
           }
         />
-        <QuestionButtons navigation={this.props.navigation}
-          hintText={questions[currQ].hintText} />
+        <QuestionButtons
+          navigation={this.props.navigation}
+          hintText={questions[currQ].hintText}
+          currQ={currQ}
+          questions={questions}
+          updateCurrQ={this.updateCurrQ} />
       </View>
     );
   }
@@ -96,7 +99,6 @@ class Question extends Component {
   }
 
   updateUri = (uriTaken, reshow, imageOn) => {
-    // console.log('update uri', uriTaken)
     this.setState({
       uri: uriTaken,
       takePic: reshow,
@@ -105,7 +107,6 @@ class Question extends Component {
   }
 
   updateAnswers = (newScore, ansFlag) => {
-    console.log('update score', newScore)
     this.setState({
       answers: newScore,
       lastAnswer: ansFlag,
@@ -115,13 +116,6 @@ class Question extends Component {
   }
 
   updateCurrQ = () => {
-    console.log('Are we done, roll on NEXTQ or rollout to scoreboard', this.state.currQ)
-    console.log('this.state.questions.length', this.state.questions.length)
-    console.log('this.state.CurrQ', this.state.currQ)
-    if (this.state.currQ === this.state.questions.length - 1) {
-      console.log('------------------ Game over')
-      this.props.navigation.navigate('ScoreCard')
-    }
     const newQ = this.state.currQ + 1;
     this.setState({
       currQ: newQ

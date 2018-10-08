@@ -54,7 +54,6 @@ class Panel extends Component {
     if (this.state.expanded) {
       icon = this.icons['up']
     }
-    console.log(this.state.maxHeight)
     return (
       <Animated.View style={[styles.container, { height: this.state.animation }]}>
         <View style={styles.container} >
