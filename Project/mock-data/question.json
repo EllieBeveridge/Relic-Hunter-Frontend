@@ -15,20 +15,6 @@
         "hintText": "Look for \"Baby\" made in 1948",
         "answerText": "Computer Baby"
       },
-      {
-        "question_id": 3,
-        "questionTitle": "Textiles",
-        "questionText": "The person who made the world\"s first synthetic dye",
-        "hintText": "Find William Henry Perkin",
-        "answerText": "William Henry Perkin"
-      },
-      {
-        "question_id": 4,
-        "questionTitle": "Cotton",
-        "questionText": "Find a factory that produces cotton in Manchester",
-        "hintText": "An engraving of a Cotton Factory on Union Street Manchester",
-        "answerText": "Cotton Factory Union Street"
-      }
     ]
   }
 }
