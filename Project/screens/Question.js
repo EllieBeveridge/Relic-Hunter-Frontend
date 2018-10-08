@@ -86,6 +86,7 @@ class Question extends Component {
           currQ={currQ}
           questions={questions}
           updateCurrQ={this.updateCurrQ}
+          score={this.state.score}
         />
       </View>
     );

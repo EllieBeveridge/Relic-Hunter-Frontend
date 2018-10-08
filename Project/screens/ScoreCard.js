@@ -21,6 +21,7 @@ class ScoreCard extends Component {
     const { navigation } = this.props
     const currQ = navigation.getParam('currQ')
     const score = navigation.getParam('score')
+    console.log(navigation, 'here is the navigation')
 
     // let { spinAnim } = this.state;
     let { fadeAnim } = this.state;
@@ -44,11 +45,12 @@ class ScoreCard extends Component {
         <View style={styles.welcomeContainer}>
           <FadeInView style={{ backgroundColor: '#fff' }}>
             <Text style={styles.scoreMode}> Congratulations </Text>
-            <Text style={styles.scoreMode}> You scored {this.props.score} POINTS !! </Text>
+            {(score === 0 || score > 1) && <Text style={styles.scoreMode}> You scored {score} POINTS !! </Text>}
+            {score === 1 && <Text style={styles.scoreMode}> You scored {score} POINT !! </Text>}
           </FadeInView>
           <Text style={styles.mainText}> Thank you for playing at {} </Text>
-          {console.log(currQ)}
-          <Text style={styles.mainText}> You played for {currQ} rounds</Text>
+          {currQ === 1 && <Text style={styles.mainText}> You played for {currQ} round</Text>}
+          {currQ > 1 && <Text style={styles.mainText}> You played for {currQ} rounds</Text>}
         </View>
 
         <View>
