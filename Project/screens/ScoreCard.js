@@ -44,7 +44,7 @@ class ScoreCard extends Component {
         <View style={styles.welcomeContainer}>
           <FadeInView style={{ backgroundColor: '#fff' }}>
             <Text style={styles.scoreMode}> Congratulations </Text>
-            <Text style={styles.scoreMode}> You scored {score} POINTS !! </Text>
+            <Text style={styles.scoreMode}> You scored {this.props.score} POINTS !! </Text>
           </FadeInView>
           <Text style={styles.mainText}> Thank you for playing at {} </Text>
           {console.log(currQ)}

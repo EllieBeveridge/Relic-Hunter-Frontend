@@ -8,7 +8,10 @@ class componentName extends Component {
     };
   }
 
+
   render() {
+
+    const rounds = this.props.currQ + 1;
     return (
       <View>
         <Button

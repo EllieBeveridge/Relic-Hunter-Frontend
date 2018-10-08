@@ -12,6 +12,7 @@ class GoodAnswer extends Component {
   render() {
     return (
       <View>
+        {console.log(this.props.score, 'this is the score in goodanswer')}
         <Text> GoodAnswer! Go to the next question... </Text>
         <Text> You are now on {this.props.score} points </Text>
         <Button
@@ -26,7 +27,7 @@ class GoodAnswer extends Component {
   done = () => {
     if (this.props.currQ === this.props.questions.length - 1) {
       this.props.navigation.navigate('ScoreCard', {
-        currQ: rounds,
+        currQ: this.props.currQ,
         score: this.props.score
       })
     } else {
