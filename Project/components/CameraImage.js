@@ -3,13 +3,14 @@ import { ImageBackground, View, Text, Button, Image, TouchableOpacity, StyleShee
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
 import styles from '../stylesheets/QuestionStylesheet'
 import * as api from '../api';
+import Spinner from 'react-native-loading-spinner-overlay'; 
 
 class CameraImage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       type: Camera.Constants.Type.back,
-      uploading: false
+      uploading: false,
     };
   }
 
@@ -23,10 +24,14 @@ class CameraImage extends Component {
           source={{ uri: uri }}
           style={{ width: "100%", height: "100%" }}
         >
-          {this.state.uploading && <View>
-            <Text>UPLOADING IMAGE</Text>
+ 
+          <View style={{ flex: 1 }}>
+            <Spinner 
+            visible={this.state.uploading} 
+            textContent={"Checking..."} 
+            textStyle={{color: '#FFF'}} />
           </View>
-          }
+        
 
           <TouchableOpacity
             style={styles.discard}
