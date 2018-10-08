@@ -3,8 +3,10 @@ import { ImageBackground, View, Text, Button, Image, TouchableOpacity, StyleShee
 import QuestionButtons from '../components/QuestionButtons'
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
 import styles from '../stylesheets/QuestionStylesheet'
-import base64 from 'base64-js';
-import * as api from '../api';
+import CameraPicture from '../components/CameraPicture'
+import CameraImage from '../components/CameraImage'
+import GoodAnswer from '../components/GoodAnswer'
+import BadAnswer from '../components/BadAnswer'
 
 import { questid } from '../mock-data/question.json'
 
@@ -12,15 +14,16 @@ class Question extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pressed: null,
+      showImage: false,
+      takePic: false,
       hasCameraPermission: null,
       type: Camera.Constants.Type.back,
       uri: null,
       questions: [],
       currQ: 0,
       score: 0,
-      answers: 0
-
+      answers: 0,
+      lastAnswer: null
     };
   }
 
@@ -29,17 +32,40 @@ class Question extends Component {
   }
 
   render() {
-    const { pressed, uri, currQ, questions } = this.state;
+    const { hasCameraPermission, takePic, uri, currQ, questions, answers, lastAnswer } = this.state;
     if (!questions[0]) return null;
 
-    if (pressed && uri) return this.renderImage();
-    if (pressed && !uri) return this.renderCamera();
+    if (hasCameraPermission === false) {
+      return <Text>Camera permission needed to play</Text>
+    }
+
+    // console.log('Question - showImage', showImage)
+    // console.log('Question - uri', uri)
+    // console.log('Question - takePic', takePic)
+    if (takePic && !uri)
+      return <CameraPicture updateUri={this.updateUri}
+      />
+    if (!takePic && uri)
+      return <CameraImage
+        updateUri={this.updateUri}
+        uri={uri}
+        answers={answers}
+        updateAnswers={this.updateAnswers}
+        lastAnswer={lastAnswer}
+      />
+
+    if (lastAnswer === 't')
+      return <GoodAnswer
+        answers={answers}
+        updateAnswers={this.updateAnswers}
+        updateCurrQ={this.updateCurrQ} />
+    if (lastAnswer === 'f')
+      return <BadAnswer
+        answers={answers} updateAnswers={this.updateAnswers} />
 
     return (
-
-
       <View style={{ flex: 1 }}>
-        {console.log(this.state.answers, 'your score!!')}
+        {console.log(answers, 'your score!!')}
         <Text style={styles.question}> QUESTION{questions[currQ].question_id}:
           {questions[currQ].questionTitle}
         </Text>
@@ -50,7 +76,8 @@ class Question extends Component {
           title="Take a picture"
           onPress={() =>
             this.setState({
-              pressed: true
+              takePic: true,
+              lastAnswer: null
             })
           }
         />
@@ -68,127 +95,37 @@ class Question extends Component {
     });
   }
 
-  renderImage = () => {
-    return (
-      <View>
-        <ImageBackground
-          source={{ uri: this.state.uri }}
-          style={{ width: "100%", height: "100%" }}
-        >
-          <TouchableOpacity
-            style={styles.discard}
-          >
-            <Text
-              onPress={() => this.setState({ uri: null })}
-              style={{ fontSize: 18, color: 'black' }}
-            >Discard
-        </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.submit}
-            onPress={() => this.sendImage()}
-          >
-            <Text
-              style={{ fontSize: 18, color: 'black' }}
-            >Submit
-            </Text>
-          </TouchableOpacity>
-        </ImageBackground>
-      </View>
-    );
-  }
-
-  renderCamera = () => {
-    const { hasCameraPermission } = this.state;
-    if (hasCameraPermission === null) {
-      return <View />;
-    } else if (hasCameraPermission === false) {
-      return <Text>No access to camera</Text>;
-    } else {
-      return (
-        <View style={{ flex: 1 }}>
-          <Camera
-            style={styles.preview}
-            ref={(ref) => { this.camera = ref }}
-          >
-            <TouchableOpacity
-              style={styles.capture}
-              onPress={this.snap.bind(this)}
-            >
-              <Text style={{ fontSize: 18, marginBottom: 20, color: 'black' }}>
-                Touch Me</Text>
-            </TouchableOpacity>
-          </Camera>
-        </View>
-      );
-    }
-  }
-
-  snap = async () => {
-    if (this.camera) {
-      let photo = await this.camera.takePictureAsync()
-        .then(data => {
-          this.setState({
-            uri: data.uri
-          })
-        })
-    }
-  }
-
-  sendImage() {
-    console.log('sending image...')
+  updateUri = (uriTaken, reshow, imageOn) => {
+    // console.log('update uri', uriTaken)
     this.setState({
-      uploading: true
+      uri: uriTaken,
+      takePic: reshow,
+      showImage: imageOn
     })
-
-    ImageManipulator.manipulate(this.state.uri, [{ resize: { width: 1000 } }], { base64: true, format: 'jpeg' })
-      .then(({ base64 }) => {
-        const finalB64 = { answer: { image: base64 } }
-        const question_id = 1;
-        api.checkPicture(question_id, finalB64)
-          .then(answer => {
-            console.log('checking picture...', answer)
-            const points = this.state.answers
-            const newPoints = points + 1
-            if (answer) {
-              this.setState({
-                uploading: false,
-                uri: null,
-                answers: newPoints
-              })
-            } else {
-              this.setState({
-                uploading: false,
-                uri: null
-              })
-            }
-            console.log(this.state.answers, 'score')
-          })
-          .catch(err => {
-            console.log('error in axios Post', err)
-          })
-      })
   }
 
-  fileToBase64Helper(uriString) {
-    return this.fileToBase64(uriString)
+  updateAnswers = (newScore, ansFlag) => {
+    console.log('update score', newScore)
+    this.setState({
+      answers: newScore,
+      lastAnswer: ansFlag,
+      takePic: false,
+      showImage: false
+    })
   }
 
-  async fileToBase64(input) {
-    try {
-      const content = await FileSystem.readAsStringAsync(input)
-      return base64.fromByteArray(this.stringToUint8Array(content))
-    } catch (e) {
-      console.warn('fileToBase64()', e.message)
-      return ''
+  updateCurrQ = () => {
+    console.log('Are we done, roll on NEXTQ or rollout to scoreboard', this.state.currQ)
+    console.log('this.state.questions.length', this.state.questions.length)
+    console.log('this.state.CurrQ', this.state.currQ)
+    if (this.state.currQ === this.state.questions.length - 1) {
+      console.log('------------------ Game over')
+      this.props.navigation.navigate('ScoreCard')
     }
-  }
-
-  stringToUint8Array(str) {
-    const length = str.length
-    const array = new Uint8Array(new ArrayBuffer(length))
-    for (let i = 0; i < length; i++) array[i] = str.charCodeAt(i)
-    return array
+    const newQ = this.state.currQ + 1;
+    this.setState({
+      currQ: newQ
+    })
   }
 
 }
