@@ -24,9 +24,12 @@ class GoodAnswer extends Component {
   }
 
   done = () => {
-    // set feedback to null
-    this.props.updateAnswers(this.props.answers, null)
-    this.props.updateCurrQ()
+    if (this.props.currQ === this.props.questions.length - 1) {
+      this.props.navigation.navigate('ScoreCard')
+    } else {
+      this.props.updateAnswers(this.props.answers, null)
+      this.props.updateCurrQ()
+    }
   }
 
 }
