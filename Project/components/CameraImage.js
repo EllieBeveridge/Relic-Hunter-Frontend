@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { ImageBackground, View, Text, Button, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-import QuestionButtons from './QuestionButtons'
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
 import styles from '../stylesheets/QuestionStylesheet'
-import base64 from 'base64-js';
 import * as api from '../api';
 
 class CameraImage extends Component {
@@ -16,9 +14,7 @@ class CameraImage extends Component {
   }
 
   render = () => {
-
-    console.log('i am in camera IMAGE')
-    const { uri, answers } = this.props
+    const { uri } = this.props
     return (
 
       <View>
@@ -69,48 +65,23 @@ class CameraImage extends Component {
 
     ImageManipulator.manipulate(this.props.uri, [{ resize: { width: 1000 } }], { base64: true, format: 'jpeg' })
       .then(({ base64 }) => {
-        const finalB64 = { answer: { image: base64 } }
-        const question_id = 1;
+        const finalB64 = { answer: { image: base64, model_name: this.props.question.model_name } }
+        const question_id = this.props.question.id
         api.checkPicture(question_id, finalB64)
           .then(answer => {
-            console.log('>>>>>>   checking picture...', answer)
-            // const points = this.props.answers
-            // const newPoints = points + 1
             this.setState({
               uploading: false,
             })
-            // null is not set yet so dont render feedback
+
             const ansFlag = (answer) ? 't' : 'f';
-            const newPoints = (answer) ? this.props.answers + 1 : this.props.answers;
+            const newPoints = (answer) ? this.props.score + 1 : this.props.score;
             this.props.updateAnswers(newPoints, ansFlag)
             this.props.updateUri(null, false, false)
-            console.log(this.props.answers, 'score')
           })
           .catch(err => {
             console.log('error in axios Post', err)
           })
       })
-  }
-
-  fileToBase64Helper(uriString) {
-    return this.fileToBase64(uriString)
-  }
-
-  async fileToBase64(input) {
-    try {
-      const content = await FileSystem.readAsStringAsync(input)
-      return base64.fromByteArray(this.stringToUint8Array(content))
-    } catch (e) {
-      console.warn('fileToBase64()', e.message)
-      return ''
-    }
-  }
-
-  stringToUint8Array(str) {
-    const length = str.length
-    const array = new Uint8Array(new ArrayBuffer(length))
-    for (let i = 0; i < length; i++) array[i] = str.charCodeAt(i)
-    return array
   }
 
 }

@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button, FlatList, ScrollView } from 'react-native';
 import Panel from '../components/Panel'
-import questList from '../mock-data/quest'
+import { Constants } from 'expo'
+import * as api from '../api'
 
 class LandingPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      quests: questList
+      quests: []
     };
+  }
+
+  componentDidMount = () => {
+    api.fetchAllQuests()
+      .then(quests => {
+        this.setState({
+          quests
+        })
+      })
   }
 
   render() {
@@ -18,9 +28,8 @@ class LandingPage extends Component {
       <View>
         <ScrollView>
           {this.state.quests.map((quest, index) => (
-            <Panel navigation={this.props.navigation} title={quest.title}
-              key={index} description={quest.description}>
-              <Text>{quest.description}</Text>
+            <Panel quest_id={quest.id} navigation={this.props.navigation} icon_url={quest.icon_url} title={quest.title}
+              key={index} description={quest.intro_text} >
             </Panel>
           ))}
         </ScrollView>
@@ -28,5 +37,6 @@ class LandingPage extends Component {
     );
   }
 }
+
 
 export default LandingPage;
