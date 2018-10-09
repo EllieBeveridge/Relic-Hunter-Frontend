@@ -18,7 +18,7 @@ class componentName extends Component {
             title="Get a Hint"
             icon={{ name: 'question-circle', type: 'font-awesome' }}
             backgroundColor="#4E3948"
-            fontSize={20}
+            fontSize={16}
             onPress={() => {
               Alert.alert(this.props.hint_text)
             }
@@ -29,7 +29,7 @@ class componentName extends Component {
           <Button
             title="Skip this question"
             backgroundColor="#4E3948"
-            fontSize={20}
+            fontSize={16}
             icon={{ name: 'fast-forward', type: 'font-awesome' }}
             onPress={() => this.skip()}
           />
@@ -38,24 +38,10 @@ class componentName extends Component {
           <Button
             title="Finish this quest"
             backgroundColor="#4E3948"
-            fontSize={20}
+            fontSize={16}
             icon={{ name: 'times-circle', type: 'font-awesome' }}
             onPress={() =>
               this.props.navigation.navigate('ScoreCard', {
-                currQ: rounds,
-                score: this.props.score
-              })
-            }
-          />
-        </View>
-        <View style={styles.welcomeContainer}>
-          <Button
-            title="Logo"
-            backgroundColor="#4E3948"
-            fontSize={20}
-            icon={{ name: 'times-circle', type: 'font-awesome' }}
-            onPress={() =>
-              this.props.navigation.navigate('Logo', {
                 currQ: rounds,
                 score: this.props.score
               })
@@ -84,7 +70,7 @@ const styles = StyleSheet.create({
   welcomeContainer: {
     alignItems: 'center',
     marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 10,
   }
 });
 

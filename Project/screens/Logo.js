@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, Picker } from 'react-native';
 //import styles from '../stylesheets/QuestionStylesheet'
 import { Button, Icon } from 'react-native-elements'
+import * as api from '../api'
 
 class componentName extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      venue: 1,
+      venues: []
     };
   }
 
-  render() {
+  componentDidMount = () => {
+    api.fetchAllVenues()
+      .then(venues => {
+        this.setState({
+          venues
+        })
+      })
+  }
 
+  render() {
     return (
       <View style={styles.container}>
         <Image
@@ -19,11 +30,16 @@ class componentName extends Component {
           style={styles.logoImage}
         />
         <View style={styles.buttonStyle}>
-          {/* <Icon
-            name="treasure-chest"
-            type="material-community"
-            color="#4E3948"
-          /> */}
+          <Text style={styles.textStyle}>Choose a Venue</Text>
+          <Picker
+            selectedValue={this.state.venue}
+            style={{ height: 40, width: 135, color: '#583E5C' }}
+            onValueChange={(itemValue, itemIndex) => this.setState({ venue: itemValue })}>
+            {this.state.venues.map((venue, index) => (
+              <Picker.Item label={venue.name} value={venue.id} key={index} />
+            ))}
+          </Picker>
+
           <Button
             title="Let's Begin..."
             fontSize={20}
@@ -35,14 +51,11 @@ class componentName extends Component {
               type: "material-community"
             }}
             onPress={() =>
-              this.props.navigation.navigate('LandingPage')
+              this.props.navigation.navigate('LandingPage', {
+                venue_id: this.state.venue
+              })
             }
           />
-          {/* <Icon
-            name="sword"
-            type="material-community"
-            color="#4E3948"
-          /> */}
         </View>
       </View >
     );
@@ -53,27 +66,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FBD158',
-    margin: 10,
     overflow: 'hidden',
     alignItems: 'center',
   },
+  textStyle: {
+    textAlign: 'left',
+    fontSize: 16,
+    color: '#583E5C',
+    fontWeight: 'bold',
+    padding: 10
+  },
   welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
+    alignItems: 'center'
   },
   buttonStyle: {
-    alignItems: 'center',
-    // position: 'absolute',
-    // bottom: 30,
-    //marginBottom: 50
+    alignItems: 'center'
   },
   logoImage: {
     width: 300,
     height: 300,
     resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10
+    marginTop: 0
   }
 });
 
