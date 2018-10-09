@@ -25,14 +25,12 @@ class BadAnswer extends Component {
           </Animatable.Text >
         </Animatable.View>
         <Text style={styles.scoreMode}>
-          Not the right Image - try again or try a HINT</Text>
-
-
+          Not the right image, sorry </Text>
 
         <Button
           style={styles.buttonImage}
           backgroundColor="#4E3948"
-          title="NEXT"
+          title="TRY AGAIN"
           onPress={() => this.done()
           }
         />
