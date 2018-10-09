@@ -3,7 +3,6 @@ import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import Panel from '../components/Panel'
 import { Constants } from 'expo'
 import * as api from '../api'
-import * as questList from '../mock-data/quest'
 
 class LandingPage extends Component {
   constructor(props) {
@@ -15,13 +14,12 @@ class LandingPage extends Component {
   }
 
   componentDidMount = () => {
-    const venue = 1;
-    api.fetchAllQuests(venue)
+    const { navigation } = this.props
+    const venue_id = navigation.getParam('venue_id')
+    api.fetchAllQuests(venue_id)
       .then(quests => {
         this.setState({
-          // quests
-          // temp use of mockdata as only 1 quest on API currently
-          quests: questList.quests
+          quests
         })
       })
   }
@@ -43,7 +41,7 @@ const styles = StyleSheet.create({
   titleMode: {
     textAlign: 'center',
     fontSize: 28,
-    color: '#333',
+    color: '#583E5C',
     fontWeight: 'bold',
     padding: 5,
   },

@@ -65,7 +65,7 @@ class Question extends Component {
         score={score} updateAnswers={this.updateAnswers} />
 
     return (
-      <View style={{ backgroundColor: '#FBD158' }}>
+      <View style={{ backgroundColor: '#FBD158', height: '100%' }}>
         <Text style={styles.titleMode}>QUESTION {questions[currQ].id}
           : {questions[currQ].title}
         </Text>
@@ -77,7 +77,7 @@ class Question extends Component {
             <Button
               title="Take a picture"
               backgroundColor="#4E3948"
-              fontSize={20}
+              fontSize={16}
               icon={{ name: 'camera', type: 'font-awesome' }}
               onPress={() =>
                 this.setState({

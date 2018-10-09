@@ -8,7 +8,7 @@ export default styles = StyleSheet.create({
   },
   question: {
     textAlign: 'left',
-    fontSize: 18,
+    fontSize: 36,
     color: '#583E5C',
     fontWeight: 'bold',
     padding: 10
@@ -26,7 +26,7 @@ export default styles = StyleSheet.create({
 
   },
   takePictureButton: {
-    marginTop: 20,
+    marginTop: 16,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20

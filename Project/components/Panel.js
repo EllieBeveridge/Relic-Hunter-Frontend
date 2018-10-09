@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Button,
-  Image
-} from 'react-native';
-import { Constants } from 'expo';
+import { ScrollView, Text, View, TouchableOpacity, Image } from 'react-native';
+import { Button, Icon } from 'react-native-elements'
+import { Constants } from 'expo'
+import styles from '../stylesheets/PanelStylesheet'
 import * as Animatable from 'react-native-animatable';
 import Accordion from 'react-native-collapsible/Accordion';
 import * as api from '../api'
@@ -41,20 +35,23 @@ class Panel extends Component {
         style={[styles.header, isActive ? styles.active : styles.inactive]}
         transition="backgroundColor"
       >
+        <Icon
+          name='chevron-down'
+          type='entypo'
+          color='#583E5C'
+          size={20}
+        />
         <Text style={styles.headerText}>{section.title}</Text>
       </Animatable.View>
     );
   };
 
   goToQuestions = (quest_id) => {
-    console.log('>>>>>>  In goto questions')
-    console.log('>>>>>> quest_id', quest_id)
     api.fetchQuestById(quest_id)
       .then(res => {
         this.props.navigation.navigate('Question', {
           questions: res
         })
-        console.log('response=', res)
       })
   }
 
@@ -83,18 +80,16 @@ class Panel extends Component {
           </Animatable.Text >
 
 
-          <Image
-            style={styles.buttonImage}
-            source={{ uri: section.icon_url }}
-          >
-          </Image>
           <View>
             <Button
-              title={"PLAY ME NOW"}
-              onPress={() => {
+              title="Start Quest"
+              backgroundColor="#4E3948"
+              fontSize={16}
+              icon={{ name: 'flask', type: 'font-awesome' }}
+              onPress={() =>
                 this.goToQuestions(section.quest_id)
-              }} />
-
+              }
+            />
           </View>
         </Animatable.View >
 
@@ -135,81 +130,5 @@ class Panel extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FED158',//'transparent',//'#F5FCFF',
-    paddingTop: Constants.statusBarHeight,
-  },
-  title: {
-    textAlign: 'center',
-    fontSize: 22,
-    fontWeight: '300',
-    marginBottom: 20,
-  },
-  buttonImage: {
-    width: 30,
-    height: 25,
-    alignItems: 'center',
-  },
-
-  scoreMode: {
-    textAlign: 'center',
-    fontSize: 16,
-    fontWeight: 'bold',
-    padding: 15,
-    color: 'green',
-    fontWeight: 'bold',
-  },
-
-  header: {
-    backgroundColor: '#F5FCFF',
-    padding: 10,
-  },
-  headerText: {
-    textAlign: 'center',
-    fontSize: 16,
-    fontWeight: '500',
-    color: '#333'
-  },
-  content: {
-    padding: 20,
-    backgroundColor: '#FED158',
-  },
-  active: {
-    backgroundColor: 'white',//'rgba(255,255,255,1)',
-  },
-  inactive: {
-    backgroundColor: '#FED158',//'rgba(245,252,255,1)',
-  },
-  selectTitle: {
-    fontSize: 14,
-    fontWeight: '500',
-    padding: 10,
-  },
-  multipleToggle: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginVertical: 30,
-    alignItems: 'center',
-  },
-  multipleToggle__title: {
-    fontSize: 16,
-    marginRight: 8,
-  },
-  myDescription: {
-    padding: 10,
-    textAlign: 'center',
-    fontSize: 16,
-
-  },
-  accordionStyle: {
-    padding: 5,
-    backgroundColor: '#333',
-
-  },
-
-});
 
 export default Panel;
