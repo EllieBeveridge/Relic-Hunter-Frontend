@@ -6,10 +6,10 @@ import Logo from '../screens/Logo'
 
 
 const AppNavigator = createStackNavigator({
+  Logo: { screen: Logo },
   LandingPage: { screen: LandingPage },
   Question: { screen: Question },
-  ScoreCard: { screen: ScoreCard },
-  Logo: { screen: Logo }
+  ScoreCard: { screen: ScoreCard }
 })
 
 export default AppNavigator;

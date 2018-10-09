@@ -10,20 +10,15 @@ class ScoreCard extends Component {
     super(props);
     this.state = {
       fadeAnim: new Animated.Value(0),
-      // spinAnim: new Animated.Value(0)
     };
   }
-
-
 
   render() {
 
     const { navigation } = this.props
     const currQ = navigation.getParam('currQ')
     const score = navigation.getParam('score')
-    console.log(navigation, 'here is the navigation')
 
-    // let { spinAnim } = this.state;
     let { fadeAnim } = this.state;
 
     return (

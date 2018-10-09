@@ -2,7 +2,13 @@ import axios from 'axios'
 
 const API_URL = 'http://ec2-35-177-132-73.eu-west-2.compute.amazonaws.com/api'
 
-// const venue_id = 1;
+export const fetchAllVenues = () => {
+  return axios.get(`${API_URL}/venues`)
+    .then(({ data: { venues } }) => {
+      return venues
+    })
+    .catch(err => { throw err })
+}
 
 export const fetchAllQuests = (venue) => {
   return axios.get(`${API_URL}/quests/${venue}`)
