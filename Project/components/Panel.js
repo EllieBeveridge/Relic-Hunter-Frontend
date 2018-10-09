@@ -1,169 +1,215 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, Image, TouchableHighlight, Animated } from 'react-native'; //Step 1
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Button,
+  Image
+} from 'react-native';
+import { Constants } from 'expo';
+import * as Animatable from 'react-native-animatable';
+import Accordion from 'react-native-collapsible/Accordion';
 import * as api from '../api'
 
 class Panel extends Component {
   constructor(props) {
     super(props);
-
-    this.icons = {
-      'up': require('../images/index.png'),
-      'down': require('../images/arrowdown.png')
-    };
-
     this.state = {
-      title: props.title,
-      description: props.description,
-      expanded: true,
-      animation: new Animated.Value()
-    };
+      activeSections: [],
+      collapsed: true,
+      multipleSelect: false,
+    }
+    this.renderContent = this.renderContent.bind(this)
   }
 
-  toggle() {
-    let initialValue = this.state.expanded ? this.state.maxHeight + this.state.minHeight : this.state.minHeight,
-      finalValue = this.state.expanded ? this.state.minHeight : this.state.maxHeight + this.state.minHeight;
+  toggleExpanded = () => {
+    this.setState({ collapsed: !this.state.collapsed });
+  };
 
+  setSections = sections => {
     this.setState({
-      expanded: !this.state.expanded
+      activeSections: sections.includes(undefined) ? [] : sections,
     });
+  };
 
-    this.state.animation.setValue(initialValue);
-    Animated.spring(
-      this.state.animation,
-      {
-        toValue: finalValue
-      }
-    ).start();
-  }
-
-  _setMaxHeight(event) {
-    this.setState({
-      maxHeight: event.nativeEvent.layout.height
-    });
-  }
-
-  _setMinHeight(event) {
-    this.setState({
-      minHeight: 80
-    });
-  }
+  renderHeader = (section, _, isActive) => {
+    return (
+      <Animatable.View
+        duration={400}
+        style={[styles.header, isActive ? styles.active : styles.inactive]}
+        transition="backgroundColor"
+      >
+        <Text style={styles.headerText}>{section.title}</Text>
+      </Animatable.View>
+    );
+  };
 
   goToQuestions = (quest_id) => {
+    console.log('>>>>>>  In goto questions')
+    console.log('>>>>>> quest_id', quest_id)
     api.fetchQuestById(quest_id)
-      .then(questions => {
+      .then(res => {
         this.props.navigation.navigate('Question', {
-          questions
+          questions: res
         })
+        console.log('response=', res)
       })
   }
 
-  render() {
-    let icon = this.icons['down']
 
-    if (this.state.expanded) {
-      icon = this.icons['up']
-    }
+  renderContent(section, _, isActive) {
     return (
-      <Animated.View style={[styles.container, { height: this.state.animation }]}>
-        <View style={styles.container} >
-          <View style={styles.titleContainer} onLayout={this._setMinHeight.bind(this)}>
-            <Text style={styles.title}>{this.state.title}</Text>
-            <TouchableHighlight
-              style={styles.button}
-              onPress={this.toggle.bind(this)}
-              underlayColor="#f1f1f1">
-              <Image
-                style={styles.buttonImage}
-                source={icon}
-              ></Image>
-            </TouchableHighlight>
-          </View>
+      <View>
 
-          <View style={styles.body} onLayout={this._setMaxHeight.bind(this)}>
-            <Text>{this.state.description}</Text>
+        <Animatable.View
+          duration={3000}
+          style={[styles.content, isActive ? styles.active : styles.inactive]}
+          transition="backgroundColor"
+        >
+
+          <Animatable.Text animation={isActive ? 'bounceIn' : undefined}>
+            <Text style={styles.scoreMode}>{section.intro}</Text>
+          </Animatable.Text >
+          <Animatable.Text animation={isActive ? 'bounceIn' : undefined}>
+            <Text style={styles.myDescription}>{section.full}</Text>
+          </Animatable.Text >
+          <Animatable.Text animation={isActive ? 'bounceIn' : undefined}>
+            <Text style={styles.myDescription}>{section.suitability}</Text>
+          </Animatable.Text >
+          <Animatable.Text animation={isActive ? 'bounceIn' : undefined}>
+            <Text style={styles.myDescription}>{section.venue_area}</Text>
+          </Animatable.Text >
+
+
+          <Image
+            style={styles.buttonImage}
+            source={{ uri: section.icon_url }}
+          >
+          </Image>
+          <View>
             <Button
-              title="Go to Quest"
+              title={"PLAY ME NOW"}
               onPress={() => {
-                this.goToQuestions(this.props.quest_id)
+                this.goToQuestions(section.quest_id)
               }} />
 
           </View>
+        </Animatable.View >
 
-        </View>
-      </Animated.View>
+      </View >
+    );
+  }
+
+
+  render() {
+    const { navigate } = this.props.navigation;
+    const { multipleSelect, activeSections } = this.state;
+    const CONTENT = this.props.quests.map(quest => {
+      return {
+        title: quest.title, intro: quest.intro_text,
+        quest_id: quest.id,
+        full: quest.full_text,
+        icon_url: quest.icon_url,
+        suitability: quest.suitability,
+        venue_id: quest.venue_id
+      }
+    })
+    return (
+      <View style={styles.container}>
+        <ScrollView contentContainerStyle={{ paddingTop: 30 }}>
+          <Accordion
+            style={styles.accordionStyle}
+            activeSections={activeSections}
+            sections={CONTENT}
+            touchableComponent={TouchableOpacity}
+            expandMultiple={multipleSelect}
+            renderHeader={this.renderHeader}
+            renderContent={this.renderContent}
+            duration={400}
+            onChange={this.setSections}
+          />
+        </ScrollView>
+      </View>
     );
   }
 }
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
-    margin: 10,
-    overflow: 'hidden'
-  },
-  titleContainer: {
-    flexDirection: 'row'
+    flex: 1,
+    backgroundColor: '#FED158',//'transparent',//'#F5FCFF',
+    paddingTop: Constants.statusBarHeight,
   },
   title: {
-    flex: 1,
-    padding: 10,
-    color: '#2a2f43',
-    fontWeight: 'bold'
-  },
-  button: {
-
+    textAlign: 'center',
+    fontSize: 22,
+    fontWeight: '300',
+    marginBottom: 20,
   },
   buttonImage: {
     width: 30,
-    height: 25
+    height: 25,
+    alignItems: 'center',
   },
-  body: {
+
+  scoreMode: {
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: 'bold',
+    padding: 15,
+    color: 'green',
+    fontWeight: 'bold',
+  },
+
+  header: {
+    backgroundColor: '#F5FCFF',
     padding: 10,
-    paddingTop: 0
-  }
+  },
+  headerText: {
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#333'
+  },
+  content: {
+    padding: 20,
+    backgroundColor: '#FED158',
+  },
+  active: {
+    backgroundColor: 'white',//'rgba(255,255,255,1)',
+  },
+  inactive: {
+    backgroundColor: '#FED158',//'rgba(245,252,255,1)',
+  },
+  selectTitle: {
+    fontSize: 14,
+    fontWeight: '500',
+    padding: 10,
+  },
+  multipleToggle: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: 30,
+    alignItems: 'center',
+  },
+  multipleToggle__title: {
+    fontSize: 16,
+    marginRight: 8,
+  },
+  myDescription: {
+    padding: 10,
+    textAlign: 'center',
+    fontSize: 16,
+
+  },
+  accordionStyle: {
+    padding: 5,
+    backgroundColor: '#333',
+
+  },
+
 });
 
 export default Panel;
-
-// import React, { Component } from 'react';
-// import { View, Text, FlatList } from 'react-native';
-// import QuestDetails from './QuestDetails'
-// import questList from '../mock-data/quest'
-// import { List, ListItem } from 'react-native-elements'
-
-// class QuestList extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       quests: questList
-//     };
-//   }
-
-//   render() {
-
-//     return (
-//       <View>
-//         <Text> This is a list of all the quests</Text>
-//         <FlatList
-//           data={this.state.quests}
-//           renderItem={({ item }) => (
-//             < ListItem
-//               key={item.id}
-//               title={item.title}
-//               subtitle={`${item.description}\n${item.suitability}`}
-//               onPress={() => {
-//                 this.props.navigation.navigate('Question')
-//               }
-//               }
-//             />
-//           )}
-//           keyExtractor={(item, index) => item.id}
-//         />
-//         {/* <QuestDetails navigation={this.props.navigation} /> */}
-//       </View>
-//     );
-
-//   }
-// }
-
-// export default QuestList;
