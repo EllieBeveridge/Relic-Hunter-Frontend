@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import { StyleSheet, Button, Image, Animated } from 'react-native';
+import { StyleSheet, Image, Animated } from 'react-native';
+import { Button } from 'react-native-elements';
 
 import FadeInView from '../components/FadeInView';
 // import FadeSpinView from '../components/FadeSpinView';
@@ -60,6 +61,7 @@ class ScoreCard extends Component {
         <View style={styles.welcomeContainer}>
           <Button
             title="NEXT"
+            backgroundColor="#4E3948"
             onPress={() =>
               this.props.navigation.navigate('LandingPage')
             }
@@ -75,7 +77,7 @@ class ScoreCard extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FED158',
     margin: 10,
     overflow: 'hidden'
   },
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
   titleMode: {
     textAlign: 'center',
     fontSize: 28,
-    color: '#333',
+    color: 'purple',
     fontWeight: 'bold',
     padding: 5,
   },
@@ -103,12 +105,12 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: 'bold',
     padding: 15,
-    color: 'green',
+    color: 'purple',
     fontWeight: 'bold',
   },
   mainText: {
     fontSize: 17,
-    color: '#333',
+    color: 'purple',
     lineHeight: 24,
     textAlign: 'center',
   },

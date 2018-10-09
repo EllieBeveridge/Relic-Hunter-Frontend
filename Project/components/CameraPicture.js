@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import { ImageBackground, View, Text, Button, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-import QuestionButtons from './QuestionButtons'
-import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { Camera } from 'expo';
 import styles from '../stylesheets/CameraStylesheet'
-import base64 from 'base64-js';
-import * as api from '../api';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 class CameraPicture extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      focusing: false,
     };
   }
 
@@ -24,6 +22,12 @@ class CameraPicture extends Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
+          <View >
+            <Spinner
+              visible={this.state.focusing}
+              textContent={"Taking Picture..."}
+              textStyle={{ color: '#FFF' }} />
+          </View>
           <Camera
             style={styles.preview}
             ref={(ref) => { this.camera = ref }}
@@ -32,9 +36,10 @@ class CameraPicture extends Component {
               style={styles.capture}
               onPress={this.snap.bind(this)}
             >
-              <Text style={{ fontSize: 18, marginBottom: 20, color: 'black' }}>
-                Touch Me</Text>
+              <Text style={{ fontSize: 18, marginBottom: 20, color: 'purple' }}>
+                PRESS ME</Text>
             </TouchableOpacity>
+
           </Camera>
         </View>
       );
@@ -42,13 +47,23 @@ class CameraPicture extends Component {
   }
 
   snap = async () => {
+    if (this.state.focusing) return;
     console.log('take a picture')
+    this.setState({
+      focusing: true
+    })
     if (this.camera) {
       let photo = await this.camera.takePictureAsync()
         .then(data => {
           this.props.updateUri(data.uri, false, true)
         })
     }
+    // gives async problem if actually do this setstate to false!
+    // cant set unmonunted component!
+    // so setstate to false` removed pending further investigation...
+    // this.setState({
+    //   focusing: false
+    // })
   }
 
 }

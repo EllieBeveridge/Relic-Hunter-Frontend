@@ -47,24 +47,20 @@ class Panel extends Component {
   };
 
   goToQuestions = (quest_id) => {
-    console.log('>>>>>>  In goto questions')
-    console.log('>>>>>> quest_id', quest_id)
     api.fetchQuestById(quest_id)
       .then(res => {
         this.props.navigation.navigate('Question', {
           questions: res
         })
-        console.log('response=', res)
       })
   }
 
-
   renderContent(section, _, isActive) {
     return (
-      <View>
+      <View style={styles.container}>
 
         <Animatable.View
-          duration={3000}
+          duration={1500}
           style={[styles.content, isActive ? styles.active : styles.inactive]}
           transition="backgroundColor"
         >
@@ -82,14 +78,13 @@ class Panel extends Component {
             <Text style={styles.myDescription}>{section.venue_area}</Text>
           </Animatable.Text >
 
-
-          <Image
+          {/* <Image
             style={styles.buttonImage}
             source={{ uri: section.icon_url }}
           >
-          </Image>
+          </Image> */}
           <View>
-            <Button
+            <Button style={styles.button}
               title={"PLAY ME NOW"}
               onPress={() => {
                 this.goToQuestions(section.quest_id)
@@ -148,6 +143,9 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     marginBottom: 20,
   },
+  button: {
+    color: 'purple',
+  },
   buttonImage: {
     width: 30,
     height: 25,
@@ -171,7 +169,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     fontWeight: '500',
-    color: '#333'
+    color: '#333',
+    // backgroundColor: 'purple,'
   },
   content: {
     padding: 20,
@@ -199,9 +198,15 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   myDescription: {
-    padding: 10,
-    textAlign: 'center',
-    fontSize: 16,
+    // padding: 10,
+    // justifyContent: 'center',
+    // fontSize: 16,
+    // alignItems: 'center',
+
+    // textAlign: 'center',
+    // fontSize: 16,
+    // fontWeight: '500',
+    // color: '#333',
 
   },
   accordionStyle: {
