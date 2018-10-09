@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ImageBackground, View, Text, Button, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { ImageBackground, View, Text, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import QuestionButtons from '../components/QuestionButtons'
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
 import styles from '../stylesheets/QuestionStylesheet'
@@ -7,6 +7,7 @@ import CameraPicture from '../components/CameraPicture'
 import CameraImage from '../components/CameraImage'
 import GoodAnswer from '../components/GoodAnswer'
 import BadAnswer from '../components/BadAnswer'
+import { Button } from 'react-native-elements';
 
 import { questid } from '../mock-data/question.json'
 
@@ -64,22 +65,29 @@ class Question extends Component {
         score={score} updateAnswers={this.updateAnswers} />
 
     return (
-      <View style={{ flex: 1 }}>
-        <Text style={styles.question}> QUESTION{questions[currQ].id}:
-          {questions[currQ].title}
+      <View style={{ backgroundColor: '#FBD158' }}>
+        <Text style={styles.titleMode}> QUESTION {questions[currQ].id}
+          : {questions[currQ].title}
         </Text>
         <Text style={styles.question}>
           {questions[currQ].text}
         </Text>
-        <Button
-          title="Take a picture"
-          onPress={() =>
-            this.setState({
-              takePic: true,
-              lastAnswer: null
-            })
-          }
-        />
+        <View >
+          <View style={styles.takePictureButton}>
+            <Button
+              title="Take a picture"
+              backgroundColor="#4E3948"
+              fontSize={20}
+              icon={{ name: 'camera', type: 'font-awesome' }}
+              onPress={() =>
+                this.setState({
+                  takePic: true,
+                  lastAnswer: null
+                })
+              }
+            />
+          </View>
+        </View>
         <QuestionButtons
           navigation={this.props.navigation}
           hint_text={questions[currQ].hint_text}

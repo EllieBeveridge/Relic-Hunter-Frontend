@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Button, Alert } from 'react-native';
+import { View, Text, Alert, StyleSheet } from 'react-native';
+import { Button } from 'react-native-elements';
 
 class componentName extends Component {
   constructor(props) {
@@ -8,32 +9,59 @@ class componentName extends Component {
     };
   }
 
-
   render() {
-
     const rounds = this.props.currQ + 1;
     return (
       <View>
-        <Button
-          title="Get a Hint"
-          onPress={() => {
-            Alert.alert(this.props.hint_text)
-          }
-          }
-        />
-        <Button
-          title="Skip this question"
-          onPress={() => this.skip()}
-        />
-        <Button
-          title="Finish this quest"
-          onPress={() =>
-            this.props.navigation.navigate('ScoreCard', {
-              currQ: rounds,
-              score: this.props.score
-            })
-          }
-        />
+        <View style={styles.welcomeContainer}>
+          <Button
+            title="Get a Hint"
+            icon={{ name: 'question-circle', type: 'font-awesome' }}
+            backgroundColor="#4E3948"
+            fontSize={20}
+            onPress={() => {
+              Alert.alert(this.props.hint_text)
+            }
+            }
+          />
+        </View>
+        <View style={styles.welcomeContainer}>
+          <Button
+            title="Skip this question"
+            backgroundColor="#4E3948"
+            fontSize={20}
+            icon={{ name: 'fast-forward', type: 'font-awesome' }}
+            onPress={() => this.skip()}
+          />
+        </View>
+        <View style={styles.welcomeContainer}>
+          <Button
+            title="Finish this quest"
+            backgroundColor="#4E3948"
+            fontSize={20}
+            icon={{ name: 'times-circle', type: 'font-awesome' }}
+            onPress={() =>
+              this.props.navigation.navigate('ScoreCard', {
+                currQ: rounds,
+                score: this.props.score
+              })
+            }
+          />
+        </View>
+        <View style={styles.welcomeContainer}>
+          <Button
+            title="Logo"
+            backgroundColor="#4E3948"
+            fontSize={20}
+            icon={{ name: 'times-circle', type: 'font-awesome' }}
+            onPress={() =>
+              this.props.navigation.navigate('Logo', {
+                currQ: rounds,
+                score: this.props.score
+              })
+            }
+          />
+        </View>
       </View>
     );
   }
@@ -51,5 +79,13 @@ class componentName extends Component {
   }
 
 }
+
+const styles = StyleSheet.create({
+  welcomeContainer: {
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 20,
+  }
+});
 
 export default componentName;
