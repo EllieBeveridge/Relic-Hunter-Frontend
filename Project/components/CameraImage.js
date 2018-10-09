@@ -74,10 +74,12 @@ class CameraImage extends Component {
         const question_id = this.props.question.id
         api.checkPicture(question_id, finalB64)
           .then(answer => {
-            this.setState({
-              uploading: false,
-            })
-
+            // gives async problem if actually do this setstate to false!
+            // cant set unmonunted component!
+            // so setstate to false removed pending further investigation...
+            // this.setState({
+            //   uploading: false,
+            // }) 
             const ansFlag = (answer) ? 't' : 'f';
             const newPoints = (answer) ? this.props.score + 1 : this.props.score;
             this.props.updateAnswers(newPoints, ansFlag)

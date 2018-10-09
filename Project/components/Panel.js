@@ -55,13 +55,12 @@ class Panel extends Component {
       })
   }
 
-
   renderContent(section, _, isActive) {
     return (
-      <View>
+      <View style={styles.container}>
 
         <Animatable.View
-          duration={3000}
+          duration={1500}
           style={[styles.content, isActive ? styles.active : styles.inactive]}
           transition="backgroundColor"
         >
@@ -78,7 +77,6 @@ class Panel extends Component {
           <Animatable.Text animation={isActive ? 'bounceIn' : undefined}>
             <Text style={styles.myDescription}>{section.venue_area}</Text>
           </Animatable.Text >
-
 
           <View>
             <Button
