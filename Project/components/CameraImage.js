@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { ImageBackground, View, Text, Button, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
-import styles from '../stylesheets/QuestionStylesheet'
+import styles from '../stylesheets/CameraStylesheet'
 import * as api from '../api';
-import Spinner from 'react-native-loading-spinner-overlay'; 
+import Spinner from 'react-native-loading-spinner-overlay';
 
 class CameraImage extends Component {
   constructor(props) {
@@ -24,14 +24,14 @@ class CameraImage extends Component {
           source={{ uri: uri }}
           style={{ width: "100%", height: "100%" }}
         >
- 
+
           <View style={{ flex: 1 }}>
-            <Spinner 
-            visible={this.state.uploading} 
-            textContent={"Checking..."} 
-            textStyle={{color: '#FFF'}} />
+            <Spinner
+              visible={this.state.uploading}
+              textContent={"Checking..."}
+              textStyle={{ color: '#FFF' }} />
           </View>
-        
+
 
           <TouchableOpacity
             style={styles.discard}

@@ -6,34 +6,57 @@ export default styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center'
   },
-  capture: {
-    flex: 0,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    // color: '#000',
-    padding: 10,
-    margin: 40,
+  question: {
+    textAlign: 'left',
+    fontSize: 18,
+    color: '#583E5C',
+    fontWeight: 'bold',
+    padding: 10
   },
-  discard: {
-    position: 'absolute',
-    bottom: 20,
-    left: 10,
-    flex: 0,
+  container: {
+    flex: 1,
     backgroundColor: '#fff',
-    borderRadius: 5,
-    // color: '#000',
-    padding: 10,
-    margin: 40, marginBottom: 20
+    margin: 10,
+    overflow: 'hidden'
   },
-  submit: {
-    position: 'absolute',
-    bottom: 20,
-    right: 10,
-    flex: 0,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    // color: '#000',
-    padding: 10,
-    margin: 40, marginBottom: 20
+  welcomeContainer: {
+    alignItems: 'center',
+    marginTop: 25,
+    marginBottom: 20,
+
+  },
+  takePictureButton: {
+    marginTop: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20
+  },
+  welcomeImage: {
+    width: 100,
+    height: 80,
+    resizeMode: 'contain',
+    marginTop: 3,
+    marginLeft: -10,
+  },
+  titleMode: {
+    textAlign: 'left',
+    fontSize: 24,
+    color: '#583E5C',
+    fontWeight: 'bold',
+    padding: 5,
+  },
+  scoreMode: {
+    textAlign: 'center',
+    fontSize: 26,
+    fontWeight: 'bold',
+    padding: 15,
+    color: 'green',
+    fontWeight: 'bold',
+  },
+  mainText: {
+    fontSize: 17,
+    color: '#333',
+    lineHeight: 24,
+    textAlign: 'center',
   }
 })
