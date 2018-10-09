@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Button, FlatList, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import Panel from '../components/Panel'
 import { Constants } from 'expo'
 import * as api from '../api'
+import * as questList from '../mock-data/quest'
 
 class LandingPage extends Component {
   constructor(props) {
@@ -14,10 +15,13 @@ class LandingPage extends Component {
   }
 
   componentDidMount = () => {
-    api.fetchAllQuests()
+    const venue = 1;
+    api.fetchAllQuests(venue)
       .then(quests => {
         this.setState({
-          quests
+          // quests
+          // temp use of mockdata as only 1 quest on API currently
+          quests: questList.quests
         })
       })
   }
@@ -25,18 +29,28 @@ class LandingPage extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View>
-        <ScrollView>
-          {this.state.quests.map((quest, index) => (
-            <Panel quest_id={quest.id} navigation={this.props.navigation} icon_url={quest.icon_url} title={quest.title}
-              key={index} description={quest.intro_text} >
-            </Panel>
-          ))}
+      <View style={styles.container}>
+        <ScrollView  >
+          <Text style={styles.titleMode}>Relic Hunter</Text>
+          <Panel quests={this.state.quests} navigation={this.props.navigation}></Panel>
         </ScrollView>
       </View>
     );
   }
 }
 
+const styles = StyleSheet.create({
+  titleMode: {
+    textAlign: 'center',
+    fontSize: 28,
+    color: '#333',
+    fontWeight: 'bold',
+    padding: 5,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#FED158',
+  },
+});
 
 export default LandingPage;
