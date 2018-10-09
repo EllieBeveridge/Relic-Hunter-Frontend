@@ -66,7 +66,7 @@ class Question extends Component {
 
     return (
       <View style={{ backgroundColor: '#FBD158' }}>
-        <Text style={styles.titleMode}> QUESTION {questions[currQ].id}
+        <Text style={styles.titleMode}>QUESTION {questions[currQ].id}
           : {questions[currQ].title}
         </Text>
         <Text style={styles.question}>
