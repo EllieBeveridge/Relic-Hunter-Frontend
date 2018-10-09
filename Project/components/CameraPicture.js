@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ImageBackground, View, Text, Button, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import QuestionButtons from './QuestionButtons'
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
-import styles from '../stylesheets/QuestionStylesheet'
+import styles from '../stylesheets/CameraStylesheet'
 import base64 from 'base64-js';
 import * as api from '../api';
 
