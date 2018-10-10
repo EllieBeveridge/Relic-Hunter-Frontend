@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { Button } from 'react-native-elements';
 import Panel from '../components/Panel'
 import { Constants } from 'expo'
 import * as api from '../api'
@@ -25,7 +26,7 @@ class LandingPage extends Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigation } = this.props;
     const venue_id = navigation.getParam('venue_id')
     return (
       <View style={styles.container}>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
-class SubmitQuestion extends Component {
+class CreateQuestion extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,4 +17,4 @@ class SubmitQuestion extends Component {
   }
 }
 
-export default SubmitQuestion;
+export default CreateQuestion;
