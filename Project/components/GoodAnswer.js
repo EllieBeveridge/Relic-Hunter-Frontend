@@ -12,34 +12,59 @@ class GoodAnswer extends Component {
   }
 
   render() {
-    return (
+    if (this.props.TestPics) {
+      return (
+        <View style={styles.container}>
+          <Animatable.View
+            duration={1000}
+            delay={1000}
+            style={styles.content}
+            transition="backgroundColor">
+            <Animatable.Text animation={'bounceIn'}>
+              <Text style={styles.title}>
+                Test OK!  </Text>
+            </Animatable.Text >
+          </Animatable.View>
+          <Button
+            style={styles.buttonImage}
+            backgroundColor="#4E3948"
+            title="Back to Home Screen"
+            onPress={() => this.props.navigation.navigate('Logo')
+            }
+          />
+        </View>
+      )
+    }
+    if (this.props.Question) {
+      return (
 
-      <View style={styles.container}>
-        {console.log(this.props.score, 'this is the score in goodanswer')}
+        <View style={styles.container}>
+          {console.log(this.props.score, 'this is the score in goodanswer')}
 
-        <Animatable.View
-          duration={1000}
-          delay={1000}
-          style={styles.content}
-          transition="backgroundColor">
-          <Animatable.Text animation={'bounceIn'}>
-            <Text style={styles.title}>
-              GoodAnswer!  </Text>
-          </Animatable.Text >
-        </Animatable.View>
-        <Text style={styles.scoreMode}>
-          Go to the next question... </Text>
-        <Text> You are now on {this.props.score} points </Text>
+          <Animatable.View
+            duration={1000}
+            delay={1000}
+            style={styles.content}
+            transition="backgroundColor">
+            <Animatable.Text animation={'bounceIn'}>
+              <Text style={styles.title}>
+                GoodAnswer!  </Text>
+            </Animatable.Text >
+          </Animatable.View>
+          <Text style={styles.scoreMode}>
+            Go to the next question... </Text>
+          <Text> You are now on {this.props.score} points </Text>
 
-        <Button
-          style={styles.buttonImage}
-          backgroundColor="#4E3948"
-          title="NEXT"
-          onPress={() => this.done()
-          }
-        />
-      </View >
-    );
+          <Button
+            style={styles.buttonImage}
+            backgroundColor="#4E3948"
+            title="NEXT"
+            onPress={() => this.done()
+            }
+          />
+        </View >
+      );
+    }
   }
 
   done = () => {

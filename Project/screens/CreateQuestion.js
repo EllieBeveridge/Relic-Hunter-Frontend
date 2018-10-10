@@ -18,11 +18,9 @@ class CreateQuestion extends Component {
     const { navigation } = this.props
     const quest_id = navigation.getParam('id');
     api.postNewQuestion(quest_id, this.state)
-      .then(({ image }) => {
-
-        console.log(image, 'here is the decond image')
+      .then((question) => {
         Alert.alert("Question Added");
-        this.props.navigation.navigate('AddPicture', { image })
+        this.props.navigation.navigate('AddPicture', { id: question.id })
       })
       .catch(err => console.log(err));
   }

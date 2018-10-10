@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ImageBackground, View, Text, Button, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { ImageBackground, View, Text, Alert, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
 import styles from '../stylesheets/CameraStylesheet'
 import * as api from '../api';
@@ -45,7 +45,7 @@ class CameraImage extends Component {
           </TouchableOpacity>
           {this.props.addPicture && <TouchableOpacity
             style={styles.submit}
-            onPress={() => this.sendImage()}
+            onPress={() => this.calibrateImage()}
           >
             <Text
               style={{ fontSize: 18, color: 'black' }}
@@ -79,14 +79,16 @@ class CameraImage extends Component {
     })
     ImageManipulator.manipulate(this.props.uri, [{ resize: { width: 1000 } }], { base64: true, format: 'jpeg' })
       .then(({ base64 }) => {
-        const finalB64 = { answer: { image: base64, model_name: this.props.question.model_name } }
-        const question_id = this.props.question.id
+        const finalB64 = { answer: { image: base64 } }
+        const question_id = this.props.question_id
         api.addPicture(question_id, finalB64)
           .then(data => {
-            console.log(data)
+            Alert.alert("Picture Added");
+            this.props.updateUri(null, false, false)
           })
 
       })
+      .catch(err => console.log(err))
   }
 
 
@@ -98,7 +100,7 @@ class CameraImage extends Component {
 
     ImageManipulator.manipulate(this.props.uri, [{ resize: { width: 1000 } }], { base64: true, format: 'jpeg' })
       .then(({ base64 }) => {
-        const finalB64 = { answer: { image: base64, model_name: this.props.question.model_name } }
+        const finalB64 = { answer: { image: base64 } }
         const question_id = this.props.question.id
         api.checkPicture(question_id, finalB64)
           .then(answer => {
@@ -109,9 +111,13 @@ class CameraImage extends Component {
             //   uploading: false,
             // }) 
             const ansFlag = (answer) ? 't' : 'f';
-            const newPoints = (answer) ? this.props.score + 1 : this.props.score;
-            this.props.updateAnswers(newPoints, ansFlag)
-            this.props.updateUri(null, false, false)
+            if (this.props.Question) {
+              const newPoints = (answer) ? this.props.score + 1 : this.props.score;
+              this.props.updateAnswers(newPoints, ansFlag)
+              this.props.updateUri(null, false, false)
+            } else {
+              this.props.updateUri(null, false, false)
+            }
           })
           .catch(err => {
             console.log('error in axios Post', err)

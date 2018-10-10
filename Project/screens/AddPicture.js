@@ -5,7 +5,8 @@ import * as api from '../api'
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
 import styles from '../stylesheets/QuestionStylesheet'
 import CameraPicture from '../components/CameraPicture'
-import CameraImage from '../components/CameraImage'
+import CameraImage from '../components/CameraImage';
+import QuestionButtons from '../components/QuestionButtons'
 
 
 class AddPicture extends Component {
@@ -37,7 +38,23 @@ class AddPicture extends Component {
     })
   }
 
+  trainModel = () => {
+    const { navigation } = this.props
+    const question_id = navigation.getParam('id');
+    api.trainModel(question_id)
+      .then(data => {
+        console.log(data, '<<<data')
+        this.props.navigation.navigate('TestPics', { question_id })
+      })
+      .catch(err => {
+        if (err) Alert.alert('More photos are required')
+      })
+  }
+
   render() {
+
+    const { navigation } = this.props
+    const question_id = navigation.getParam('id');
     const { hasCameraPermission, takePic, uri } = this.state;
 
     if (hasCameraPermission === false) {
@@ -53,10 +70,8 @@ class AddPicture extends Component {
         addPicture={this.state.addPicture}
         updateUri={this.updateUri}
         uri={uri}
-        score={score}
-        updateAnswers={this.updateAnswers}
-        lastAnswer={lastAnswer}
-        question={questions[currQ]}
+        question_id={question_id}
+        navigation={navigation}
       />
 
     return (
@@ -69,9 +84,10 @@ class AddPicture extends Component {
         <View >
           <View style={styles.takePictureButton}>
             <Button
-              title="Take a picture"
+              title="Add a picture"
               backgroundColor="#4E3948"
               fontSize={16}
+              marginBottom={20}
               icon={{ name: 'camera', type: 'font-awesome' }}
               onPress={() =>
                 this.setState({
@@ -80,16 +96,17 @@ class AddPicture extends Component {
                 })
               }
             />
+            <Button
+              title="Finish Adding Pictures"
+              backgroundColor="#4E3948"
+              fontSize={16}
+              icon={{ name: 'camera', type: 'font-awesome' }}
+              onPress={() =>
+                this.trainModel()
+              }
+            />
           </View>
         </View>
-        <QuestionButtons
-          navigation={this.props.navigation}
-          hint_text={questions[currQ].hint_text}
-          currQ={currQ}
-          questions={questions}
-          updateCurrQ={this.updateCurrQ}
-          score={this.state.score}
-        />
       </View>
     );
   }

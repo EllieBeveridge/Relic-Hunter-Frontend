@@ -25,7 +25,7 @@ class BadAnswer extends Component {
           </Animatable.Text >
         </Animatable.View>
         <Text style={styles.scoreMode}>
-          Not the right image, sorry </Text>
+          Image not recognised, sorry </Text>
 
         <Button
           style={styles.buttonImage}
@@ -34,9 +34,12 @@ class BadAnswer extends Component {
           onPress={() => this.done()
           }
         />
+
       </View >
     );
   }
+
+
 
   done = () => {
     // set feedback to null

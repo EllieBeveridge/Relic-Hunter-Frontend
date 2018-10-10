@@ -9,7 +9,7 @@ import GoodAnswer from '../components/GoodAnswer'
 import BadAnswer from '../components/BadAnswer'
 import { Button } from 'react-native-elements';
 
-class Question extends Component {
+class TestPics extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,9 +18,6 @@ class Question extends Component {
       hasCameraPermission: null,
       type: Camera.Constants.Type.back,
       uri: null,
-      questions: [],
-      currQ: 0,
-      score: 0,
       lastAnswer: null
     };
   }
@@ -30,8 +27,9 @@ class Question extends Component {
   }
 
   render() {
+    const { navigation } = this.props
+    const question_id = navigation.getParam('id');
     const { hasCameraPermission, takePic, uri, currQ, questions, score, lastAnswer } = this.state;
-    if (!questions[0]) return null;
 
     if (hasCameraPermission === false) {
       return <Text>Camera permission needed to play</Text>
@@ -42,36 +40,26 @@ class Question extends Component {
       />
     if (!takePic && uri)
       return <CameraImage
-        Question={true}
         updateUri={this.updateUri}
         uri={uri}
-        score={score}
-        updateAnswers={this.updateAnswers}
-        lastAnswer={lastAnswer}
-        question={questions[currQ]}
+        question_id={question_id}
       />
 
     if (lastAnswer === 't')
       return <GoodAnswer
-        score={score}
-        updateAnswers={this.updateAnswers}
-        currQ={currQ}
-        questions={questions}
-        navigation={this.props.navigation}
-        updateCurrQ={this.updateCurrQ}
-        Question={true} />
+
+        TestPics={true}
+        navigation={navigation}
+      />
     if (lastAnswer === 'f')
       return <BadAnswer
-        score={score} updateAnswers={this.updateAnswers} Question={true} />
+        TestPics={true} />
 
     return (
       <View style={{ backgroundColor: '#FBD158', height: '100%' }}>
-        <Text style={styles.titleMode}>QUESTION {questions[currQ].id}
-          : {questions[currQ].title}
-        </Text>
         <ScrollView>
           <Text style={styles.question}>
-            {questions[currQ].text}
+            Test Your Picture!
           </Text>
         </ScrollView>
         <View >
@@ -90,14 +78,6 @@ class Question extends Component {
             />
           </View>
         </View>
-        <QuestionButtons
-          navigation={this.props.navigation}
-          hint_text={questions[currQ].hint_text}
-          currQ={currQ}
-          questions={questions}
-          updateCurrQ={this.updateCurrQ}
-          score={this.state.score}
-        />
       </View>
     );
   }
@@ -108,7 +88,6 @@ class Question extends Component {
     const questions = navigation.getParam('questions')
     this.setState({
       hasCameraPermission: status === 'granted',
-      questions: questions.questions
     });
   }
 
@@ -135,7 +114,6 @@ class Question extends Component {
       currQ: newQ
     })
   }
-
 }
 
-export default Question;
+export default TestPics;
