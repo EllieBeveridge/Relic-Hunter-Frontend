@@ -17,7 +17,7 @@ class GoodAnswer extends Component {
 
       <View style={styles.container}>
         {console.log(this.props.score, 'this is the score in goodanswer')}
-
+        <Text style={generalStyle.titleMode}>Relic Hunter</Text>
         <Animatable.View
           duration={1000}
           delay={1000}

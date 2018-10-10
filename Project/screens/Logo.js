@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, Picker } from 'react-native';
-//import styles from '../stylesheets/QuestionStylesheet'
 import { Button, Icon } from 'react-native-elements'
 import generalStyle from '../stylesheets/generalStyle'
 import * as api from '../api'

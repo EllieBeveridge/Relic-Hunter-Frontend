@@ -10,8 +10,6 @@ import GoodAnswer from '../components/GoodAnswer'
 import BadAnswer from '../components/BadAnswer'
 import { Button } from 'react-native-elements';
 
-import { questid } from '../mock-data/question.json'
-
 class Question extends Component {
   constructor(props) {
     super(props);
@@ -73,7 +71,7 @@ class Question extends Component {
     return (
       <View style={{ backgroundColor: '#FBD158', height: '100%' }}>
         <Text style={generalStyle.titleMode}>Relic Hunter</Text>
-        <Text style={styles.titleMode}>QUESTION {questions[currQ].id}
+        <Text style={generalStyle.titleMode}>QUESTION {questions[currQ].id}
           : {questions[currQ].title}
         </Text>
         <Text style={styles.question}>

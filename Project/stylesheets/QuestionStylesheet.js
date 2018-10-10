@@ -38,13 +38,6 @@ export default styles = StyleSheet.create({
     marginTop: 3,
     marginLeft: -10,
   },
-  titleMode: {
-    textAlign: 'left',
-    fontSize: 24,
-    color: '#583E5C',
-    fontWeight: 'bold',
-    padding: 5,
-  },
   scoreMode: {
     textAlign: 'center',
     fontSize: 26,

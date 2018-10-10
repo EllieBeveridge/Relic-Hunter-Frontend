@@ -15,6 +15,7 @@ class BadAnswer extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text style={generalStyle.titleMode}>Relic Hunter</Text>
         <Animatable.View
           duration={1000}
           delay={1000}

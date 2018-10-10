@@ -53,7 +53,7 @@ class ScoreCard extends Component {
         </View>
 
         <View>
-          <Text style={styles.titleMode}>Game Complete</Text>
+          <Text style={generalStyle.titleMode}>Game Complete</Text>
         </View>
 
         <View style={styles.welcomeContainer}>
@@ -90,13 +90,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
-  },
-  titleMode: {
-    textAlign: 'center',
-    fontSize: 28,
-    color: 'purple',
-    fontWeight: 'bold',
-    padding: 5,
   },
   scoreMode: {
     textAlign: 'center',
