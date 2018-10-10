@@ -53,7 +53,7 @@ class CameraImage extends Component {
             </Text>
           </TouchableOpacity>
           }
-          {this.props.Question && <TouchableOpacity
+          {(this.props.Question || this.props.TestPics) && <TouchableOpacity
             style={styles.submit}
             onPress={() => this.sendImage()}
           >
@@ -101,7 +101,8 @@ class CameraImage extends Component {
     ImageManipulator.manipulate(this.props.uri, [{ resize: { width: 1000 } }], { base64: true, format: 'jpeg' })
       .then(({ base64 }) => {
         const finalB64 = { answer: { image: base64 } }
-        const question_id = this.props.question.id
+        console.log(this.props);
+        const question_id = this.props.question_id || this.props.question.id
         api.checkPicture(question_id, finalB64)
           .then(answer => {
             // gives async problem if actually do this setstate to false!
@@ -116,7 +117,9 @@ class CameraImage extends Component {
               this.props.updateAnswers(newPoints, ansFlag)
               this.props.updateUri(null, false, false)
             } else {
+              this.props.updateAnswers(0, ansFlag)
               this.props.updateUri(null, false, false)
+
             }
           })
           .catch(err => {

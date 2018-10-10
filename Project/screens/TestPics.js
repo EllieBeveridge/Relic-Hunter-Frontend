@@ -28,7 +28,8 @@ class TestPics extends Component {
 
   render() {
     const { navigation } = this.props
-    const question_id = navigation.getParam('id');
+    const question_id = navigation.getParam('question_id');
+    console.log(question_id);
     const { hasCameraPermission, takePic, uri, currQ, questions, score, lastAnswer } = this.state;
 
     if (hasCameraPermission === false) {
@@ -43,6 +44,8 @@ class TestPics extends Component {
         updateUri={this.updateUri}
         uri={uri}
         question_id={question_id}
+        TestPics={true}
+        updateAnswers={this.updateAnswers}
       />
 
     if (lastAnswer === 't')
@@ -53,7 +56,9 @@ class TestPics extends Component {
       />
     if (lastAnswer === 'f')
       return <BadAnswer
-        TestPics={true} />
+        TestPics={true}
+        updateAnswers={this.updateAnswers}
+      />
 
     return (
       <View style={{ backgroundColor: '#FBD158', height: '100%' }}>
