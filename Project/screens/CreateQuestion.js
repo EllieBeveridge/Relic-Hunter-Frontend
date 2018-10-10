@@ -18,15 +18,18 @@ class CreateQuestion extends Component {
     const { navigation } = this.props
     const quest_id = navigation.getParam('id');
     api.postNewQuestion(quest_id, this.state)
-      .then(data => {
+      .then(({ image }) => {
+
+        console.log(image, 'here is the decond image')
         Alert.alert("Question Added");
+        this.props.navigation.navigate('AddPicture', { image })
       })
       .catch(err => console.log(err));
   }
 
   render() {
-    return (
 
+    return (
       <View>
         <ScrollView>
           <FormLabel>Question Title</FormLabel>
@@ -54,7 +57,6 @@ class CreateQuestion extends Component {
             title="Submit"
             onPress={() => {
               this.submitForm()
-              this.props.navigation.navigate('LandingPage')
             }
             } />
         </ScrollView>

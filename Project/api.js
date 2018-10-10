@@ -56,3 +56,7 @@ export const postNewQuestion = (quest_id, question) => {
     })
     .catch(err => { throw err })
 }
+
+export const addPicture = () => {
+  return axios.post(`${API_URL}/references/${question_id}`)
+}

@@ -43,7 +43,7 @@ class CameraImage extends Component {
             >Discard
         </Text>
           </TouchableOpacity>
-          <TouchableOpacity
+          {this.props.addPicture && <TouchableOpacity
             style={styles.submit}
             onPress={() => this.sendImage()}
           >
@@ -52,6 +52,17 @@ class CameraImage extends Component {
             >Submit
             </Text>
           </TouchableOpacity>
+          }
+          {this.props.Question && <TouchableOpacity
+            style={styles.submit}
+            onPress={() => this.sendImage()}
+          >
+            <Text
+              style={{ fontSize: 18, color: 'black' }}
+            >Submit
+            </Text>
+          </TouchableOpacity>
+          }
         </ImageBackground>
       </View >
     );
@@ -61,6 +72,23 @@ class CameraImage extends Component {
     console.log('discarding image')
     this.props.updateUri(null, true, false)
   }
+
+  calibrateImage() {
+    this.setState({
+      uploading: true
+    })
+    ImageManipulator.manipulate(this.props.uri, [{ resize: { width: 1000 } }], { base64: true, format: 'jpeg' })
+      .then(({ base64 }) => {
+        const finalB64 = { answer: { image: base64, model_name: this.props.question.model_name } }
+        const question_id = this.props.question.id
+        api.addPicture(question_id, finalB64)
+          .then(data => {
+            console.log(data)
+          })
+
+      })
+  }
+
 
   sendImage() {
     console.log('sending image...')
