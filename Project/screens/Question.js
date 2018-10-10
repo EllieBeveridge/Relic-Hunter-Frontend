@@ -3,7 +3,7 @@ import { ImageBackground, View, Text, Image, TouchableOpacity, StyleSheet, Dimen
 import QuestionButtons from '../components/QuestionButtons'
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
 import styles from '../stylesheets/QuestionStylesheet'
-import buttonStyles from '../stylesheets/buttonStyles'
+import generalStyle from '../stylesheets/generalStyle'
 import CameraPicture from '../components/CameraPicture'
 import CameraImage from '../components/CameraImage'
 import GoodAnswer from '../components/GoodAnswer'
@@ -35,8 +35,15 @@ class Question extends Component {
     if (!questions[0]) return null;
 
     if (hasCameraPermission === false) {
-      return <Text>Camera permission needed to play</Text>
+      return (
+        <View>
+          <Text style={generalStyle.titleMode}>Relic Hunter</Text>
+          <Text>Camera permission needed to play</Text>
+        </View>
+      )
     }
+
+
 
     if (takePic && !uri)
       return <CameraPicture updateUri={this.updateUri}
@@ -65,6 +72,7 @@ class Question extends Component {
 
     return (
       <View style={{ backgroundColor: '#FBD158', height: '100%' }}>
+        <Text style={generalStyle.titleMode}>Relic Hunter</Text>
         <Text style={styles.titleMode}>QUESTION {questions[currQ].id}
           : {questions[currQ].title}
         </Text>
@@ -74,7 +82,7 @@ class Question extends Component {
         <View >
           <View style={styles.takePictureButton}>
             <Button
-              buttonStyle={buttonStyles.buttonStyle}
+              buttonStyle={generalStyle.buttonStyle}
               title="Take a picture"
               icon={{ name: 'camera', type: 'font-awesome' }}
               onPress={() =>

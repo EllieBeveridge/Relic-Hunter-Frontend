@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ImageBackground, View, Text, Button, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
 import styles from '../stylesheets/CameraStylesheet'
+import generalStyle from '../stylesheets/generalStyle'
 import * as api from '../api';
 import Spinner from 'react-native-loading-spinner-overlay';
 
@@ -26,6 +27,7 @@ class CameraImage extends Component {
         >
 
           <View style={{ flex: 1 }}>
+            <Text style={generalStyle.titleMode}>Relic Hunter</Text>
             <Spinner
               visible={this.state.uploading}
               textContent={"Checking..."}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { StyleSheet, Image, Animated } from 'react-native';
 import { Button } from 'react-native-elements';
-import buttonStyles from '../stylesheets/buttonStyles'
+import generalStyle from '../stylesheets/generalStyle'
 
 import FadeInView from '../components/FadeInView';
 // import FadeSpinView from '../components/FadeSpinView';
@@ -29,7 +29,7 @@ class ScoreCard extends Component {
       <View style={styles.container}>
 
         <View>
-          <Text style={styles.titleMode}>Relic Hunters</Text>
+          <Text style={generalStyle.titleMode}>Relic Hunter</Text>
         </View>
 
         <View style={styles.welcomeContainer}>
@@ -58,8 +58,8 @@ class ScoreCard extends Component {
 
         <View style={styles.welcomeContainer}>
           <Button
-            buttonStyle={buttonStyles.buttonStyle}
-            title="Main Menu"
+            buttonStyle={generalStyle.buttonStyle}
+            title="Next"
             onPress={() =>
               this.props.navigation.navigate('Logo')
             }

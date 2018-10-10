@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import generalStyle from '../stylesheets/generalStyle'
 import Panel from '../components/Panel'
 import { Constants } from 'expo'
 import * as api from '../api'
@@ -31,7 +32,8 @@ class LandingPage extends Component {
     return (
       <View style={styles.container}>
         <ScrollView  >
-          <Text style={styles.titleMode}>Relic Hunter</Text>
+          <Text style={generalStyle.titleMode}>Relic Hunter</Text>
+          <Text style={styles.listHead}>Click on a quest below !!</Text>
           <Panel quests={this.state.quests} navigation={this.props.navigation}></Panel>
         </ScrollView>
       </View>
@@ -40,12 +42,13 @@ class LandingPage extends Component {
 }
 
 const styles = StyleSheet.create({
-  titleMode: {
+  listHead: {
     textAlign: 'center',
-    fontSize: 28,
+    fontSize: 22,
     color: '#583E5C',
     fontWeight: 'bold',
-    padding: 5,
+    margin: 10,
+    color: '#333',
   },
   container: {
     flex: 1,

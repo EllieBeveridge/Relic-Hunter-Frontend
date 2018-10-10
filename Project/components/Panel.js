@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Button, Icon } from 'react-native-elements'
-import buttonStyles from '../stylesheets/buttonStyles'
 import { Constants } from 'expo'
 import styles from '../stylesheets/PanelStylesheet'
+import generalStyle from '../stylesheets/generalStyle'
 import * as Animatable from 'react-native-animatable';
 import Accordion from 'react-native-collapsible/Accordion';
 import * as api from '../api'
@@ -73,19 +73,18 @@ class Panel extends Component {
             <Text style={styles.myDescription}>{section.full}</Text>
           </Animatable.Text >
 
-          <Text style={styles.myDescription}>Aimed at:{section.suitability}</Text>
-          <Text style={styles.myDescription}>Takes place at:{section.venue_area}</Text>
+          <Text style={styles.myDescription}>Aimed at: {section.suitability}</Text>
+          <Text style={styles.myDescription}>Takes place at: {section.venue_area}</Text>
 
-          <View>
-            <Button
-              buttonStyle={buttonStyles.buttonStyle}
-              title="Start Quest"
-              icon={{ name: 'flask', type: 'font-awesome' }}
-              onPress={() =>
-                this.goToQuestions(section.quest_id)
-              }
-            />
-          </View>
+          <Button
+            buttonStyle={generalStyle.buttonStyle}
+            title="Start Quest"
+            icon={{ name: 'flask', type: 'font-awesome' }}
+            onPress={() =>
+              this.goToQuestions(section.quest_id)
+            }
+          />
+
         </Animatable.View >
 
       </View >

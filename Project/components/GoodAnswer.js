@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Question from '../screens/Question'
 import * as Animatable from 'react-native-animatable';
 import { Button } from 'react-native-elements';
-import buttonStyles from '../stylesheets/buttonStyles'
+import generalStyle from '../stylesheets/generalStyle'
 
 class GoodAnswer extends Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class GoodAnswer extends Component {
         <Text> You are now on {this.props.score} points </Text>
 
         <Button
-          buttonStyle={buttonStyles.buttonStyle}
+          buttonStyle={generalStyle.buttonStyle}
           title="Next"
           onPress={() => this.done()
           }

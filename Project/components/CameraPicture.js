@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo';
 import styles from '../stylesheets/CameraStylesheet'
+import generalStyle from '../stylesheets/generalStyle'
 import Spinner from 'react-native-loading-spinner-overlay';
 
 class CameraPicture extends Component {
@@ -22,6 +23,7 @@ class CameraPicture extends Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
+          <Text style={generalStyle.titleMode}>Relic Hunter</Text>
           <View >
             <Spinner
               visible={this.state.focusing}

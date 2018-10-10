@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, Picker } from 'react-native';
 //import styles from '../stylesheets/QuestionStylesheet'
 import { Button, Icon } from 'react-native-elements'
-import buttonStyles from '../stylesheets/buttonStyles'
+import generalStyle from '../stylesheets/generalStyle'
 import * as api from '../api'
 
 class componentName extends Component {
@@ -45,7 +45,7 @@ class componentName extends Component {
           </Picker>
 
           <Button
-            buttonStyle={buttonStyles.buttonStyle}
+            buttonStyle={generalStyle.buttonStyle}
             title="Let's Begin..."
             icon={{
               name: "treasure-chest",

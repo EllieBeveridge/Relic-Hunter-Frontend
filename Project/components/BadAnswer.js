@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Question from '../screens/Question'
 import * as Animatable from 'react-native-animatable';
 import { Button } from 'react-native-elements'
-import buttonStyles from '../stylesheets/buttonStyles'
+import generalStyle from '../stylesheets/generalStyle'
 
 class BadAnswer extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class BadAnswer extends Component {
           Not the right image, sorry </Text>
 
         <Button
-          buttonStyle={buttonStyles.buttonStyle}
+          buttonStyle={generalStyle.buttonStyle}
           title="Try again"
           onPress={() => this.done()
           }
