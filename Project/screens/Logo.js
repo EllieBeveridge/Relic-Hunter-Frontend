@@ -8,7 +8,7 @@ class componentName extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      venue: 1,
+      venueState: 1,
       venues: []
     };
   }
@@ -23,6 +23,7 @@ class componentName extends Component {
   }
 
   render() {
+    const { venueState } = this.state
     return (
       <View style={styles.container}>
         <Image
@@ -32,9 +33,9 @@ class componentName extends Component {
         <View style={styles.buttonStyle}>
           <Text style={styles.textStyle}>Choose a Venue</Text>
           <Picker
-            selectedValue={this.state.venue}
+            selectedValue={venueState}
             style={{ height: 40, width: 135, color: '#583E5C' }}
-            onValueChange={(itemValue, itemIndex) => this.setState({ venue: itemValue })}>
+            onValueChange={(itemValue, itemIndex) => this.setState({ venueState: itemValue })}>
             {this.state.venues.map((venue, index) => (
               <Picker.Item label={venue.name} value={venue.id} key={index} />
             ))}
@@ -52,7 +53,15 @@ class componentName extends Component {
             }}
             onPress={() =>
               this.props.navigation.navigate('LandingPage', {
-                venue_id: this.state.venue
+                venue_id: venueState
+              })
+            }
+          />
+          <Button
+            title="Create a Quest"
+            onPress={() =>
+              this.props.navigation.navigate('CreateQuest', {
+                venueState
               })
             }
           />

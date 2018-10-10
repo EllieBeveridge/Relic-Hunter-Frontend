@@ -29,6 +29,7 @@ class TestPics extends Component {
   render() {
     const { navigation } = this.props
     const question_id = navigation.getParam('question_id');
+    const quest_id = navigation.getParam('quest_id');
     console.log(question_id);
     const { hasCameraPermission, takePic, uri, currQ, questions, score, lastAnswer } = this.state;
 
@@ -50,7 +51,7 @@ class TestPics extends Component {
 
     if (lastAnswer === 't')
       return <GoodAnswer
-
+        quest_id={quest_id}
         TestPics={true}
         navigation={navigation}
       />

@@ -20,7 +20,7 @@ class CreateQuestion extends Component {
     api.postNewQuestion(quest_id, this.state)
       .then((question) => {
         Alert.alert("Question Added");
-        this.props.navigation.navigate('AddPicture', { id: question.id })
+        this.props.navigation.navigate('AddPicture', { id: question.id, quest_id })
       })
       .catch(err => console.log(err));
   }

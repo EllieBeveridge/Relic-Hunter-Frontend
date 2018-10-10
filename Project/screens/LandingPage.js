@@ -26,18 +26,8 @@ class LandingPage extends Component {
   }
 
   render() {
-    const { navigation } = this.props;
-    const venue_id = navigation.getParam('venue_id')
     return (
       <View style={styles.container}>
-        <Button
-          title="Create a Quest"
-          onPress={() =>
-            this.props.navigation.navigate('CreateQuest', {
-              venue_id
-            })
-          }
-        />
         <ScrollView  >
           <Text style={styles.titleMode}>Relic Hunter</Text>
           <Panel quests={this.state.quests} navigation={this.props.navigation}></Panel>

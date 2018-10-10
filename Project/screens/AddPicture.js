@@ -41,10 +41,11 @@ class AddPicture extends Component {
   trainModel = () => {
     const { navigation } = this.props
     const question_id = navigation.getParam('id');
+    const quest_id = navigation.getParam('quest_id');
     api.trainModel(question_id)
       .then(data => {
         console.log(data, '<<<data')
-        this.props.navigation.navigate('TestPics', { question_id })
+        this.props.navigation.navigate('TestPics', { question_id, quest_id })
       })
       .catch(err => {
         if (err) Alert.alert('More photos are required')
@@ -72,6 +73,7 @@ class AddPicture extends Component {
         uri={uri}
         question_id={question_id}
         navigation={navigation}
+
       />
 
     return (

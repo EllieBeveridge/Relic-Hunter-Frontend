@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import Question from '../screens/Question'
 import * as Animatable from 'react-native-animatable';
+import * as api from '../api'
 import { Button } from 'react-native-elements';
+import { addPicture } from '../api';
 
 class GoodAnswer extends Component {
   constructor(props) {
@@ -28,8 +30,15 @@ class GoodAnswer extends Component {
           <Button
             style={styles.buttonImage}
             backgroundColor="#4E3948"
-            title="Back to Home Screen"
-            onPress={() => this.props.navigation.navigate('Logo')
+            title="Publish Quest"
+            onPress={() => this.publishQuest()
+            }
+          />
+          <Button
+            style={styles.buttonImage}
+            backgroundColor="#4E3948"
+            title="Create Another Question"
+            onPress={() => this.props.navigation.navigate('CreateQuestion')
             }
           />
         </View>
@@ -77,6 +86,16 @@ class GoodAnswer extends Component {
       this.props.updateAnswers(this.props.score, null)
       this.props.updateCurrQ()
     }
+  }
+
+  publishQuest = () => {
+    const quest_id = this.props.quest_id
+    const publish = true
+    api.publishQuest(quest_id, publish)
+      .then(res => {
+        Alert.alert('Your quest has been published!')
+        this.props.navigation.navigate('Logo')
+      })
   }
 
 }

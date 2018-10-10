@@ -71,3 +71,11 @@ export const trainModel = (question_id) => {
     })
     .catch(err => { throw err })
 }
+
+export const publishQuest = (quest_id, publish) => {
+  return axios.patch(`${API_URL}/quests/${quest_id}/publish?published=${publish}`)
+    .then(res => {
+      console.log(res)
+      return res
+    })
+}
