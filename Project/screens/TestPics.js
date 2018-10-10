@@ -3,14 +3,13 @@ import { ScrollView, View, Text } from 'react-native';
 import QuestionButtons from '../components/QuestionButtons'
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
 import styles from '../stylesheets/QuestionStylesheet'
-import generalStyle from '../stylesheets/generalStyle'
 import CameraPicture from '../components/CameraPicture'
 import CameraImage from '../components/CameraImage'
 import GoodAnswer from '../components/GoodAnswer'
 import BadAnswer from '../components/BadAnswer'
 import { Button } from 'react-native-elements';
 
-class Question extends Component {
+class TestPics extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,26 +18,23 @@ class Question extends Component {
       hasCameraPermission: null,
       type: Camera.Constants.Type.back,
       uri: null,
-      questions: [],
-      currQ: 0,
-      score: 0,
       lastAnswer: null
     };
   }
 
-  static navigationOptions = { title: 'Relic Hunter', header: null };
+  static navigatorStyle = {
+    navBarHidden: true
+  }
 
   render() {
+    const { navigation } = this.props
+    const question_id = navigation.getParam('question_id');
+    const quest_id = navigation.getParam('quest_id');
+    console.log(question_id);
     const { hasCameraPermission, takePic, uri, currQ, questions, score, lastAnswer } = this.state;
-    if (!questions[0]) return null;
 
     if (hasCameraPermission === false) {
-      return (
-        <View>
-          <Text style={generalStyle.titleMode}>Relic Hunter</Text>
-          <Text>Camera permission needed to play</Text>
-        </View>
-      )
+      return <Text>Camera permission needed to play</Text>
     }
 
     if (takePic && !uri)
@@ -46,45 +42,38 @@ class Question extends Component {
       />
     if (!takePic && uri)
       return <CameraImage
-        Question={true}
         updateUri={this.updateUri}
         uri={uri}
-        score={score}
+        question_id={question_id}
+        TestPics={true}
         updateAnswers={this.updateAnswers}
-        lastAnswer={lastAnswer}
-        question={questions[currQ]}
       />
 
     if (lastAnswer === 't')
       return <GoodAnswer
-        score={score}
-        updateAnswers={this.updateAnswers}
-        currQ={currQ}
-        questions={questions}
-        navigation={this.props.navigation}
-        updateCurrQ={this.updateCurrQ}
-        Question={true} />
+        quest_id={quest_id}
+        TestPics={true}
+        navigation={navigation}
+      />
     if (lastAnswer === 'f')
       return <BadAnswer
+        TestPics={true}
+        updateAnswers={this.updateAnswers}
+      />
 
-        score={score} updateAnswers={this.updateAnswers} Question={true} />
-          
     return (
       <View style={{ backgroundColor: '#FBD158', height: '100%' }}>
-        <Text style={generalStyle.titleMode}>Relic Hunter</Text>
-        <Text style={generalStyle.titleMode}>QUESTION {questions[currQ].id}
-          : {questions[currQ].title}
-        </Text>
         <ScrollView>
           <Text style={styles.question}>
-            {questions[currQ].text}
+            Test Your Picture!
           </Text>
         </ScrollView>
         <View >
           <View style={styles.takePictureButton}>
             <Button
-              buttonStyle={generalStyle.buttonStyle}
               title="Take a picture"
+              backgroundColor="#4E3948"
+              fontSize={16}
               icon={{ name: 'camera', type: 'font-awesome' }}
               onPress={() =>
                 this.setState({
@@ -95,14 +84,6 @@ class Question extends Component {
             />
           </View>
         </View>
-        <QuestionButtons
-          navigation={this.props.navigation}
-          hint_text={questions[currQ].hint_text}
-          currQ={currQ}
-          questions={questions}
-          updateCurrQ={this.updateCurrQ}
-          score={this.state.score}
-        />
       </View>
     );
   }
@@ -113,7 +94,6 @@ class Question extends Component {
     const questions = navigation.getParam('questions')
     this.setState({
       hasCameraPermission: status === 'granted',
-      questions: questions.questions
     });
   }
 
@@ -140,7 +120,6 @@ class Question extends Component {
       currQ: newQ
     })
   }
-
 }
 
-export default Question;
+export default TestPics;

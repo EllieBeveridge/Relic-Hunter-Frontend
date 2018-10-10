@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import Question from '../screens/Question'
 import * as Animatable from 'react-native-animatable';
+import * as api from '../api'
 import { Button } from 'react-native-elements';
+import { addPicture } from '../api';
 import generalStyle from '../stylesheets/generalStyle'
 
 class GoodAnswer extends Component {
@@ -13,33 +15,100 @@ class GoodAnswer extends Component {
   }
 
   render() {
+
     const { score } = this.props;
     const pointWord = (score === 1) ? 'point' : 'points';
-    return (
-      <View style={generalStyle.topView}>
+    if (this.props.TestPics) {
+      return (
+        <View style={generalStyle.topView}>
+        
         <View>
           <Text style={generalStyle.titleMode}>Relic Hunter</Text>
         </View>
-
-        <Animatable.View
-          duration={1000}
+        
+          <Animatable.View
+             duration={1000}
           delay={1000}
           style={styles.contentAnimated}
           transition="backgroundColor">
-          <Animatable.Text animation={'bounceIn'}>
-            <Text style={styles.title}>
-              GoodAnswer!  </Text>
-          </Animatable.Text >
-        </Animatable.View>
-        <Text style={styles.scoreMode}>
-          Go to the next question... </Text>
+            <Animatable.Text animation={'bounceIn'}>
+              <Text style={styles.title}>
+                Test OK!  </Text>
+            </Animatable.Text >
+          </Animatable.View>
+          <Button
+            style={styles.buttonImage}
+            backgroundColor="#4E3948"
+            title="Publish Quest"
+            onPress={() => this.publishQuest()
+            }
+          />
+          <Button
+            style={styles.buttonImage}
+            backgroundColor="#4E3948"
+            title="Create Another Question"
+            onPress={() => this.props.navigation.navigate('CreateQuestion')
+            }
+          />
+        </View>
+      )
+    }
+    if (this.props.Question) {
+      return (
 
-        <Text style={styles.scoreMode}> You are now on {score} {pointWord} </Text>
+        <View style={generalStyle.topView}>
+          {console.log(this.props.score, 'this is the score in goodanswer')}
 
-        <View style={styles.container}>
+  <View>
+          <Text style={generalStyle.titleMode}>Relic Hunter</Text>
+        </View>
+  
+          <Animatable.View
+             duration={1000}
+          delay={1000}
+          style={styles.contentAnimated}
+          transition="backgroundColor">
+            <Animatable.Text animation={'bounceIn'}>
+              <Text style={styles.title}>
+                GoodAnswer!  </Text>
+            </Animatable.Text >
+          </Animatable.View>
+          <Text style={styles.scoreMode}>
+            Go to the next question... </Text>
+           <Text style={styles.scoreMode}> You are now on {score} {pointWord} </Text>
+
           <Button
             buttonStyle={generalStyle.buttonStyle}
-            title="Next"
+            title="NEXT"
+
+//     const { score } = this.props;
+//     const pointWord = (score === 1) ? 'point' : 'points';
+//     return (
+//       <View style={generalStyle.topView}>
+//         <View>
+//           <Text style={generalStyle.titleMode}>Relic Hunter</Text>
+//         </View>
+
+//         <Animatable.View
+//           duration={1000}
+//           delay={1000}
+//           style={styles.contentAnimated}
+//           transition="backgroundColor">
+//           <Animatable.Text animation={'bounceIn'}>
+//             <Text style={styles.title}>
+//               GoodAnswer!  </Text>
+//           </Animatable.Text >
+//         </Animatable.View>
+//         <Text style={styles.scoreMode}>
+//           Go to the next question... </Text>
+
+//         <Text style={styles.scoreMode}> You are now on {score} {pointWord} </Text>
+
+//         <View style={styles.container}>
+//           <Button
+//             buttonStyle={generalStyle.buttonStyle}
+//             title="Next"
+
             onPress={() => this.done()
             }
           />
@@ -59,6 +128,16 @@ class GoodAnswer extends Component {
       this.props.updateAnswers(this.props.score, null)
       this.props.updateCurrQ()
     }
+  }
+
+  publishQuest = () => {
+    const quest_id = this.props.quest_id
+    const publish = true
+    api.publishQuest(quest_id, publish)
+      .then(res => {
+        Alert.alert('Your quest has been published!')
+        this.props.navigation.navigate('Logo')
+      })
   }
 
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ImageBackground, View, Text, Button, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { ImageBackground, View, Text, Alert, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
 import styles from '../stylesheets/CameraStylesheet'
 import generalStyle from '../stylesheets/generalStyle'
@@ -37,6 +37,34 @@ class CameraImage extends Component {
             </View>
 
 
+//             <Text
+//               onPress={() => this.discardImage()}
+//               style={{ fontSize: 18, color: 'black' }}
+//             >Discard
+//         </Text>
+//           </TouchableOpacity>
+//           {this.props.addPicture && <TouchableOpacity
+//             style={styles.submit}
+//             onPress={() => this.calibrateImage()}
+//           >
+//             <Text
+//               style={{ fontSize: 18, color: 'black' }}
+//             >Submit
+//             </Text>
+//           </TouchableOpacity>
+//           }
+//           {(this.props.Question || this.props.TestPics) && <TouchableOpacity
+//             style={styles.submit}
+//             onPress={() => this.sendImage()}
+//           >
+//             <Text
+//               style={{ fontSize: 18, color: 'black' }}
+//             >Submit
+//             </Text>
+//           </TouchableOpacity>
+//           }
+//         </ImageBackground>
+
             <TouchableOpacity
               style={styles.discard}
             >
@@ -52,10 +80,14 @@ class CameraImage extends Component {
                 }>Retake
             </Text>
             </TouchableOpacity>
-            <TouchableOpacity
+           {(this.props.Question || this.props.TestPics) && <TouchableOpacity
               style={styles.submit}
               onPress={() => this.sendImage()}
-            >
+            >}
+              {this.props.addPicture && <TouchableOpacity
+            style={styles.submit}
+            onPress={() => this.calibrateImage()}
+          >}
               <Text
                 style={
                   {
@@ -76,6 +108,25 @@ class CameraImage extends Component {
     this.props.updateUri(null, true, false)
   }
 
+  calibrateImage() {
+    this.setState({
+      uploading: true
+    })
+    ImageManipulator.manipulate(this.props.uri, [{ resize: { width: 1000 } }], { base64: true, format: 'jpeg' })
+      .then(({ base64 }) => {
+        const finalB64 = { answer: { image: base64 } }
+        const question_id = this.props.question_id
+        api.addPicture(question_id, finalB64)
+          .then(data => {
+            Alert.alert("Picture Added");
+            this.props.updateUri(null, false, false)
+          })
+
+      })
+      .catch(err => console.log(err))
+  }
+
+
   sendImage() {
     console.log('sending image...')
     this.setState({
@@ -84,13 +135,10 @@ class CameraImage extends Component {
 
     ImageManipulator.manipulate(this.props.uri, [{ resize: { width: 1000 } }], { base64: true, format: 'jpeg' })
       .then(({ base64 }) => {
-        const finalB64 = {
-          answer: {
-            image: base64
-            // model_name: this.props.question.model_name
-          }
-        }
-        const question_id = this.props.question.id
+        const finalB64 = { answer: { image: base64 } }
+        console.log(this.props);
+        const question_id = this.props.question_id || this.props.question.id
+
         api.checkPicture(question_id, finalB64)
           .then(answer => {
             // gives async problem if actually do this setstate to false!
@@ -101,10 +149,15 @@ class CameraImage extends Component {
             // }) 
 
             const ansFlag = (answer) ? 't' : 'f';
-            const newPoints = (answer) ? this.props.score + 1 : this.props.score;
+            if (this.props.Question) {
+              const newPoints = (answer) ? this.props.score + 1 : this.props.score;
+              this.props.updateAnswers(newPoints, ansFlag)
+              this.props.updateUri(null, false, false)
+            } else {
+              this.props.updateAnswers(0, ansFlag)
+              this.props.updateUri(null, false, false)
 
-            this.props.updateAnswers(newPoints, ansFlag)
-            this.props.updateUri(null, false, false)
+            }
           })
           .catch(err => {
             console.log('error in axios Post', err)

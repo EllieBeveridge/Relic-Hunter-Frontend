@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { Button } from 'react-native-elements';
 import generalStyle from '../stylesheets/generalStyle'
 import Panel from '../components/Panel'
 import { Constants } from 'expo'
@@ -33,14 +34,6 @@ class LandingPage extends Component {
     const venue_id = navigation.getParam('venue_id')
     return (
       <View style={styles.container}>
-        <Button
-          title="Create a Quest"
-          onPress={() =>
-            this.props.navigation.navigate('CreateQuest', {
-              venue_id
-            })
-          }
-        />
         <ScrollView  >
           <Text style={generalStyle.titleMode}>Relic Hunter</Text>
           <Panel quests={this.state.quests} navigation={this.props.navigation}></Panel>

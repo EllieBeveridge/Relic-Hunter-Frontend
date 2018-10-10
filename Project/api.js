@@ -37,19 +37,45 @@ export const checkPicture = (question_id, finalB64) => {
     .catch(err => { throw err })
 }
 
-export const postNewQuest = (venue_id, state) => {
-  const { title, intro_text, full_text, icon_url, background_url, suitability, venue_area } = state
-  return axios.post(`${API_URL}/quests/${venue_id}`, {
-    title,
-    intro_text,
-    full_text,
-    icon_url,
-    background_url,
-    suitability,
-    venue_area
-  })
-    .then(({ data: { quest } }) => {
-      return quest
+export const postNewQuest = (venue_id, quest) => {
+  // console.log(state);
+  // const { title, intro_text, full_text, icon_url, background_url, suitability, venue_area } = state
+  return axios.post(`${API_URL}/quests/${venue_id}`, quest)
+    .then(({ data }) => {
+      return data.quest
     })
     .catch(err => { throw err })
+}
+
+export const postNewQuestion = (quest_id, question) => {
+  return axios.post(`${API_URL}/quests/${quest_id}/questions`, question)
+    .then(({ data: { question } }) => {
+      return question
+    })
+    .catch(err => { throw err })
+}
+
+export const addPicture = (question_id, finalB64) => {
+  return axios.post(`${API_URL}/references/${question_id}`, finalB64)
+    .then(res => {
+      return res
+    })
+    .catch(err => { throw err })
+}
+
+export const trainModel = (question_id) => {
+  return axios.get(`${API_URL}/references/${question_id}/train`)
+    .then(res => {
+      console.log(res)
+      return res
+    })
+    .catch(err => { throw err })
+}
+
+export const publishQuest = (quest_id, publish) => {
+  return axios.patch(`${API_URL}/quests/${quest_id}/publish?published=${publish}`)
+    .then(res => {
+      console.log(res)
+      return res
+    })
 }

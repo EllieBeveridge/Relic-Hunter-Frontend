@@ -29,12 +29,15 @@ class BadAnswer extends Component {
               WHOOPS </Text>
           </Animatable.Text >
         </Animatable.View>
+
         <View style={styles.welcomeContainer}>
           <Text style={styles.scoreMode}>
             Not the right image, sorry
             </Text>
         </View>
-        <View style={styles.welcomeContainer}>
+        {this.props.Question
+          ? 
+      <View style={styles.welcomeContainer}>
           <Button
             buttonStyle={generalStyle.buttonStyle}
             title="Try again"
@@ -42,6 +45,16 @@ class BadAnswer extends Component {
             }
           />
         </View>
+          : 
+            <View style={styles.welcomeContainer}>
+          <Button
+            buttonStyle={generalStyle.buttonStyle}
+            title="Try again"
+            onPress={() => this.fail()
+            }
+          />
+        </View>
+        }
       </View >
     );
   }
@@ -49,6 +62,10 @@ class BadAnswer extends Component {
   done = () => {
     // set feedback to null
     this.props.updateAnswers(this.props.score, null)
+  }
+
+  fail = () => {
+    this.props.updateAnswers(null, null);
   }
 
 }
