@@ -4,14 +4,16 @@ import Question from '../screens/Question'
 import ScoreCard from '../screens/ScoreCard'
 import Logo from '../screens/Logo'
 import CreateQuest from '../screens/CreateQuest'
+import CreateQuestion from '../screens/CreateQuestion'
 
 
 const AppNavigator = createStackNavigator({
-  CreateQuest: { screen: CreateQuest },
   Logo: { screen: Logo },
   LandingPage: { screen: LandingPage },
+  CreateQuest: { screen: CreateQuest },
   Question: { screen: Question },
-  ScoreCard: { screen: ScoreCard }
+  ScoreCard: { screen: ScoreCard },
+  CreateQuestion: { screen: CreateQuestion }
 })
 
 export default AppNavigator;

@@ -37,19 +37,22 @@ export const checkPicture = (question_id, finalB64) => {
     .catch(err => { throw err })
 }
 
-export const postNewQuest = (venue_id, state) => {
-  const { title, intro_text, full_text, icon_url, background_url, suitability, venue_area } = state
-  return axios.post(`${API_URL}/quests/${venue_id}`, {
-    title,
-    intro_text,
-    full_text,
-    icon_url,
-    background_url,
-    suitability,
-    venue_area
-  })
-    .then(({ data: { quest } }) => {
-      return quest
+export const postNewQuest = (venue_id, quest) => {
+  // console.log(state);
+  // const { title, intro_text, full_text, icon_url, background_url, suitability, venue_area } = state
+  return axios.post(`${API_URL}/quests/${venue_id}`, quest)
+    .then(({ data }) => {
+      return data.quest
+    })
+    .catch(err => { throw err })
+}
+
+export const postNewQuestion = (quest_id, question) => {
+  // console.log(state);
+  // const { title, intro_text, full_text, icon_url, background_url, suitability, venue_area } = state
+  return axios.post(`${API_URL}/quests/${quest_id}/questions`, question)
+    .then(({ data }) => {
+      return data
     })
     .catch(err => { throw err })
 }
