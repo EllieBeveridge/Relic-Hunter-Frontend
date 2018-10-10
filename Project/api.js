@@ -38,10 +38,12 @@ export const checkPicture = (question_id, finalB64) => {
 }
 
 export const postNewQuest = (venue_id, quest) => {
+  console.log('getting into api to create quest?')
   // console.log(state);
   // const { title, intro_text, full_text, icon_url, background_url, suitability, venue_area } = state
   return axios.post(`${API_URL}/quests/${venue_id}`, quest)
     .then(({ data }) => {
+      console.log('returning for quest api?')
       return data.quest
     })
     .catch(err => { throw err })
@@ -50,6 +52,7 @@ export const postNewQuest = (venue_id, quest) => {
 export const postNewQuestion = (quest_id, question) => {
   return axios.post(`${API_URL}/quests/${quest_id}/questions`, question)
     .then(({ data: { question } }) => {
+      console.log('getting into api?')
       return question
     })
     .catch(err => { throw err })

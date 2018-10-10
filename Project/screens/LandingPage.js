@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
-import { Button } from 'react-native-elements';
 import generalStyle from '../stylesheets/generalStyle'
 import Panel from '../components/Panel'
 import { Constants } from 'expo'
 import * as api from '../api'
-import { Button } from 'react-native-elements';
 
 class LandingPage extends Component {
   constructor(props) {

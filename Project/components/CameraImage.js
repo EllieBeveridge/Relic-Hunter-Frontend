@@ -37,34 +37,6 @@ class CameraImage extends Component {
             </View>
 
 
-//             <Text
-//               onPress={() => this.discardImage()}
-//               style={{ fontSize: 18, color: 'black' }}
-//             >Discard
-//         </Text>
-//           </TouchableOpacity>
-//           {this.props.addPicture && <TouchableOpacity
-//             style={styles.submit}
-//             onPress={() => this.calibrateImage()}
-//           >
-//             <Text
-//               style={{ fontSize: 18, color: 'black' }}
-//             >Submit
-//             </Text>
-//           </TouchableOpacity>
-//           }
-//           {(this.props.Question || this.props.TestPics) && <TouchableOpacity
-//             style={styles.submit}
-//             onPress={() => this.sendImage()}
-//           >
-//             <Text
-//               style={{ fontSize: 18, color: 'black' }}
-//             >Submit
-//             </Text>
-//           </TouchableOpacity>
-//           }
-//         </ImageBackground>
-
             <TouchableOpacity
               style={styles.discard}
             >
@@ -80,14 +52,17 @@ class CameraImage extends Component {
                 }>Retake
             </Text>
             </TouchableOpacity>
-           {(this.props.Question || this.props.TestPics) && <TouchableOpacity
+
+
+            <TouchableOpacity
               style={styles.submit}
-              onPress={() => this.sendImage()}
-            >}
-              {this.props.addPicture && <TouchableOpacity
-            style={styles.submit}
-            onPress={() => this.calibrateImage()}
-          >}
+              onPress={() => {
+                if (this.props.Question || this.props.TestPics) this.sendImage()
+
+                else if (this.props.addPicture) this.calibrateImage()
+              }
+              }
+            >
               <Text
                 style={
                   {
@@ -97,6 +72,7 @@ class CameraImage extends Component {
                 }>Submit
             </Text>
             </TouchableOpacity>
+
           </ImageBackground>
         </View >
       </View >

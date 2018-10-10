@@ -21,16 +21,16 @@ class GoodAnswer extends Component {
     if (this.props.TestPics) {
       return (
         <View style={generalStyle.topView}>
-        
-        <View>
-          <Text style={generalStyle.titleMode}>Relic Hunter</Text>
-        </View>
-        
+
+          <View>
+            <Text style={generalStyle.titleMode}>Relic Hunter</Text>
+          </View>
+
           <Animatable.View
-             duration={1000}
-          delay={1000}
-          style={styles.contentAnimated}
-          transition="backgroundColor">
+            duration={1000}
+            delay={1000}
+            style={styles.contentAnimated}
+            transition="backgroundColor">
             <Animatable.Text animation={'bounceIn'}>
               <Text style={styles.title}>
                 Test OK!  </Text>
@@ -59,15 +59,15 @@ class GoodAnswer extends Component {
         <View style={generalStyle.topView}>
           {console.log(this.props.score, 'this is the score in goodanswer')}
 
-  <View>
-          <Text style={generalStyle.titleMode}>Relic Hunter</Text>
-        </View>
-  
+          <View>
+            <Text style={generalStyle.titleMode}>Relic Hunter</Text>
+          </View>
+
           <Animatable.View
-             duration={1000}
-          delay={1000}
-          style={styles.contentAnimated}
-          transition="backgroundColor">
+            duration={1000}
+            delay={1000}
+            style={styles.contentAnimated}
+            transition="backgroundColor">
             <Animatable.Text animation={'bounceIn'}>
               <Text style={styles.title}>
                 GoodAnswer!  </Text>
@@ -75,46 +75,17 @@ class GoodAnswer extends Component {
           </Animatable.View>
           <Text style={styles.scoreMode}>
             Go to the next question... </Text>
-           <Text style={styles.scoreMode}> You are now on {score} {pointWord} </Text>
+          <Text style={styles.scoreMode}> You are now on {score} {pointWord} </Text>
 
           <Button
             buttonStyle={generalStyle.buttonStyle}
             title="NEXT"
-
-//     const { score } = this.props;
-//     const pointWord = (score === 1) ? 'point' : 'points';
-//     return (
-//       <View style={generalStyle.topView}>
-//         <View>
-//           <Text style={generalStyle.titleMode}>Relic Hunter</Text>
-//         </View>
-
-//         <Animatable.View
-//           duration={1000}
-//           delay={1000}
-//           style={styles.contentAnimated}
-//           transition="backgroundColor">
-//           <Animatable.Text animation={'bounceIn'}>
-//             <Text style={styles.title}>
-//               GoodAnswer!  </Text>
-//           </Animatable.Text >
-//         </Animatable.View>
-//         <Text style={styles.scoreMode}>
-//           Go to the next question... </Text>
-
-//         <Text style={styles.scoreMode}> You are now on {score} {pointWord} </Text>
-
-//         <View style={styles.container}>
-//           <Button
-//             buttonStyle={generalStyle.buttonStyle}
-//             title="Next"
-
             onPress={() => this.done()
             }
-          />
+          ></Button>
         </View >
-      </View >
-    );
+      );
+    }
   }
 
   done = () => {
@@ -141,6 +112,7 @@ class GoodAnswer extends Component {
   }
 
 }
+
 
 const styles = StyleSheet.create({
   container: {
