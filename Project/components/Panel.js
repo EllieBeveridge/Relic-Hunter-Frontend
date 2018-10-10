@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Button, Icon } from 'react-native-elements'
+import buttonStyles from '../stylesheets/buttonStyles'
 import { Constants } from 'expo'
 import styles from '../stylesheets/PanelStylesheet'
 import * as Animatable from 'react-native-animatable';
@@ -77,9 +78,8 @@ class Panel extends Component {
 
           <View>
             <Button
+              buttonStyle={buttonStyles.buttonStyle}
               title="Start Quest"
-              backgroundColor="#4E3948"
-              fontSize={16}
               icon={{ name: 'flask', type: 'font-awesome' }}
               onPress={() =>
                 this.goToQuestions(section.quest_id)

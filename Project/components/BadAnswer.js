@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Question from '../screens/Question'
 import * as Animatable from 'react-native-animatable';
 import { Button } from 'react-native-elements'
+import buttonStyles from '../stylesheets/buttonStyles'
 
 class BadAnswer extends Component {
   constructor(props) {
@@ -28,9 +29,8 @@ class BadAnswer extends Component {
           Not the right image, sorry </Text>
 
         <Button
-          style={styles.buttonImage}
-          backgroundColor="#4E3948"
-          title="TRY AGAIN"
+          buttonStyle={buttonStyles.buttonStyle}
+          title="Try again"
           onPress={() => this.done()
           }
         />
@@ -66,13 +66,6 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     marginBottom: 20,
     color: 'purple',
-  },
-  buttonImage: {
-    width: 30,
-    height: 25,
-    alignItems: 'center',
-    color: 'white',
-    backgroundColor: "purple"
   },
 })
 

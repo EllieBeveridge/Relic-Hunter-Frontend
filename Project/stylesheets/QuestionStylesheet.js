@@ -58,5 +58,5 @@ export default styles = StyleSheet.create({
     color: '#333',
     lineHeight: 24,
     textAlign: 'center',
-  }
+  },
 })

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, Picker } from 'react-native';
 //import styles from '../stylesheets/QuestionStylesheet'
 import { Button, Icon } from 'react-native-elements'
+import buttonStyles from '../stylesheets/buttonStyles'
 import * as api from '../api'
 
 class componentName extends Component {
@@ -44,11 +45,8 @@ class componentName extends Component {
           </Picker>
 
           <Button
+            buttonStyle={buttonStyles.buttonStyle}
             title="Let's Begin..."
-            fontSize={20}
-            buttonStyle={{
-              backgroundColor: "#4E3948",
-            }}
             icon={{
               name: "treasure-chest",
               type: "material-community"

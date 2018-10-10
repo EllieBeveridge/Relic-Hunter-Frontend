@@ -3,6 +3,7 @@ import { ImageBackground, View, Text, Image, TouchableOpacity, StyleSheet, Dimen
 import QuestionButtons from '../components/QuestionButtons'
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
 import styles from '../stylesheets/QuestionStylesheet'
+import buttonStyles from '../stylesheets/buttonStyles'
 import CameraPicture from '../components/CameraPicture'
 import CameraImage from '../components/CameraImage'
 import GoodAnswer from '../components/GoodAnswer'
@@ -73,9 +74,8 @@ class Question extends Component {
         <View >
           <View style={styles.takePictureButton}>
             <Button
+              buttonStyle={buttonStyles.buttonStyle}
               title="Take a picture"
-              backgroundColor="#4E3948"
-              fontSize={16}
               icon={{ name: 'camera', type: 'font-awesome' }}
               onPress={() =>
                 this.setState({

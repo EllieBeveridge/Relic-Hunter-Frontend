@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { StyleSheet, Image, Animated } from 'react-native';
 import { Button } from 'react-native-elements';
+import buttonStyles from '../stylesheets/buttonStyles'
 
 import FadeInView from '../components/FadeInView';
 // import FadeSpinView from '../components/FadeSpinView';
@@ -57,8 +58,8 @@ class ScoreCard extends Component {
 
         <View style={styles.welcomeContainer}>
           <Button
-            title="NEXT"
-            backgroundColor="#4E3948"
+            buttonStyle={buttonStyles.buttonStyle}
+            title="Main Menu"
             onPress={() =>
               this.props.navigation.navigate('Logo')
             }
