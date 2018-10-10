@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ImageBackground, View, Text, Alert, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
 import styles from '../stylesheets/CameraStylesheet'
+import generalStyle from '../stylesheets/generalStyle'
 import * as api from '../api';
 import Spinner from 'react-native-loading-spinner-overlay';
 
@@ -18,52 +19,86 @@ class CameraImage extends Component {
     const { uri } = this.props
     return (
 
-      <View>
+      <View style={styles.container}>
 
-        <ImageBackground
-          source={{ uri: uri }}
-          style={{ width: "100%", height: "100%" }}
-        >
+        <Text style={generalStyle.titleMode}>Relic Hunter</Text>
+        <View style={{ flex: 1 }}>
 
-          <View style={{ flex: 1 }}>
-            <Spinner
-              visible={this.state.uploading}
-              textContent={"Checking..."}
-              textStyle={{ color: '#FFF' }} />
-          </View>
-
-
-          <TouchableOpacity
-            style={styles.discard}
+          <ImageBackground
+            source={{ uri: uri }}
+            style={{ width: "100%", height: "100%" }}
           >
 
-            <Text
-              onPress={() => this.discardImage()}
-              style={{ fontSize: 18, color: 'black' }}
-            >Discard
-        </Text>
-          </TouchableOpacity>
-          {this.props.addPicture && <TouchableOpacity
+            <View style={{ flex: 1 }}>
+              <Spinner
+                visible={this.state.uploading}
+                textContent={"Checking..."}
+                textStyle={{ color: '#FFF' }} />
+            </View>
+
+
+//             <Text
+//               onPress={() => this.discardImage()}
+//               style={{ fontSize: 18, color: 'black' }}
+//             >Discard
+//         </Text>
+//           </TouchableOpacity>
+//           {this.props.addPicture && <TouchableOpacity
+//             style={styles.submit}
+//             onPress={() => this.calibrateImage()}
+//           >
+//             <Text
+//               style={{ fontSize: 18, color: 'black' }}
+//             >Submit
+//             </Text>
+//           </TouchableOpacity>
+//           }
+//           {(this.props.Question || this.props.TestPics) && <TouchableOpacity
+//             style={styles.submit}
+//             onPress={() => this.sendImage()}
+//           >
+//             <Text
+//               style={{ fontSize: 18, color: 'black' }}
+//             >Submit
+//             </Text>
+//           </TouchableOpacity>
+//           }
+//         </ImageBackground>
+
+            <TouchableOpacity
+              style={styles.discard}
+            >
+
+              <Text
+                onPress={() => this.discardImage()}
+
+                style={
+                  {
+                    fontSize: 22, width: 80, padding: 0, margin: 0,
+                    color: 'purple',
+                  }
+                }>Retake
+            </Text>
+            </TouchableOpacity>
+           {(this.props.Question || this.props.TestPics) && <TouchableOpacity
+              style={styles.submit}
+              onPress={() => this.sendImage()}
+            >}
+              {this.props.addPicture && <TouchableOpacity
             style={styles.submit}
             onPress={() => this.calibrateImage()}
-          >
-            <Text
-              style={{ fontSize: 18, color: 'black' }}
-            >Submit
+          >}
+              <Text
+                style={
+                  {
+                    fontSize: 22, width: 80, padding: 0, margin: 0,
+                    color: 'purple',
+                  }
+                }>Submit
             </Text>
-          </TouchableOpacity>
-          }
-          {(this.props.Question || this.props.TestPics) && <TouchableOpacity
-            style={styles.submit}
-            onPress={() => this.sendImage()}
-          >
-            <Text
-              style={{ fontSize: 18, color: 'black' }}
-            >Submit
-            </Text>
-          </TouchableOpacity>
-          }
-        </ImageBackground>
+            </TouchableOpacity>
+          </ImageBackground>
+        </View >
       </View >
     );
   }
@@ -103,6 +138,7 @@ class CameraImage extends Component {
         const finalB64 = { answer: { image: base64 } }
         console.log(this.props);
         const question_id = this.props.question_id || this.props.question.id
+
         api.checkPicture(question_id, finalB64)
           .then(answer => {
             // gives async problem if actually do this setstate to false!
@@ -111,6 +147,7 @@ class CameraImage extends Component {
             // this.setState({
             //   uploading: false,
             // }) 
+
             const ansFlag = (answer) ? 't' : 'f';
             if (this.props.Question) {
               const newPoints = (answer) ? this.props.score + 1 : this.props.score;

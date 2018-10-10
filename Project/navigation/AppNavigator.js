@@ -11,6 +11,7 @@ import TestPics from '../screens/TestPics'
 
 const AppNavigator = createStackNavigator({
   Logo: { screen: Logo },
+  CreateQuest: { screen: CreateQuest },
   LandingPage: { screen: LandingPage },
   CreateQuest: { screen: CreateQuest },
   Question: { screen: Question },

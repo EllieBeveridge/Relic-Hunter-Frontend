@@ -7,10 +7,10 @@ export default styles = StyleSheet.create({
     alignItems: 'center'
   },
   question: {
-    textAlign: 'left',
-    fontSize: 36,
+    textAlign: 'center',
+    fontSize: 28,
     color: '#583E5C',
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     padding: 10
   },
   container: {
@@ -38,13 +38,6 @@ export default styles = StyleSheet.create({
     marginTop: 3,
     marginLeft: -10,
   },
-  titleMode: {
-    textAlign: 'left',
-    fontSize: 24,
-    color: '#583E5C',
-    fontWeight: 'bold',
-    padding: 5,
-  },
   scoreMode: {
     textAlign: 'center',
     fontSize: 26,
@@ -58,5 +51,5 @@ export default styles = StyleSheet.create({
     color: '#333',
     lineHeight: 24,
     textAlign: 'center',
-  }
+  },
 })

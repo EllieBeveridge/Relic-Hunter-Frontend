@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
+import generalStyle from '../stylesheets/generalStyle'
 import Panel from '../components/Panel'
 import { Constants } from 'expo'
 import * as api from '../api'
+import { Button } from 'react-native-elements';
 
 class LandingPage extends Component {
   constructor(props) {
@@ -13,6 +15,8 @@ class LandingPage extends Component {
       quests: []
     };
   }
+
+  static navigationOptions = { title: 'Relic Hunter', header: null };
 
   componentDidMount = () => {
     const { navigation } = this.props
@@ -26,10 +30,12 @@ class LandingPage extends Component {
   }
 
   render() {
+    const { navigation } = this.props;
+    const venue_id = navigation.getParam('venue_id')
     return (
       <View style={styles.container}>
         <ScrollView  >
-          <Text style={styles.titleMode}>Relic Hunter</Text>
+          <Text style={generalStyle.titleMode}>Relic Hunter</Text>
           <Panel quests={this.state.quests} navigation={this.props.navigation}></Panel>
         </ScrollView>
       </View>
@@ -38,13 +44,14 @@ class LandingPage extends Component {
 }
 
 const styles = StyleSheet.create({
-  titleMode: {
-    textAlign: 'center',
-    fontSize: 28,
-    color: '#583E5C',
-    fontWeight: 'bold',
-    padding: 5,
-  },
+  // listHead: {
+  //   textAlign: 'center',
+  //   fontSize: 22,
+  //   color: '#583E5C',
+  //   fontWeight: 'bold',
+  //   margin: 10,
+  //   color: '#333',
+  // },
   container: {
     flex: 1,
     backgroundColor: '#FED158',
