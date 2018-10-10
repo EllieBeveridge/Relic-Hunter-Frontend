@@ -7,10 +7,10 @@ export default styles = StyleSheet.create({
     alignItems: 'center'
   },
   question: {
-    textAlign: 'left',
-    fontSize: 36,
+    textAlign: 'center',
+    fontSize: 28,
     color: '#583E5C',
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     padding: 10
   },
   container: {

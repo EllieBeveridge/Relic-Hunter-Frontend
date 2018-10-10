@@ -5,7 +5,6 @@ import { Button } from 'react-native-elements';
 import generalStyle from '../stylesheets/generalStyle'
 
 import FadeInView from '../components/FadeInView';
-// import FadeSpinView from '../components/FadeSpinView';
 
 class ScoreCard extends Component {
   constructor(props) {
@@ -22,31 +21,38 @@ class ScoreCard extends Component {
     const { navigation } = this.props
     const currQ = navigation.getParam('currQ')
     const score = navigation.getParam('score')
-
+    const firstWord = (score === 1) ? 'Well done' : 'Fantastic';
+    const pointWord = (score === 1) ? 'point' : 'points';
     let { fadeAnim } = this.state;
 
     return (
       <View style={styles.container}>
-        <View>
-          <Text style={generalStyle.titleMode}>Relic Hunter</Text>
-        </View>
 
         <View style={styles.welcomeContainer}>
-          <FadeInView style={{ width: 100, height: 80, backgroundColor: '#fff' }}>
+          <FadeInView style={{ width: 200, height: 200, backgroundColor: '#FED158' }}>
             <Image
-              source={require('../assets/images/robot-dev.png')}
+              source={require('../images/logo.png')}
               style={styles.welcomeImage}
             />
           </FadeInView>
         </View>
 
         <View style={styles.welcomeContainer}>
-          <FadeInView style={{ backgroundColor: '#fff' }}>
-            <Text style={styles.scoreMode}> Congratulations </Text>
-            {(score === 0 || score > 1) && <Text style={styles.scoreMode}> You scored {score} POINTS !! </Text>}
-            {score === 1 && <Text style={styles.scoreMode}> You scored {score} POINT !! </Text>}
+          <FadeInView style={{ backgroundColor: '#FED158' }}>
+
+
+            {score === 0 && <View>
+              <Text style={styles.scoreMode}> Come back and play again soon </Text>
+            </View>
+            }
+
+            {score > 0 && <View>
+              <Text style={styles.scoreMode}> {firstWord} </Text>
+              <Text style={styles.scoreMode}> You scored {score} {pointWord}</Text>
+            </View>
+            }
+
           </FadeInView>
-          <Text style={styles.mainText}> Thank you for playing at {} </Text>
           {currQ === 1 && <Text style={styles.mainText}> You played for {currQ} round</Text>}
           {currQ > 1 && <Text style={styles.mainText}> You played for {currQ} rounds</Text>}
         </View>
@@ -84,11 +90,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   welcomeImage: {
-    width: 100,
-    height: 80,
+    width: 200,
+    height: 200,
     resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
+    // marginTop: 3,
+    // marginLeft: -10,
   },
   scoreMode: {
     textAlign: 'center',
@@ -103,6 +109,8 @@ const styles = StyleSheet.create({
     color: 'purple',
     lineHeight: 24,
     textAlign: 'center',
+    marginTop: 10,
+    marginBottom: 20,
   },
 });
 

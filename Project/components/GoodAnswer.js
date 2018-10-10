@@ -13,8 +13,10 @@ class GoodAnswer extends Component {
   }
 
   render() {
+    const { score } = this.props;
+    const pointWord = (score === 1) ? 'point' : 'points';
     return (
-      <View style={styles.container}>
+      <View style={generalStyle.topView}>
         <View>
           <Text style={generalStyle.titleMode}>Relic Hunter</Text>
         </View>
@@ -31,7 +33,9 @@ class GoodAnswer extends Component {
         </Animatable.View>
         <Text style={styles.scoreMode}>
           Go to the next question... </Text>
-        <Text style={styles.scoreMode}> You are now on {this.props.score} points </Text>
+
+        <Text style={styles.scoreMode}> You are now on {score} {pointWord} </Text>
+
         <View style={styles.container}>
           <Button
             buttonStyle={generalStyle.buttonStyle}
@@ -46,8 +50,9 @@ class GoodAnswer extends Component {
 
   done = () => {
     if (this.props.currQ === this.props.questions.length - 1) {
+      const finalRound = this.props.currQ + 1;
       this.props.navigation.navigate('ScoreCard', {
-        currQ: this.props.currQ,
+        currQ: finalRound,
         score: this.props.score
       })
     } else {

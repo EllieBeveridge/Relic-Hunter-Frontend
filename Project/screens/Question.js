@@ -41,8 +41,6 @@ class Question extends Component {
       )
     }
 
-
-
     if (takePic && !uri)
       return <CameraPicture updateUri={this.updateUri}
       />

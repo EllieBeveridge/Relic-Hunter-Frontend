@@ -19,5 +19,9 @@ export default generalStyles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: '#333',
   },
+  topView: {
+    backgroundColor: '#FBD158',
+    height: '100%'
+  },
 
 })

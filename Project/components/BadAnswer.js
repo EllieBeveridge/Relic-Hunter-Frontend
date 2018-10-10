@@ -14,7 +14,7 @@ class BadAnswer extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={generalStyle.topView}>
         <View>
           <Text style={generalStyle.titleMode}>Relic Hunter</Text>
         </View>

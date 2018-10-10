@@ -46,7 +46,7 @@ class CameraImage extends Component {
 
                 style={
                   {
-                    fontSize: 22, width: 100, padding: 0, margin: 0,
+                    fontSize: 22, width: 80, padding: 0, margin: 0,
                     color: 'purple',
                   }
                 }>Retake
@@ -59,7 +59,7 @@ class CameraImage extends Component {
               <Text
                 style={
                   {
-                    fontSize: 22, width: 100, padding: 0, margin: 0,
+                    fontSize: 22, width: 80, padding: 0, margin: 0,
                     color: 'purple',
                   }
                 }>Submit
@@ -99,8 +99,10 @@ class CameraImage extends Component {
             // this.setState({
             //   uploading: false,
             // }) 
+
             const ansFlag = (answer) ? 't' : 'f';
             const newPoints = (answer) ? this.props.score + 1 : this.props.score;
+
             this.props.updateAnswers(newPoints, ansFlag)
             this.props.updateUri(null, false, false)
           })

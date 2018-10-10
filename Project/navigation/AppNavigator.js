@@ -7,8 +7,8 @@ import CreateQuest from '../screens/CreateQuest'
 
 
 const AppNavigator = createStackNavigator({
-  CreateQuest: { screen: CreateQuest },
   Logo: { screen: Logo },
+  CreateQuest: { screen: CreateQuest },
   LandingPage: { screen: LandingPage },
   Question: { screen: Question },
   ScoreCard: { screen: ScoreCard }
