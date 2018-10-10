@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ImageBackground, View, Text, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 import QuestionButtons from '../components/QuestionButtons'
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
 import styles from '../stylesheets/QuestionStylesheet'
@@ -69,9 +69,11 @@ class Question extends Component {
         <Text style={styles.titleMode}>QUESTION {questions[currQ].id}
           : {questions[currQ].title}
         </Text>
-        <Text style={styles.question}>
-          {questions[currQ].text}
-        </Text>
+        <ScrollView>
+          <Text style={styles.question}>
+            {questions[currQ].text}
+          </Text>
+        </ScrollView>
         <View >
           <View style={styles.takePictureButton}>
             <Button
