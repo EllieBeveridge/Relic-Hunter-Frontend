@@ -10,8 +10,8 @@ class CreateQuest extends Component {
       title: 'test',
       intro_text: 'test',
       full_text: 'test',
-      icon_url: null,
-      background_url: null,
+      // icon_url: null,
+      // background_url: null,
       suitability: 'test',
       venue_area: 'test'
     };
@@ -20,15 +20,12 @@ class CreateQuest extends Component {
   submitForm = () => {
     const { navigation } = this.props
     const venue_id = navigation.getParam('venue_id');
-    console.log(venue_id);
-    console.log(this.state)
-    const { title, intro_text, full_text, suitability, venue_area } = this.state;
-    const quest = { title, intro_text, full_text, suitability, venue_area };
-    if (this.state.icon_url) quest.icon_url = this.state.icon_url;
-    if (this.state.background_url) quest.background_url = this.state.background_url;
-    api.postNewQuest(venue_id, quest)
-      .then(data => {
+    // if (this.state.icon_url) quest.icon_url = this.state.icon_url;
+    // if (this.state.background_url) quest.background_url = this.state.background_url;
+    api.postNewQuest(venue_id, this.state)
+      .then(quest => {
         Alert.alert("Quest created");
+        this.props.navigation.navigate('CreateQuestion', quest)
       })
       .catch(err => console.log(err));
   }
@@ -42,18 +39,18 @@ class CreateQuest extends Component {
           <FormInput
             value={this.state.title}
             onChangeText={(title) => this.setState({ title })} />
-          <FormValidationMessage>Error message</FormValidationMessage>
+          {(this.state.title.length < 3 && this.state.title !== '') && <FormValidationMessage>Must be at least 3 characters.</FormValidationMessage>}
           <FormLabel>Short Summary of Quest</FormLabel>
           <FormInput
             value={this.state.intro_text}
             onChangeText={(intro_text) => this.setState({ intro_text })} />
-          <FormValidationMessage>Error message</FormValidationMessage>
+          {(this.state.intro_text.length < 3 && this.state.intro_text !== '') && <FormValidationMessage>Must be at least 3 characters.</FormValidationMessage>}
           <FormLabel>Full Summary of Quest (include suitability, theme and difficulty</FormLabel>
           <FormInput
             value={this.state.full_text}
             onChangeText={(full_text) => this.setState({ full_text })} />
-          <FormValidationMessage>Error message</FormValidationMessage>
-          <FormLabel>Icon URL</FormLabel>
+          {(this.state.full_text.length < 3 && this.state.full_text !== '') && <FormValidationMessage>Must be at least 3 characters.</FormValidationMessage>}
+          {/* <FormLabel>Icon URL</FormLabel>
           <FormInput
             value={this.state.icon_url}
             onChangeText={(icon_url) => this.setState({ icon_url })}
@@ -64,22 +61,21 @@ class CreateQuest extends Component {
             value={this.state.background_url}
             onChangeText={(background_url) => this.setState({ background_url })}
             placeholder='Leave blank if not using'
-          />
+          /> */}
           <FormLabel>Age suitability</FormLabel>
           <FormInput
             value={this.state.suitability}
             onChangeText={(suitability) => this.setState({ suitability })} />
-          <FormValidationMessage>Error message</FormValidationMessage>
+          {(this.state.suitability.length < 3 && this.state.suitability !== '') && <FormValidationMessage>Must be at least 3 characters.</FormValidationMessage>}
           <FormLabel>Area within Venue</FormLabel>
           <FormInput
             value={this.state.venue_area}
             onChangeText={(venue_area) => this.setState({ venue_area })} />
-          <FormValidationMessage>Error message</FormValidationMessage>
+          {(this.state.venue_area.length < 3 && this.state.venue_area !== '') && <FormValidationMessage>Must be at least 3 characters.</FormValidationMessage>}
           <Button
             title="Submit"
             onPress={() => {
               this.submitForm()
-              this.props.navigation.navigate('CreateQuestion')
             }
             } />
         </ScrollView>
