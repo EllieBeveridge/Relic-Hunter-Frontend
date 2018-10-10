@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Question from '../screens/Question'
 import * as Animatable from 'react-native-animatable';
 import { Button } from 'react-native-elements';
+import generalStyle from '../stylesheets/generalStyle'
 
 class GoodAnswer extends Component {
   constructor(props) {
@@ -13,14 +14,15 @@ class GoodAnswer extends Component {
 
   render() {
     return (
-
       <View style={styles.container}>
-        {console.log(this.props.score, 'this is the score in goodanswer')}
+        <View>
+          <Text style={generalStyle.titleMode}>Relic Hunter</Text>
+        </View>
 
         <Animatable.View
           duration={1000}
           delay={1000}
-          style={styles.content}
+          style={styles.contentAnimated}
           transition="backgroundColor">
           <Animatable.Text animation={'bounceIn'}>
             <Text style={styles.title}>
@@ -29,15 +31,15 @@ class GoodAnswer extends Component {
         </Animatable.View>
         <Text style={styles.scoreMode}>
           Go to the next question... </Text>
-        <Text> You are now on {this.props.score} points </Text>
-
-        <Button
-          style={styles.buttonImage}
-          backgroundColor="#4E3948"
-          title="NEXT"
-          onPress={() => this.done()
-          }
-        />
+        <Text style={styles.scoreMode}> You are now on {this.props.score} points </Text>
+        <View style={styles.container}>
+          <Button
+            buttonStyle={generalStyle.buttonStyle}
+            title="Next"
+            onPress={() => this.done()
+            }
+          />
+        </View >
       </View >
     );
   }
@@ -78,13 +80,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: 'purple',
   },
-  buttonImage: {
-    width: 30,
-    height: 25,
+  contentAnimated: {
+    padding: 40,
+    backgroundColor: '#FED158',
     alignItems: 'center',
-    color: 'white',
-    backgroundColor: "purple"
   },
+
 })
 
 export default GoodAnswer;

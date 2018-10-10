@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { StyleSheet, Image, Animated } from 'react-native';
 import { Button } from 'react-native-elements';
+import generalStyle from '../stylesheets/generalStyle'
 
 import FadeInView from '../components/FadeInView';
 // import FadeSpinView from '../components/FadeSpinView';
@@ -14,6 +15,8 @@ class ScoreCard extends Component {
     };
   }
 
+  static navigationOptions = { title: 'Relic Hunter', header: null };
+
   render() {
 
     const { navigation } = this.props
@@ -24,9 +27,8 @@ class ScoreCard extends Component {
 
     return (
       <View style={styles.container}>
-
         <View>
-          <Text style={styles.titleMode}>Relic Hunters</Text>
+          <Text style={generalStyle.titleMode}>Relic Hunter</Text>
         </View>
 
         <View style={styles.welcomeContainer}>
@@ -50,15 +52,15 @@ class ScoreCard extends Component {
         </View>
 
         <View>
-          <Text style={styles.titleMode}>Game Complete</Text>
+          <Text style={generalStyle.titleMode}>Game Complete</Text>
         </View>
 
         <View style={styles.welcomeContainer}>
           <Button
-            title="NEXT"
-            backgroundColor="#4E3948"
+            buttonStyle={generalStyle.buttonStyle}
+            title="Next"
             onPress={() =>
-              this.props.navigation.navigate('LandingPage')
+              this.props.navigation.navigate('Logo')
             }
           />
         </View>
@@ -87,13 +89,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
-  },
-  titleMode: {
-    textAlign: 'center',
-    fontSize: 28,
-    color: 'purple',
-    fontWeight: 'bold',
-    padding: 5,
   },
   scoreMode: {
     textAlign: 'center',

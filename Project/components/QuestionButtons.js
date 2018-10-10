@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Alert, StyleSheet } from 'react-native';
+import generalStyle from '../stylesheets/generalStyle'
 import { Button } from 'react-native-elements';
 
 class componentName extends Component {
@@ -15,10 +16,9 @@ class componentName extends Component {
       <View>
         <View style={styles.welcomeContainer}>
           <Button
+            buttonStyle={generalStyle.buttonStyle}
             title="Get a Hint"
             icon={{ name: 'question-circle', type: 'font-awesome' }}
-            backgroundColor="#4E3948"
-            fontSize={16}
             onPress={() => {
               Alert.alert(this.props.hint_text)
             }
@@ -27,18 +27,16 @@ class componentName extends Component {
         </View>
         <View style={styles.welcomeContainer}>
           <Button
+            buttonStyle={generalStyle.buttonStyle}
             title="Skip this question"
-            backgroundColor="#4E3948"
-            fontSize={16}
             icon={{ name: 'fast-forward', type: 'font-awesome' }}
             onPress={() => this.skip()}
           />
         </View>
         <View style={styles.welcomeContainer}>
           <Button
+            buttonStyle={generalStyle.buttonStyle}
             title="Finish this quest"
-            backgroundColor="#4E3948"
-            fontSize={16}
             icon={{ name: 'times-circle', type: 'font-awesome' }}
             onPress={() =>
               this.props.navigation.navigate('ScoreCard', {
@@ -71,7 +69,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 10,
-  }
-});
+  },
+})
 
 export default componentName;

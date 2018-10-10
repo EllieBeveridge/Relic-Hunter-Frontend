@@ -4,8 +4,8 @@ import { Constants } from 'expo'
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FED158',//'transparent',//'#F5FCFF',
-    paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#FED158',
+    // paddingTop: Constants.statusBarHeight,
   },
   title: {
     textAlign: 'center',
@@ -13,12 +13,6 @@ export default styles = StyleSheet.create({
     fontWeight: '300',
     marginBottom: 20,
   },
-  buttonImage: {
-    width: 30,
-    height: 25,
-    alignItems: 'center',
-  },
-
   scoreMode: {
     textAlign: 'center',
     fontSize: 16,
