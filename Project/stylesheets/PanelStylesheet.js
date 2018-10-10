@@ -5,7 +5,7 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FED158',//'transparent',//'#F5FCFF',
-    paddingTop: Constants.statusBarHeight,
+    // paddingTop: Constants.statusBarHeight,
   },
   title: {
     textAlign: 'center',

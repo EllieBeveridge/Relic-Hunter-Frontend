@@ -39,6 +39,16 @@ class componentName extends Component {
             title="Finish this quest"
             backgroundColor="#4E3948"
             fontSize={16}
+
+            buttonStyle={{
+              backgroundColor: "rgba(92, 99,216, 1)",
+              width: 300,
+              height: 45,
+              borderColor: "transparent",
+              borderWidth: 0,
+              borderRadius: 5
+            }}
+
             icon={{ name: 'times-circle', type: 'font-awesome' }}
             onPress={() =>
               this.props.navigation.navigate('ScoreCard', {

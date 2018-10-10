@@ -27,9 +27,7 @@ class Question extends Component {
     };
   }
 
-  static navigatorStyle = {
-    navBarHidden: true
-  }
+  static navigationOptions = { title: 'Relic Hunter', header: null };
 
   render() {
     const { hasCameraPermission, takePic, uri, currQ, questions, score, lastAnswer } = this.state;

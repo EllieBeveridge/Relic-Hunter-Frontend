@@ -35,13 +35,13 @@ class Panel extends Component {
         style={[styles.header, isActive ? styles.active : styles.inactive]}
         transition="backgroundColor"
       >
+        <Text style={styles.headerText}>{section.title}</Text>
         <Icon
           name='chevron-down'
           type='entypo'
           color='#583E5C'
           size={20}
         />
-        <Text style={styles.headerText}>{section.title}</Text>
       </Animatable.View>
     );
   };
@@ -71,12 +71,9 @@ class Panel extends Component {
           <Animatable.Text animation={isActive ? 'bounceIn' : undefined}>
             <Text style={styles.myDescription}>{section.full}</Text>
           </Animatable.Text >
-          <Animatable.Text animation={isActive ? 'bounceIn' : undefined}>
-            <Text style={styles.myDescription}>{section.suitability}</Text>
-          </Animatable.Text >
-          <Animatable.Text animation={isActive ? 'bounceIn' : undefined}>
-            <Text style={styles.myDescription}>{section.venue_area}</Text>
-          </Animatable.Text >
+
+          <Text style={styles.myDescription}>Aimed at:{section.suitability}</Text>
+          <Text style={styles.myDescription}>Takes place at:{section.venue_area}</Text>
 
           <View>
             <Button
@@ -97,16 +94,19 @@ class Panel extends Component {
 
 
   render() {
+
     const { navigate } = this.props.navigation;
     const { multipleSelect, activeSections } = this.state;
     const CONTENT = this.props.quests.map(quest => {
       return {
-        title: quest.title, intro: quest.intro_text,
+        title: quest.title,
+        intro: quest.intro_text,
         quest_id: quest.id,
         full: quest.full_text,
         icon_url: quest.icon_url,
         suitability: quest.suitability,
-        venue_id: quest.venue_id
+        venue_id: quest.venue_id,
+        venue_area: quest.venue_area
       }
     })
     return (

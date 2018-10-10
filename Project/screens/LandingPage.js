@@ -13,6 +13,8 @@ class LandingPage extends Component {
     };
   }
 
+  static navigationOptions = { title: 'Relic Hunter', header: null };
+
   componentDidMount = () => {
     const { navigation } = this.props
     const venue_id = navigation.getParam('venue_id')

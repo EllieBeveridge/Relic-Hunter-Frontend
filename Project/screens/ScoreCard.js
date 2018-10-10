@@ -14,6 +14,8 @@ class ScoreCard extends Component {
     };
   }
 
+  static navigationOptions = { title: 'Relic Hunter', header: null };
+
   render() {
 
     const { navigation } = this.props
@@ -58,7 +60,7 @@ class ScoreCard extends Component {
             title="NEXT"
             backgroundColor="#4E3948"
             onPress={() =>
-              this.props.navigation.navigate('LandingPage')
+              this.props.navigation.navigate('Logo')
             }
           />
         </View>

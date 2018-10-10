@@ -70,7 +70,12 @@ class CameraImage extends Component {
 
     ImageManipulator.manipulate(this.props.uri, [{ resize: { width: 1000 } }], { base64: true, format: 'jpeg' })
       .then(({ base64 }) => {
-        const finalB64 = { answer: { image: base64, model_name: this.props.question.model_name } }
+        const finalB64 = {
+          answer: {
+            image: base64
+            // model_name: this.props.question.model_name
+          }
+        }
         const question_id = this.props.question.id
         api.checkPicture(question_id, finalB64)
           .then(answer => {

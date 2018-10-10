@@ -10,8 +10,11 @@ class componentName extends Component {
     this.state = {
       venue: 1,
       venues: []
-    };
+    }
+
   }
+
+  static navigationOptions = { title: 'Relic Hunter', header: null };
 
   componentDidMount = () => {
     api.fetchAllVenues()
@@ -33,7 +36,7 @@ class componentName extends Component {
           <Text style={styles.textStyle}>Choose a Venue</Text>
           <Picker
             selectedValue={this.state.venue}
-            style={{ height: 40, width: 135, color: '#583E5C' }}
+            style={{ height: 40, width: 160, color: '#583E5C' }}
             onValueChange={(itemValue, itemIndex) => this.setState({ venue: itemValue })}>
             {this.state.venues.map((venue, index) => (
               <Picker.Item label={venue.name} value={venue.id} key={index} />
