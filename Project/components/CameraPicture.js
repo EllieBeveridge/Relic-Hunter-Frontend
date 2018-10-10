@@ -22,27 +22,37 @@ class CameraPicture extends Component {
       return <Text>No access to camera</Text>;
     } else {
       return (
-        <View style={{ flex: 1 }}>
-          <Text style={generalStyle.titleMode}>Relic Hunter</Text>
-          <View >
-            <Spinner
-              visible={this.state.focusing}
-              textContent={"Taking Picture..."}
-              textStyle={{ color: '#FFF' }} />
-          </View>
-          <Camera
-            style={styles.preview}
-            ref={(ref) => { this.camera = ref }}
-          >
-            <TouchableOpacity
-              style={styles.capture}
-              onPress={this.snap.bind(this)}
-            >
-              <Text style={{ fontSize: 18, marginBottom: 20, color: 'purple' }}>
-                PRESS ME</Text>
-            </TouchableOpacity>
+        <View style={styles.container}>
 
-          </Camera>
+          <Text style={generalStyle.titleMode}>Relic Hunter</Text>
+          <View style={{ flex: 1 }}>
+
+            <View >
+              <Spinner
+                visible={this.state.focusing}
+                textContent={"Taking Picture..."}
+                textStyle={{ color: '#FFF' }} />
+            </View>
+            <Camera
+              style={styles.preview}
+              ref={(ref) => { this.camera = ref }}
+            >
+              <TouchableOpacity
+                style={styles.capture}
+                onPress={this.snap.bind(this)}
+              >
+                <Text
+                  style={
+                    {
+                      fontSize: 22, width: 100, padding: 0, margin: 0,
+                      color: 'purple',
+                    }
+                  }>
+                  Press me</Text>
+              </TouchableOpacity>
+
+            </Camera>
+          </View>
         </View>
       );
     }

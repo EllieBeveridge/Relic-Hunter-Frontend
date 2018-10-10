@@ -14,14 +14,15 @@ class GoodAnswer extends Component {
 
   render() {
     return (
-
       <View style={styles.container}>
-        {console.log(this.props.score, 'this is the score in goodanswer')}
-        <Text style={generalStyle.titleMode}>Relic Hunter</Text>
+        <View>
+          <Text style={generalStyle.titleMode}>Relic Hunter</Text>
+        </View>
+
         <Animatable.View
           duration={1000}
           delay={1000}
-          style={styles.content}
+          style={styles.contentAnimated}
           transition="backgroundColor">
           <Animatable.Text animation={'bounceIn'}>
             <Text style={styles.title}>
@@ -30,14 +31,15 @@ class GoodAnswer extends Component {
         </Animatable.View>
         <Text style={styles.scoreMode}>
           Go to the next question... </Text>
-        <Text> You are now on {this.props.score} points </Text>
-
-        <Button
-          buttonStyle={generalStyle.buttonStyle}
-          title="Next"
-          onPress={() => this.done()
-          }
-        />
+        <Text style={styles.scoreMode}> You are now on {this.props.score} points </Text>
+        <View style={styles.container}>
+          <Button
+            buttonStyle={generalStyle.buttonStyle}
+            title="Next"
+            onPress={() => this.done()
+            }
+          />
+        </View >
       </View >
     );
   }
@@ -78,6 +80,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: 'purple',
   },
+  contentAnimated: {
+    padding: 40,
+    backgroundColor: '#FED158',
+    alignItems: 'center',
+  },
+
 })
 
 export default GoodAnswer;

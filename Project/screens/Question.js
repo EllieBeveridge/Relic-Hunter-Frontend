@@ -67,7 +67,6 @@ class Question extends Component {
     if (lastAnswer === 'f')
       return <BadAnswer
         score={score} updateAnswers={this.updateAnswers} />
-
     return (
       <View style={{ backgroundColor: '#FBD158', height: '100%' }}>
         <Text style={generalStyle.titleMode}>Relic Hunter</Text>

@@ -15,33 +15,40 @@ class BadAnswer extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={generalStyle.titleMode}>Relic Hunter</Text>
+        <View>
+          <Text style={generalStyle.titleMode}>Relic Hunter</Text>
+        </View>
+
         <Animatable.View
           duration={1000}
           delay={1000}
-          style={styles.content}
+          style={styles.contentAnimated}
           transition="backgroundColor">
           <Animatable.Text animation={'bounceIn'}>
             <Text style={styles.title}>
               WHOOPS </Text>
           </Animatable.Text >
         </Animatable.View>
-        <Text style={styles.scoreMode}>
-          Not the right image, sorry </Text>
-
-        <Button
-          buttonStyle={generalStyle.buttonStyle}
-          title="Try again"
-          onPress={() => this.done()
-          }
-        />
+        <View style={styles.welcomeContainer}>
+          <Text style={styles.scoreMode}>
+            Not the right image, sorry
+            </Text>
+        </View>
+        <View style={styles.welcomeContainer}>
+          <Button
+            buttonStyle={generalStyle.buttonStyle}
+            title="Try again"
+            onPress={() => this.done()
+            }
+          />
+        </View>
       </View >
     );
   }
 
   done = () => {
     // set feedback to null
-    this.props.updateAnswers(this.props.answers, null)
+    this.props.updateAnswers(this.props.score, null)
   }
 
 }
@@ -68,6 +75,19 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: 'purple',
   },
+  contentAnimated: {
+    padding: 40,
+    backgroundColor: '#FED158',
+    alignItems: 'center',
+  },
+
+  welcomeContainer: {
+    flex: 1,
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 20,
+  },
+
 })
 
 export default BadAnswer;

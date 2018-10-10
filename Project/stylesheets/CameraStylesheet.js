@@ -38,8 +38,9 @@ export default styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    margin: 10,
+    backgroundColor: '#FED158',
+    // paddingTop: Constants.statusBarHeight,
+    // margin: 10,
     overflow: 'hidden'
   }
 })

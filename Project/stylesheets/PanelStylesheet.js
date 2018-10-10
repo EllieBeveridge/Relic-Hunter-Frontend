@@ -4,7 +4,7 @@ import { Constants } from 'expo'
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FED158',//'transparent',//'#F5FCFF',
+    backgroundColor: '#FED158',
     // paddingTop: Constants.statusBarHeight,
   },
   title: {

@@ -27,7 +27,6 @@ class ScoreCard extends Component {
 
     return (
       <View style={styles.container}>
-
         <View>
           <Text style={generalStyle.titleMode}>Relic Hunter</Text>
         </View>

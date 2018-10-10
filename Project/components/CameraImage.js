@@ -19,42 +19,54 @@ class CameraImage extends Component {
     const { uri } = this.props
     return (
 
-      <View>
+      <View style={styles.container}>
 
-        <ImageBackground
-          source={{ uri: uri }}
-          style={{ width: "100%", height: "100%" }}
-        >
+        <Text style={generalStyle.titleMode}>Relic Hunter</Text>
+        <View style={{ flex: 1 }}>
 
-          <View style={{ flex: 1 }}>
-            <Text style={generalStyle.titleMode}>Relic Hunter</Text>
-            <Spinner
-              visible={this.state.uploading}
-              textContent={"Checking..."}
-              textStyle={{ color: '#FFF' }} />
-          </View>
-
-
-          <TouchableOpacity
-            style={styles.discard}
+          <ImageBackground
+            source={{ uri: uri }}
+            style={{ width: "100%", height: "100%" }}
           >
 
-            <Text
-              onPress={() => this.discardImage()}
-              style={{ fontSize: 18, color: 'black' }}
-            >Discard
-        </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.submit}
-            onPress={() => this.sendImage()}
-          >
-            <Text
-              style={{ fontSize: 18, color: 'black' }}
-            >Submit
+            <View style={{ flex: 1 }}>
+              <Spinner
+                visible={this.state.uploading}
+                textContent={"Checking..."}
+                textStyle={{ color: '#FFF' }} />
+            </View>
+
+
+            <TouchableOpacity
+              style={styles.discard}
+            >
+
+              <Text
+                onPress={() => this.discardImage()}
+
+                style={
+                  {
+                    fontSize: 22, width: 100, padding: 0, margin: 0,
+                    color: 'purple',
+                  }
+                }>Retake
             </Text>
-          </TouchableOpacity>
-        </ImageBackground>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.submit}
+              onPress={() => this.sendImage()}
+            >
+              <Text
+                style={
+                  {
+                    fontSize: 22, width: 100, padding: 0, margin: 0,
+                    color: 'purple',
+                  }
+                }>Submit
+            </Text>
+            </TouchableOpacity>
+          </ImageBackground>
+        </View >
       </View >
     );
   }
