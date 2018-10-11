@@ -44,29 +44,33 @@ class componentName extends Component {
               <Picker.Item label={venue.name} value={venue.id} key={index} />
             ))}
           </Picker>
+          <View style={styles.welcomeContainer}>
+            <Button
+              buttonStyle={generalStyle.buttonStyle}
+              title="Play a Quest..."
+              icon={{
+                name: "treasure-chest",
+                type: "material-community"
+              }}
+              onPress={() =>
+                this.props.navigation.navigate('LandingPage', {
+                  venue_id: venueState
+                })
+              }
+            />
+          </View>
 
-          <Button
-            buttonStyle={generalStyle.buttonStyle}
-            title="Let's Begin..."
-            icon={{
-              name: "treasure-chest",
-              type: "material-community"
-            }}
-            onPress={() =>
-              this.props.navigation.navigate('LandingPage', {
-                venue_id: venueState
-              })
-            }
-          />
-          <Button
-buttonStyle={generalStyle.buttonStyle}
-            title="Create a Quest"
-            onPress={() =>
-              this.props.navigation.navigate('CreateQuest', {
-                venueState
-              })
-            }
-          />
+          <View style={styles.welcomeContainer}>
+            <Button
+              buttonStyle={generalStyle.buttonStyle}
+              title="Create a Quest"
+              onPress={() =>
+                this.props.navigation.navigate('CreateQuest', {
+                  venueState
+                })
+              }
+            />
+          </View>
         </View>
       </View >
     );
@@ -88,7 +92,8 @@ const styles = StyleSheet.create({
     padding: 10
   },
   welcomeContainer: {
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 20,
   },
   buttonStyle: {
     alignItems: 'center'
