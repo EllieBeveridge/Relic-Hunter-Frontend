@@ -70,10 +70,18 @@ export const trainModel = (question_id) => {
     .catch(err => { throw err })
 }
 
+export const testModel = (question_id, finalB64) => {
+  return axios.post(`${API_URL}/references/${question_id}/test`, finalB64)
+    .then(({ data: { answer } }) => {
+      return answer.answer_id.isCorrect
+    })
+    .catch(err => { throw err })
+}
+
 export const publishQuest = (quest_id, publish) => {
   return axios.patch(`${API_URL}/quests/${quest_id}/publish?published=${publish}`)
     .then(res => {
-      console.log(res)
       return res
     })
+    .catch(err => { throw err })
 }

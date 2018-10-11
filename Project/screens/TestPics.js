@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import QuestionButtons from '../components/QuestionButtons'
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
 import styles from '../stylesheets/QuestionStylesheet'
@@ -30,7 +30,7 @@ class TestPics extends Component {
     const question_id = navigation.getParam('question_id');
     const quest_id = navigation.getParam('quest_id');
     console.log(question_id);
-    const { hasCameraPermission, takePic, uri, currQ, questions, score, lastAnswer } = this.state;
+    const { hasCameraPermission, takePic, uri, lastAnswer } = this.state;
 
     if (hasCameraPermission === false) {
       return <Text>Camera permission needed to play</Text>
@@ -63,12 +63,12 @@ class TestPics extends Component {
     return (
       <View style={{ backgroundColor: '#FBD158', height: '100%' }}>
         <ScrollView>
-          <Text style={styles.question}>
+          <Text style={addPicStyles.heading}>
             Test Your Picture!
           </Text>
         </ScrollView>
         <View >
-          <View style={styles.takePictureButton}>
+          <View style={addPicStyles.welcomeContainer}>
             <Button
               title="Take a picture"
               buttonStyle={generalStyle.buttonStyle}
@@ -119,5 +119,20 @@ class TestPics extends Component {
     })
   }
 }
+
+const addPicStyles = StyleSheet.create({
+  heading: {
+    textAlign: 'center',
+    fontSize: 32,
+    color: '#583E5C',
+    padding: 10,
+    marginTop: 100
+  },
+  welcomeContainer: {
+    alignItems: 'center',
+    marginTop: 25,
+    marginBottom: 80,
+  }
+})
 
 export default TestPics;

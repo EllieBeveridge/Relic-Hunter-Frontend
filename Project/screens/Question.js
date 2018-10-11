@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import QuestionButtons from '../components/QuestionButtons'
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
 import styles from '../stylesheets/QuestionStylesheet'
@@ -68,11 +68,11 @@ class Question extends Component {
       return <BadAnswer
 
         score={score} updateAnswers={this.updateAnswers} Question={true} />
-          
+
     return (
       <View style={{ backgroundColor: '#FBD158', height: '100%' }}>
         <Text style={generalStyle.titleMode}>Relic Hunter</Text>
-        <Text style={generalStyle.titleMode}>QUESTION {questions[currQ].id}
+        <Text style={generalStyle.titleMode}>QUESTION {currQ + 1}
           : {questions[currQ].title}
         </Text>
         <ScrollView>

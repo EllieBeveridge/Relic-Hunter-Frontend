@@ -76,7 +76,7 @@ class Panel extends Component {
           <Text style={styles.myDescription}>Aimed at: {section.suitability}</Text>
           <Text style={styles.myDescription}>Takes place at: {section.venue_area}</Text>
           <Button
-            buttonStyle={generalStyle.buttonStyle}
+            buttonStyle={panelButtonStyle.panelButton}
             title="Start Quest"
             icon={{ name: 'flask', type: 'font-awesome' }}
             onPress={() =>
@@ -135,7 +135,7 @@ const panelButtonStyle = StyleSheet.create({
     borderColor: "transparent",
     borderWidth: 0,
     borderRadius: 25,
-    marginLeft: 100
+    marginLeft: 50
   }
 })
 
