@@ -7,10 +7,10 @@ class CreateQuestion extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: 'testtesttesttest',
-      text: 'testtesttesttest',
-      hint_text: 'testtesttesttest',
-      answer_text: 'testtesttesttest'
+      title: 'Input question title here',
+      text: 'Input question here',
+      hint_text: 'Include a hint here',
+      answer_text: 'Write your answer here'
     };
   }
 
