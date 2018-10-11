@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, ScrollView, Alert } from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage, Button } from 'react-native-elements'
 import * as api from '../api'
+import generalStyle from '../stylesheets/generalStyle'
 
 class CreateQuest extends Component {
   constructor(props) {
@@ -31,20 +32,23 @@ class CreateQuest extends Component {
   render() {
     return (
 
-      <View>
+      <View style={generalStyle.topView}>
         <ScrollView>
-          <FormLabel>Title of Quest</FormLabel>
+          <FormLabel labelStyle={{ color: '#583E5C' }}>Title of Quest</FormLabel>
           <FormInput
+            inputStyle={{ color: '#583E5C' }}
             value={this.state.title}
             onChangeText={(title) => this.setState({ title })} />
           {(this.state.title.length < 3 && this.state.title !== '') && <FormValidationMessage>Must be at least 3 characters.</FormValidationMessage>}
-          <FormLabel>Short Summary of Quest</FormLabel>
+          <FormLabel labelStyle={{ color: '#583E5C' }}>Short Summary of Quest</FormLabel>
           <FormInput
+            inputStyle={{ color: '#583E5C' }}
             value={this.state.intro_text}
             onChangeText={(intro_text) => this.setState({ intro_text })} />
           {(this.state.intro_text.length < 3 && this.state.intro_text !== '') && <FormValidationMessage>Must be at least 3 characters.</FormValidationMessage>}
-          <FormLabel>Full Summary of Quest (include suitability, theme and difficulty</FormLabel>
+          <FormLabel labelStyle={{ color: '#583E5C' }}>Full Summary of Quest (include suitability, theme and difficulty</FormLabel>
           <FormInput
+            inputStyle={{ color: '#583E5C' }}
             value={this.state.full_text}
             onChangeText={(full_text) => this.setState({ full_text })} />
           {(this.state.full_text.length < 3 && this.state.full_text !== '') && <FormValidationMessage>Must be at least 3 characters.</FormValidationMessage>}
@@ -60,17 +64,21 @@ class CreateQuest extends Component {
             onChangeText={(background_url) => this.setState({ background_url })}
             placeholder='Leave blank if not using'
           /> */}
-          <FormLabel>Age suitability</FormLabel>
+
+          <FormLabel labelStyle={{ color: '#583E5C' }}>Age suitability</FormLabel>
           <FormInput
+            inputStyle={{ color: '#583E5C' }}
             value={this.state.suitability}
             onChangeText={(suitability) => this.setState({ suitability })} />
           {(this.state.suitability.length < 3 && this.state.suitability !== '') && <FormValidationMessage>Must be at least 3 characters.</FormValidationMessage>}
-          <FormLabel>Area within Venue</FormLabel>
+          <FormLabel labelStyle={{ color: '#583E5C' }}>Area within Venue</FormLabel>
           <FormInput
+            inputStyle={{ color: '#583E5C' }}
             value={this.state.venue_area}
             onChangeText={(venue_area) => this.setState({ venue_area })} />
           {(this.state.venue_area.length < 3 && this.state.venue_area !== '') && <FormValidationMessage>Must be at least 3 characters.</FormValidationMessage>}
           <Button
+            buttonStyle={generalStyle.buttonStyle}
             title="Submit"
             onPress={() => {
               this.submitForm()
