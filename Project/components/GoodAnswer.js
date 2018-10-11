@@ -13,8 +13,7 @@ class GoodAnswer extends Component {
   }
 
   render() {
-
-    const { score } = this.props;
+    const { score, questions, currQ } = this.props;
     const pointWord = (score === 1) ? 'point' : 'points';
     if (this.props.TestPics) {
       return (
@@ -68,6 +67,12 @@ class GoodAnswer extends Component {
               <Text style={styles.title}>
                 Good Answer!  </Text>
             </Animatable.Text >
+
+            <Animatable.Text animation={'bounceIn'}>
+              <Text style={styles.scoreMode}>
+                You found {questions[currQ].answer_text}</Text>
+            </Animatable.Text >
+
           </Animatable.View>
           <Text style={styles.scoreMode}>
             Go to the next question... </Text>
