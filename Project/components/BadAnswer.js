@@ -20,7 +20,7 @@ class BadAnswer extends Component {
         </View>
 
         <Animatable.View
-          duration={1000}
+          duration={3000}
           delay={1000}
           style={styles.contentAnimated}
           transition="backgroundColor">
@@ -36,24 +36,24 @@ class BadAnswer extends Component {
             </Text>
         </View>
         {this.props.Question
-          ? 
-      <View style={styles.welcomeContainer}>
-          <Button
-            buttonStyle={generalStyle.buttonStyle}
-            title="Try again"
-            onPress={() => this.done()
-            }
-          />
-        </View>
-          : 
-            <View style={styles.welcomeContainer}>
-          <Button
-            buttonStyle={generalStyle.buttonStyle}
-            title="Try again"
-            onPress={() => this.fail()
-            }
-          />
-        </View>
+          ?
+          <View style={styles.welcomeContainer}>
+            <Button
+              buttonStyle={generalStyle.buttonStyle}
+              title="Try again"
+              onPress={() => this.done()
+              }
+            />
+          </View>
+          :
+          <View style={styles.welcomeContainer}>
+            <Button
+              buttonStyle={generalStyle.buttonStyle}
+              title="Try again"
+              onPress={() => this.fail()
+              }
+            />
+          </View>
         }
       </View >
     );
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   scoreMode: {
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 22,
     fontWeight: 'bold',
     padding: 15,
     color: 'purple',

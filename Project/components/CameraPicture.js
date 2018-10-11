@@ -36,6 +36,7 @@ class CameraPicture extends Component {
             <Camera
               style={styles.preview}
               ref={(ref) => { this.camera = ref }}
+              autoFocus={'off'}
             >
               <TouchableOpacity
                 style={styles.capture}

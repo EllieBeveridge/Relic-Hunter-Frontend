@@ -127,7 +127,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     padding: 15,
     color: 'purple',
-    fontWeight: 'bold',
   },
   title: {
     textAlign: 'center',
@@ -135,6 +134,7 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     marginBottom: 20,
     color: 'purple',
+    fontWeight: 'bold',
   },
   contentAnimated: {
     padding: 40,
