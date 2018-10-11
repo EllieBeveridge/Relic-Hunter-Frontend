@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View, TouchableOpacity, Image } from 'react-native';
+import { ScrollView, Text, View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Button, Icon } from 'react-native-elements'
 import { Constants } from 'expo'
 import styles from '../stylesheets/PanelStylesheet'
@@ -75,7 +75,6 @@ class Panel extends Component {
 
           <Text style={styles.myDescription}>Aimed at: {section.suitability}</Text>
           <Text style={styles.myDescription}>Takes place at: {section.venue_area}</Text>
-
           <Button
             buttonStyle={generalStyle.buttonStyle}
             title="Start Quest"
@@ -127,5 +126,17 @@ class Panel extends Component {
     );
   }
 }
+
+const panelButtonStyle = StyleSheet.create({
+  panelButton: {
+    backgroundColor: "#4E3948",
+    width: 200,
+    height: 45,
+    borderColor: "transparent",
+    borderWidth: 0,
+    borderRadius: 25,
+    marginLeft: 100
+  }
+})
 
 export default Panel;

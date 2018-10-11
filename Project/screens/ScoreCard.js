@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FED158',
-    margin: 10,
     overflow: 'hidden'
   },
   welcomeContainer: {

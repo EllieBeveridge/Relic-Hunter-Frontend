@@ -14,12 +14,14 @@ class CreateQuestion extends Component {
     };
   }
 
+  static navigationOptions = { title: 'Relic Hunter', header: null };
+
   submitForm = () => {
     const { navigation } = this.props
     const quest_id = navigation.getParam('id');
+    //console.log(quest_id, 'here is quest id')
     api.postNewQuestion(quest_id, this.state)
       .then((question) => {
-        console.log('returning?')
         Alert.alert("Question Added");
         this.props.navigation.navigate('AddPicture', { id: question.id, quest_id })
       })

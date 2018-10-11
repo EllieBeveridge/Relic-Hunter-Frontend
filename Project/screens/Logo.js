@@ -66,7 +66,7 @@ class componentName extends Component {
               title="Create a Quest"
               onPress={() =>
                 this.props.navigation.navigate('CreateQuest', {
-                  venueState
+                  venue_id: venueState
                 })
               }
             />
