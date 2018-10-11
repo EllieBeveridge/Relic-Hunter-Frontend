@@ -7,11 +7,11 @@ class CreateQuest extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: 'test',
-      intro_text: 'test',
-      full_text: 'test',
-      suitability: 'test',
-      venue_area: 'test'
+      title: 'Title of quest here',
+      intro_text: 'Short summary of quest',
+      full_text: 'More details on quest here',
+      suitability: 'Who is this quest for?',
+      venue_area: 'Where is it, ie 3rd floor, garden'
     };
   }
 
