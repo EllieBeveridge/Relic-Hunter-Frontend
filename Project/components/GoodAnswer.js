@@ -76,7 +76,7 @@ class GoodAnswer extends Component {
           <Text style={styles.scoreMode}> You are now on {score} {pointWord} </Text>
 
           <Button
-            buttonStyle={generalStyle.buttonStyle}
+            buttonStyle={styles.panelButton}
             title="NEXT"
             onPress={() => this.done()
             }
@@ -139,7 +139,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#FED158',
     alignItems: 'center',
   },
-
+  panelButton: {
+    backgroundColor: "#4E3948",
+    width: 200,
+    height: 45,
+    borderColor: "transparent",
+    borderWidth: 0,
+    borderRadius: 25,
+    marginLeft: 63
+  }
 })
 
 export default GoodAnswer;
