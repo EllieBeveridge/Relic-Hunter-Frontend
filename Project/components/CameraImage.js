@@ -115,30 +115,35 @@ class CameraImage extends Component {
         console.log(this.props);
         const question_id = this.props.question_id || this.props.question.id
 
-        api.checkPicture(question_id, finalB64)
-          .then(answer => {
-            // gives async problem if actually do this setstate to false!
-            // cant set unmonunted component!
-            // so setstate to false removed pending further investigation...
-            // this.setState({
-            //   uploading: false,
-            // }) 
+        if (this.props.Question) {
+          api.checkPicture(question_id, finalB64)
+            .then(answer => {
+              // gives async problem if actually do this setstate to false!
+              // cant set unmonunted component!
+              // so setstate to false removed pending further investigation...
+              // this.setState({
+              //   uploading: false,
+              // }) 
 
-            const ansFlag = (answer) ? 't' : 'f';
-            if (this.props.Question) {
+              const ansFlag = (answer) ? 't' : 'f';
               const newPoints = (answer) ? this.props.score + 1 : this.props.score;
               this.props.updateAnswers(newPoints, ansFlag)
               this.props.updateUri(null, false, false)
-            } else {
+            })
+        } else {
+          api.testModel(question_id, finalB64)
+            .then(answer => {
+              const ansFlag = (answer) ? 't' : 'f';
               this.props.updateAnswers(0, ansFlag)
               this.props.updateUri(null, false, false)
 
-            }
-          })
-          .catch(err => {
-            console.log('error in axios Post', err)
-          })
+            })
+        }
       })
+      .catch(err => {
+        console.log('error in axios Post', err)
+      })
+
   }
 
 }
