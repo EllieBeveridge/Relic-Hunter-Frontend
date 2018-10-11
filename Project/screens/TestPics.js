@@ -3,6 +3,7 @@ import { ScrollView, View, Text } from 'react-native';
 import QuestionButtons from '../components/QuestionButtons'
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
 import styles from '../stylesheets/QuestionStylesheet'
+import generalStyle from '../stylesheets/generalStyle'
 import CameraPicture from '../components/CameraPicture'
 import CameraImage from '../components/CameraImage'
 import GoodAnswer from '../components/GoodAnswer'
@@ -22,9 +23,7 @@ class TestPics extends Component {
     };
   }
 
-  static navigatorStyle = {
-    navBarHidden: true
-  }
+  static navigationOptions = { title: 'Relic Hunter', header: null };
 
   render() {
     const { navigation } = this.props
@@ -72,8 +71,7 @@ class TestPics extends Component {
           <View style={styles.takePictureButton}>
             <Button
               title="Take a picture"
-              backgroundColor="#4E3948"
-              fontSize={16}
+              buttonStyle={generalStyle.buttonStyle}
               icon={{ name: 'camera', type: 'font-awesome' }}
               onPress={() =>
                 this.setState({

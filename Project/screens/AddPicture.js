@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, ScrollView, Alert } from 'react-native';
+import { View, Text, TextInput, ScrollView, Alert, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements'
 import * as api from '../api'
 import { Camera, Permissions, ImageManipulator, FileSystem } from 'expo';
 import styles from '../stylesheets/QuestionStylesheet'
 import CameraPicture from '../components/CameraPicture'
 import CameraImage from '../components/CameraImage';
-import QuestionButtons from '../components/QuestionButtons'
+import generalStyle from '../stylesheets/generalStyle'
 
 
 class AddPicture extends Component {
@@ -21,6 +21,8 @@ class AddPicture extends Component {
       addPicture: true
     };
   }
+
+  static navigationOptions = { title: 'Relic Hunter', header: null };
 
   async componentDidMount() {
     const { navigation } = this.props;
@@ -44,7 +46,7 @@ class AddPicture extends Component {
     const quest_id = navigation.getParam('quest_id');
     api.trainModel(question_id)
       .then(data => {
-        console.log(data, '<<<data')
+        Alert.alert('Image recognition model created')
         this.props.navigation.navigate('TestPics', { question_id, quest_id })
       })
       .catch(err => {
@@ -78,18 +80,19 @@ class AddPicture extends Component {
 
     return (
       <View style={{ backgroundColor: '#FBD158', height: '100%' }}>
+        <Text style={addPicStyles.heading}>
+          Add pictures to Model
+            </Text>
         <ScrollView>
-          <Text style={styles.question}>
-            Add a picture
+          <Text style={addPicStyles.explanation}>
+            Take pictures to generate an image recognition model. For best results, include at least 10 pictures from multiple angles. Try to keep lighting consistent.
             </Text>
         </ScrollView>
         <View >
-          <View style={styles.takePictureButton}>
+          <View style={styles.welcomeContainer}>
             <Button
-              title="Add a picture"
-              backgroundColor="#4E3948"
-              fontSize={16}
-              marginBottom={20}
+              title="Add picture"
+              buttonStyle={generalStyle.buttonStyle}
               icon={{ name: 'camera', type: 'font-awesome' }}
               onPress={() =>
                 this.setState({
@@ -98,10 +101,11 @@ class AddPicture extends Component {
                 })
               }
             />
+          </View>
+          <View style={addPicStyles.welcomeContainer}>
             <Button
               title="Finish Adding Pictures"
-              backgroundColor="#4E3948"
-              fontSize={16}
+              buttonStyle={generalStyle.buttonStyle}
               icon={{ name: 'camera', type: 'font-awesome' }}
               onPress={() =>
                 this.trainModel()
@@ -113,5 +117,27 @@ class AddPicture extends Component {
     );
   }
 }
+
+const addPicStyles = StyleSheet.create({
+  heading: {
+    textAlign: 'center',
+    fontSize: 32,
+    color: '#583E5C',
+    // fontWeight: 'bold',
+    padding: 10,
+    marginTop: 60
+  },
+  explanation: {
+    textAlign: 'center',
+    fontSize: 18,
+    color: '#583E5C',
+    padding: 10
+  },
+  welcomeContainer: {
+    alignItems: 'center',
+    marginTop: 25,
+    marginBottom: 80,
+  },
+})
 
 export default AddPicture;

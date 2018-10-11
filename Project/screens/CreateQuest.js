@@ -10,18 +10,17 @@ class CreateQuest extends Component {
       title: 'test',
       intro_text: 'test',
       full_text: 'test',
-      // icon_url: null,
-      // background_url: null,
       suitability: 'test',
       venue_area: 'test'
     };
   }
 
+  static navigationOptions = { title: 'Relic Hunter', header: null };
+
   submitForm = () => {
     const { navigation } = this.props
     const venue_id = navigation.getParam('venue_id');
-    // if (this.state.icon_url) quest.icon_url = this.state.icon_url;
-    // if (this.state.background_url) quest.background_url = this.state.background_url;
+    console.log(venue_id, 'does it exist')
     api.postNewQuest(venue_id, this.state)
       .then(quest => {
         Alert.alert("Quest created");

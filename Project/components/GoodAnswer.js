@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
-import Question from '../screens/Question'
 import * as Animatable from 'react-native-animatable';
 import * as api from '../api'
 import { Button } from 'react-native-elements';
-import { addPicture } from '../api';
 import generalStyle from '../stylesheets/generalStyle'
 
 class GoodAnswer extends Component {
