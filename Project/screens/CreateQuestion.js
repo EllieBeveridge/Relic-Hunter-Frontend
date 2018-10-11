@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, ScrollView, Alert } from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage, Button } from 'react-native-elements'
 import * as api from '../api'
+import generalStyle from '../stylesheets/generalStyle';
 
 class CreateQuestion extends Component {
   constructor(props) {
@@ -19,7 +20,6 @@ class CreateQuestion extends Component {
   submitForm = () => {
     const { navigation } = this.props
     const quest_id = navigation.getParam('id');
-    //console.log(quest_id, 'here is quest id')
     api.postNewQuestion(quest_id, this.state)
       .then((question) => {
         Alert.alert("Question Added");
@@ -31,30 +31,35 @@ class CreateQuestion extends Component {
   render() {
 
     return (
-      <View>
+      <View style={generalStyle.topView}>
         <ScrollView>
-          <FormLabel>Question Title</FormLabel>
+          <FormLabel labelStyle={{ color: '#583E5C' }}>Question Title</FormLabel>
           <FormInput
+            inputStyle={{ color: '#583E5C' }}
             value={this.state.title}
             onChangeText={(title) => this.setState({ title })} />
           {(this.state.title.length < 3 && this.state.title !== '') && <FormValidationMessage>Must be at least 3 characters.</FormValidationMessage>}
-          <FormLabel>Question Text</FormLabel>
+          <FormLabel labelStyle={{ color: '#583E5C' }}>Question Text</FormLabel>
           <FormInput
+            inputStyle={{ color: '#583E5C' }}
             value={this.state.text}
             onChangeText={(text) => this.setState({ text })} />
           {(this.state.text.length < 10 && this.state.text !== '') && <FormValidationMessage>Must be at least 10 characters.</FormValidationMessage>}
-          <FormLabel>Question Hint</FormLabel>
+          <FormLabel labelStyle={{ color: '#583E5C' }}>Question Hint</FormLabel>
           <FormInput
+            inputStyle={{ color: '#583E5C' }}
             value={this.state.hint_text}
             onChangeText={(hint_text) => this.setState({ hint_text })} />
           {(this.state.hint_text.length < 5 && this.state.hint_text !== '') && <FormValidationMessage>Must be at least 5 characters.</FormValidationMessage>}
-          <FormLabel>Question Answer</FormLabel>
+          <FormLabel labelStyle={{ color: '#583E5C' }}>Question Answer</FormLabel>
           <FormInput
+            inputStyle={{ color: '#583E5C' }}
             value={this.state.answer_text}
             onChangeText={(answer_text) => this.setState({ answer_text })} />
           {(this.state.answer_text.length < 5 && this.state.answer_text !== '') && <FormValidationMessage>Must be at least 5 characters.</FormValidationMessage>}
 
           <Button
+            buttonStyle={generalStyle.buttonStyle}
             title="Submit"
             onPress={() => {
               this.submitForm()
