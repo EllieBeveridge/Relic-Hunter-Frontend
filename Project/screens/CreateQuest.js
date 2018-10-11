@@ -20,7 +20,6 @@ class CreateQuest extends Component {
   submitForm = () => {
     const { navigation } = this.props
     const venue_id = navigation.getParam('venue_id');
-    console.log(venue_id, 'does it exist')
     api.postNewQuest(venue_id, this.state)
       .then(quest => {
         Alert.alert("Quest created");

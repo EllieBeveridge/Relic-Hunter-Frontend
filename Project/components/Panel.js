@@ -135,7 +135,7 @@ const panelButtonStyle = StyleSheet.create({
     borderColor: "transparent",
     borderWidth: 0,
     borderRadius: 25,
-    marginLeft: 45
+    marginLeft: 43
   }
 })
 

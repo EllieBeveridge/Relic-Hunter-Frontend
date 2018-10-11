@@ -123,7 +123,6 @@ const addPicStyles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 32,
     color: '#583E5C',
-    // fontWeight: 'bold',
     padding: 10,
     marginTop: 60
   },

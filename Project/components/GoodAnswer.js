@@ -35,14 +35,14 @@ class GoodAnswer extends Component {
             </Animatable.Text >
           </Animatable.View>
           <Button
-            style={styles.buttonImage}
+            buttonStyle={styles.panelButton}
             backgroundColor="#4E3948"
             title="Publish Quest"
             onPress={() => this.publishQuest()
             }
           />
           <Button
-            style={styles.buttonImage}
+            buttonStyle={styles.panelButton}
             backgroundColor="#4E3948"
             title="Create Another Question"
             onPress={() => this.props.navigation.navigate('CreateQuestion')
@@ -55,8 +55,6 @@ class GoodAnswer extends Component {
       return (
 
         <View style={generalStyle.topView}>
-          {console.log(this.props.score, 'this is the score in goodanswer')}
-
           <View>
             <Text style={generalStyle.titleMode}>Relic Hunter</Text>
           </View>
@@ -68,7 +66,7 @@ class GoodAnswer extends Component {
             transition="backgroundColor">
             <Animatable.Text animation={'bounceIn'}>
               <Text style={styles.title}>
-                GoodAnswer!  </Text>
+                Good Answer!  </Text>
             </Animatable.Text >
           </Animatable.View>
           <Text style={styles.scoreMode}>
@@ -146,6 +144,7 @@ const styles = StyleSheet.create({
     borderColor: "transparent",
     borderWidth: 0,
     borderRadius: 25,
+    marginBottom: 10,
     marginLeft: 63
   }
 })
