@@ -94,7 +94,6 @@ class CameraImage extends Component {
         const question_id = this.props.question_id
         api.addPicture(question_id, finalB64)
           .then(data => {
-            Alert.alert("Picture Added");
             this.props.updateUri(null, false, false)
           })
 
@@ -104,7 +103,6 @@ class CameraImage extends Component {
 
 
   sendImage() {
-    console.log('sending image...')
     this.setState({
       uploading: true
     })
@@ -112,7 +110,6 @@ class CameraImage extends Component {
     ImageManipulator.manipulate(this.props.uri, [{ resize: { width: 1000 } }], { base64: true, format: 'jpeg' })
       .then(({ base64 }) => {
         const finalB64 = { answer: { image: base64 } }
-        console.log(this.props);
         const question_id = this.props.question_id || this.props.question.id
 
         if (this.props.Question) {

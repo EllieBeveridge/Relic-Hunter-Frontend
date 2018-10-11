@@ -64,7 +64,6 @@ export const addPicture = (question_id, finalB64) => {
 export const trainModel = (question_id) => {
   return axios.get(`${API_URL}/references/${question_id}/train`)
     .then(res => {
-      console.log(res)
       return res
     })
     .catch(err => { throw err })

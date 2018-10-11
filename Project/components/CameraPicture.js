@@ -14,7 +14,6 @@ class CameraPicture extends Component {
   }
 
   render = () => {
-    console.log('i am in camera picture')
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
@@ -61,7 +60,6 @@ class CameraPicture extends Component {
 
   snap = async () => {
     if (this.state.focusing) return;
-    console.log('take a picture')
     this.setState({
       focusing: true
     })
@@ -71,12 +69,6 @@ class CameraPicture extends Component {
           this.props.updateUri(data.uri, false, true)
         })
     }
-    // gives async problem if actually do this setstate to false!
-    // cant set unmonunted component!
-    // so setstate to false` removed pending further investigation...
-    // this.setState({
-    //   focusing: false
-    // })
   }
 
 }

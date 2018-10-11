@@ -42,14 +42,6 @@ class LandingPage extends Component {
 }
 
 const styles = StyleSheet.create({
-  // listHead: {
-  //   textAlign: 'center',
-  //   fontSize: 22,
-  //   color: '#583E5C',
-  //   fontWeight: 'bold',
-  //   margin: 10,
-  //   color: '#333',
-  // },
   container: {
     flex: 1,
     backgroundColor: '#FED158',
