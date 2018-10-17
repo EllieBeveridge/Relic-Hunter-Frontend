@@ -13,7 +13,7 @@ When you start the app, you begin on the landing page. On this page, you can sel
 
 ### Play Quest
 
-A video demonstration of the game play can be found here[https://www.youtube.com/watch?v=ODsk4HAC_m0]
+A video demonstration of the game play can be found [here](https://www.youtube.com/watch?v=ODsk4HAC_m0)
 
 #### Quest Select
 
