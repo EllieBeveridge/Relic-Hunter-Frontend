@@ -13,6 +13,8 @@ When you start the app, you begin on the landing page. On this page, you can sel
 
 ### Play Quest
 
+A video demonstration of the game play can be found here[https://www.youtube.com/watch?v=ODsk4HAC_m0]
+
 #### Quest Select
 
 On this page you can see a list of all Quests for the venue selected on the landing page. If you tap a Quest title it will expand to show more information about the Quest, such as the intended age, where it takes place, and a short description. Clicking "Start Quest" will begin the Quest and take you to the first question.
